@@ -1,0 +1,4 @@
+# Shell scripts and SQL also run on Linux CI runners: force LF even on Windows checkouts.
+* text=auto eol=lf
+*.zip binary
+*.png binary

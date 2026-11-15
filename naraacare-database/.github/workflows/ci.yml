@@ -1,0 +1,94 @@
+name: ci
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  secret-scan:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+      - name: Install gitleaks 8.30.1 (checksum verified)
+        run: |
+          curl -sSfL -o /tmp/gitleaks.tgz https://github.com/gitleaks/gitleaks/releases/download/v8.30.1/gitleaks_8.30.1_linux_x64.tar.gz
+          echo "551f6fc83ea457d62a0d98237cbad105af8d557003051f41f3e7ca7b3f2470eb  /tmp/gitleaks.tgz" | sha256sum -c -
+          tar -xzf /tmp/gitleaks.tgz -C /usr/local/bin gitleaks
+      - name: Scan full history
+        run: gitleaks git --redact --verbose --config .gitleaks.toml .
+
+  lint:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.13.17"
+      - run: pip install sqlfluff==4.4.0
+      - run: sqlfluff lint migrations schemas tables indexes functions procedures views triggers seed roles tests
+      - run: bash tools/check_payload_version.sh
+      - name: Baseline migrations match the canonical manifest
+        run: python tools/build_baseline.py --check
+      - name: Payload fixture regenerated from xss.txt
+        run: python tools/build_payload_fixture.py --check
+      - name: No invisible or bidi characters in SQL sources
+        run: python tools/check_invisible_chars.py migrations schemas roles tables indexes functions procedures views triggers seed tests
+
+  migrate-and-test:
+    runs-on: ubuntu-24.04
+    needs: lint
+    env:
+      FLYWAY_VERSION: "13.11.1"
+      FLYWAY_SHA256: c5397ad1c58dbbac94682f29322ec54896f15e9827c5dc3e02ca40240077d3f7
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Use dummy local env
+        run: cp .env.example .env
+      - name: Install PostgreSQL 18 (PGDG apt repository) and pg_prove on the runner
+        run: |
+          sudo apt-get update -q
+          sudo apt-get install -yq postgresql-common
+          sudo /usr/share/postgresql-common/pgdg/apt.postgresql.org.sh -y
+          # The runner image ships an older cluster on port 5432; drop it so 18 gets that port.
+          pg_lsclusters -h | while read -r ver name _; do sudo pg_dropcluster --stop "$ver" "$name"; done
+          sudo apt-get install -yq postgresql-18 libtap-parser-sourcehandler-pgtap-perl
+          sudo pg_ctlcluster 18 main status || sudo pg_ctlcluster 18 main start
+          test "$(pg_lsclusters -h | awk '$1 == 18 {print $3}')" = 5432
+          echo "/usr/lib/postgresql/18/bin" >> "$GITHUB_PATH"
+          sudo -u postgres psql -p 5432 -c "ALTER USER postgres PASSWORD 'local-dev-only-postgres'"
+      - name: Install Flyway ${{ env.FLYWAY_VERSION }} (checksum verified)
+        run: |
+          curl -sSfL -o /tmp/flyway.tgz "https://download.red-gate.com/maven/release/com/redgate/flyway/flyway-commandline/${FLYWAY_VERSION}/flyway-commandline-${FLYWAY_VERSION}-linux-x64.tar.gz"
+          echo "${FLYWAY_SHA256}  /tmp/flyway.tgz" | sha256sum -c -
+          sudo tar -xzf /tmp/flyway.tgz -C /opt
+          echo "/opt/flyway-${FLYWAY_VERSION}" >> "$GITHUB_PATH"
+      - name: Install pgTAP 1.3.4 (checksum verified)
+        run: bash tools/install_pgtap.sh
+      - name: Server is PostgreSQL 18
+        run: test "$(PGPASSWORD=local-dev-only-postgres psql -h localhost -U postgres -At -c 'SHOW server_version_num')" -ge 180000
+      - name: Bootstrap (migration_owner) and migrate the dev database
+        run: bash tools/local_setup.sh
+      - name: Migrate a fresh test database from empty + run pgTAP
+        run: bash tools/run_pgtap.sh
+      - name: Migration re-run is a no-op
+        run: |
+          source tools/pg_env.sh
+          flyway_on "${TEST_DB}" migrate | tee /tmp/rerun.log
+          grep -q "Schema \"public\" is up to date. No migration necessary." /tmp/rerun.log
+      - name: Drift check (migrations vs canonical DDL)
+        run: bash tools/drift_check.sh
+      - name: Routine catalogue (functions/README.md) is up to date
+        run: |
+          source tools/pg_env.sh
+          psql_su "${TEST_DB}" -At -f tools/function_catalog.sql > functions/README.md
+          git diff --exit-code functions/README.md

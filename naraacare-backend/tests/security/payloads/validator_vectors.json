@@ -1,0 +1,189 @@
+{
+  "version": "1.0.0",
+  "comment": "Legitimate samples per Safe* type, accepted by the API (tests/unit/core/test_validators.py LEGIT). Copied byte-identical to naraacare-mobile/test/core/security/vectors.json.",
+  "accept": {
+    "SafeName": [
+      "Priya Sharma",
+      "O'Brien",
+      "Jean-Luc Picard",
+      "Anne-Marie",
+      "D\u2019Souza",
+      "Dr. Rao",
+      "Ravi",
+      "Zo\u00eb Kravitz",
+      "Jos\u00e9 \u00c1lvarez",
+      "Mary Jane Watson",
+      "\u092a\u094d\u0930\u093f\u092f\u093e \u0936\u0930\u094d\u092e\u093e",
+      "\u0905\u0928\u0928\u094d\u092f\u093e",
+      "\u0930\u093e\u0939\u0941\u0932 \u0935\u0930\u094d\u092e\u093e",
+      "\u0938\u094d\u0928\u0947\u0939\u093e \u092a\u093e\u091f\u0940\u0932",
+      "\u091c\u094d\u091e\u093e\u0928\u0947\u0936\u094d\u0935\u0930",
+      "\u0baa\u0bbf\u0bb0\u0bbf\u0baf\u0bbe",
+      "\u0b95\u0bbe\u0bb0\u0bcd\u0ba4\u0bcd\u0ba4\u0bbf\u0b95\u0bcd \u0bb0\u0bbe\u0b9c\u0bbe",
+      "\u0c2a\u0c4d\u0c30\u0c3f\u0c2f",
+      "\u0c36\u0c4d\u0c30\u0c40\u0c28\u0c3f\u0c35\u0c3e\u0c38\u0c4d",
+      "\u0caa\u0ccd\u0cb0\u0cbf\u0caf\u0cbe",
+      "\u0cae\u0c82\u0c9c\u0cc1\u0ca8\u0cbe\u0ca5",
+      "\u0d2a\u0d4d\u0d30\u0d3f\u0d2f",
+      "\u0d36\u0d4d\u0d30\u0d40\u0d32\u0d15\u0d4d\u0d37\u0d4d\u0d2e\u0d3f",
+      "\u09aa\u09cd\u09b0\u09bf\u09af\u09bc\u09be",
+      "\u09b8\u09cc\u09b0\u09ad \u0997\u09be\u0999\u09cd\u0997\u09c1\u09b2\u09c0",
+      "\u0aaa\u0acd\u0ab0\u0abf\u0aaf\u0abe",
+      "\u0ab9\u0abe\u0ab0\u0acd\u0aa6\u0abf\u0a95",
+      "\u0a2a\u0a4d\u0a30\u0a3f\u0a2f\u0a3e",
+      "\u0a17\u0a41\u0a30\u0a2a\u0a4d\u0a30\u0a40\u0a24",
+      "\u0b2a\u0b4d\u0b30\u0b3f\u0b5f\u0b3e",
+      "\u0645\u062d\u0645\u062f \u0639\u0644\u06cc"
+    ],
+    "SafeShortText120": [
+      "Moong Dal Chilla",
+      "Aloo Paratha (2 pieces)",
+      "Salt & pepper",
+      "100% juice",
+      "Dal, rice, roti",
+      "Tea/coffee",
+      "Curd + rice",
+      "Poha - 1 plate",
+      "Rajma chawal",
+      "Paneer tikka",
+      "Masala dosa",
+      "Idli (3)",
+      "Upma",
+      "Sabudana khichdi",
+      "Chole bhature",
+      "\u0918\u0930 \u0915\u093e \u0916\u093e\u0928\u093e",
+      "\u0926\u093e\u0932 \u091a\u093e\u0935\u0932",
+      "Mom's kitchen",
+      "Family 2026",
+      "Morning walk"
+    ],
+    "SafeText500": [
+      "Had a light dinner today.\nFeeling good!",
+      "Is 2 katori dal ok? Yes: protein is fine; carbs too.",
+      "Doctor said \"drink more water\" #health",
+      "Meeting @ 5 - reminder",
+      "Line one\r\nLine two",
+      "\u092e\u0941\u091d\u0947 \u0906\u091c \u092c\u0939\u0941\u0924 \u092a\u094d\u092f\u093e\u0938 \u0932\u0917\u0940!",
+      "Can I eat mangoes daily?",
+      "Wake up at 6:30; sleep by 10:30.",
+      "Rating: 5/5 (great)",
+      "Notes: 3 meals, 2 snacks."
+    ],
+    "SafeChatMessage": [
+      "Great job \ud83d\udc4f",
+      "See you at 7 \ud83d\ude42",
+      "Family \ud83d\udc68\u200d\ud83d\udc69\u200d\ud83d\udc67 dinner tonight",
+      "Love it \u2764\ufe0f",
+      "Thumbs up \ud83d\udc4d\ud83c\udffd",
+      "Go India \ud83c\uddee\ud83c\uddf3!",
+      "Well done!!",
+      "Had a light dinner today.\nFeeling good!",
+      "Is 2 katori dal ok? Yes: protein is fine; carbs too.",
+      "Doctor said \"drink more water\" #health",
+      "Meeting @ 5 - reminder",
+      "Line one\r\nLine two",
+      "\u092e\u0941\u091d\u0947 \u0906\u091c \u092c\u0939\u0941\u0924 \u092a\u094d\u092f\u093e\u0938 \u0932\u0917\u0940!",
+      "Can I eat mangoes daily?",
+      "Wake up at 6:30; sleep by 10:30.",
+      "Rating: 5/5 (great)",
+      "Notes: 3 meals, 2 snacks."
+    ],
+    "SafeSearchQuery": [
+      "dal",
+      "moong dal",
+      "paneer_65",
+      "priya.s",
+      "d'souza",
+      "a&w",
+      "chai",
+      "\u0930\u094b\u091f\u0940",
+      "idli",
+      "x"
+    ],
+    "SafeUsername": [
+      "priya.s",
+      "rahul_99",
+      "anna",
+      "a1b",
+      "the.real.dev",
+      "user_name.x",
+      "x9z",
+      "abc"
+    ],
+    "SafeEmail": [
+      "priya@example.com",
+      "Rahul.Verma+fit@Example.co.in",
+      "a@b.io",
+      "first.last@sub.domain.org"
+    ],
+    "SafePassword": [
+      "Correct1Horse",
+      "Passw0rd!Long",
+      "\u0939\u093f\u0902\u0926\u0940 Pass 9",
+      "  Spaces9 Inside  ",
+      "\u00dcn\u00efc\u00f6d\u00e91x"
+    ],
+    "SafeNewPassword": [
+      "Correct1Horse",
+      "Passw0rd!Long",
+      "\u0939\u093f\u0902\u0926\u0940 Pass 9",
+      "  Spaces9 Inside  ",
+      "\u00dcn\u00efc\u00f6d\u00e91x"
+    ],
+    "SafeOtp": [
+      "000000",
+      "123456",
+      "999999"
+    ],
+    "SafeOpaqueToken256": [
+      "abc.DEF_ghi-jkl~mno+pqr/stu=",
+      "eyJhbGciOiJFUzI1NiJ9.eyJzdWIiOiIxIn0.c2ln",
+      "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    ],
+    "SafeReferralCode": [
+      "PRIYA26",
+      "ab12cd",
+      "XYZ123456789"
+    ],
+    "SafeBarcode": [
+      "8901058000290",
+      "96385074",
+      "036000291452",
+      "10012345678902"
+    ],
+    "SafeTimezone": [
+      "Asia/Kolkata",
+      "UTC",
+      "America/New_York",
+      "Europe/London",
+      "Asia/Dubai"
+    ],
+    "SafeLocale": [
+      "en",
+      "en-IN",
+      "hi",
+      "hi-IN"
+    ],
+    "SafeFileName": [
+      "photo.png",
+      "IMG_2026-10-28.jpg",
+      "scan 1.jpeg",
+      "report_final.png"
+    ],
+    "SafeAppVersion": [
+      "1.0.0",
+      "2.13.4+57",
+      "10.0.12"
+    ],
+    "SafeDeviceToken": [
+      "fcm:APA91bHPRgkF3JUikC4ENAHEeMrd41Zxv3hVZjC9KtT8OvPVGJ-hQMRKRrZuJAEcl7B338qju59zJMjw2DeLc"
+    ],
+    "SafeCode40": [
+      "diabetes",
+      "allergy_peanut",
+      "none",
+      "kidney_disease",
+      "nutr.floor.male_kcal"
+    ]
+  }
+}

@@ -1,0 +1,9 @@
+title = "naraacare-mobile gitleaks config"
+
+[extend]
+useDefault = true
+
+# Non-secret example/test configuration and the shared security payload list.
+[[allowlists]]
+description = "Example env files, security test payloads and test-only TLS fixtures"
+paths = ['''\.env\.example$''', '''env/test\.env$''', '''test/security/payloads/.*''', '''test/fixtures/tls/.*''']

@@ -1,0 +1,8 @@
+# Test files only (pgTAP). On top of the repository rules, these are relaxed because assertions are
+# written as ad-hoc expressions inside is()/ok() calls, where they do not affect correctness:
+#   AL03  unaliased expressions: `SELECT is((SELECT row(...)::text FROM ...), ...)` is the pgTAP idiom
+#   AM09  LIMIT without ORDER BY: fixtures pick "any" matching row on purpose (one row exists)
+#   RF02  unqualified columns in fixture subqueries with a single real table plus a function
+#   LT02/LT14  layout of long assertion arguments
+[sqlfluff]
+exclude_rules = LT05, RF04, AM04, ST09, AL03, AM09, RF02, LT02, LT14

@@ -1,0 +1,23 @@
+# Secrets and local config — never commit
+.env
+.env.*
+!.env.example
+*.pem
+*.p8
+*.key
+flyway.conf
+flyway.toml
+
+# Tooling
+.venv/
+__pycache__/
+.sqlfluff_cache/
+*.log
+/tmp/
+
+# OS / editors
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json

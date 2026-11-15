@@ -1,0 +1,8 @@
+# Code owners — replace the placeholder team names below once the GitHub teams exist,
+# then uncomment. Doc 09 §1: security-sensitive paths need 2 approvals incl. the security owner.
+#
+# *                    @naraacare1-tech/db-maintainers
+# /migrations/         @naraacare1-tech/db-maintainers @naraacare1-tech/security
+# /roles/              @naraacare1-tech/db-maintainers @naraacare1-tech/security
+# /bootstrap/          @naraacare1-tech/db-maintainers @naraacare1-tech/security
+# /.github/            @naraacare1-tech/db-maintainers

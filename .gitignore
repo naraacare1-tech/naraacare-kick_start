@@ -1,0 +1,12 @@
+# Root ignores (each project also has its own .gitignore)
+.env
+.env.*
+!.env.example
+.claude/
+**/.venv/
+**/node_modules/
+**/__pycache__/
+**/.mypy_cache/
+**/.pytest_cache/
+**/.ruff_cache/
+**/build/

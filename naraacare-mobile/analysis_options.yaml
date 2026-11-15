@@ -1,0 +1,19 @@
+# very_good_analysis 11.0.0 (doc 09 §5) + project rules.
+include: package:very_good_analysis/analysis_options.yaml
+
+analyzer:
+  exclude:
+    - build/**
+    - android/**
+    - ios/**
+    - "**/*.g.dart"
+    - "**/*.freezed.dart"
+  errors:
+    # Treat these as errors so CI fails, not just warns.
+    avoid_print: error
+    unawaited_futures: error
+
+linter:
+  rules:
+    # Doc comments on every public member are not required for an app (only for packages).
+    public_member_api_docs: false

@@ -1,0 +1,31 @@
+CREATE TABLE nutrition.daily_summary (
+    user_id uuid NOT NULL REFERENCES auth.user_account (id) ON DELETE CASCADE,
+    local_date date NOT NULL,
+    calories_kcal_total numeric(11, 3) NOT NULL DEFAULT 0 CHECK (calories_kcal_total >= 0),
+    protein_g_total numeric(11, 3) NOT NULL DEFAULT 0 CHECK (protein_g_total >= 0),
+    carbohydrates_g_total numeric(11, 3) NOT NULL DEFAULT 0 CHECK (carbohydrates_g_total >= 0),
+    fat_g_total numeric(11, 3) NOT NULL DEFAULT 0 CHECK (fat_g_total >= 0),
+    dietary_fiber_g_total numeric(11, 3) NOT NULL DEFAULT 0 CHECK (dietary_fiber_g_total >= 0),
+    total_sugar_g_total numeric(11, 3) NOT NULL DEFAULT 0 CHECK (total_sugar_g_total >= 0),
+    saturated_fat_g_total numeric(11, 3) NOT NULL DEFAULT 0 CHECK (saturated_fat_g_total >= 0),
+    polyunsaturated_fat_g_total numeric(11, 3) NOT NULL DEFAULT 0 CHECK (polyunsaturated_fat_g_total >= 0),
+    monounsaturated_fat_g_total numeric(11, 3) NOT NULL DEFAULT 0 CHECK (monounsaturated_fat_g_total >= 0),
+    trans_fat_g_total numeric(11, 3) NOT NULL DEFAULT 0 CHECK (trans_fat_g_total >= 0),
+    cholesterol_mg_total numeric(11, 3) NOT NULL DEFAULT 0 CHECK (cholesterol_mg_total >= 0),
+    sodium_mg_total numeric(11, 3) NOT NULL DEFAULT 0 CHECK (sodium_mg_total >= 0),
+    potassium_mg_total numeric(11, 3) NOT NULL DEFAULT 0 CHECK (potassium_mg_total >= 0),
+    calcium_mg_total numeric(11, 3) NOT NULL DEFAULT 0 CHECK (calcium_mg_total >= 0),
+    iron_mg_total numeric(11, 3) NOT NULL DEFAULT 0 CHECK (iron_mg_total >= 0),
+    vitamin_a_mcg_total numeric(11, 3) NOT NULL DEFAULT 0 CHECK (vitamin_a_mcg_total >= 0),
+    vitamin_c_mg_total numeric(11, 3) NOT NULL DEFAULT 0 CHECK (vitamin_c_mg_total >= 0),
+    meal_count smallint NOT NULL DEFAULT 0 CHECK (meal_count BETWEEN 0 AND 8),
+    exercise_kcal integer NOT NULL DEFAULT 0 CHECK (exercise_kcal >= 0),
+    base_target_kcal integer CHECK (base_target_kcal BETWEEN 1200 AND 10000),
+    effective_allowance_kcal integer CHECK (effective_allowance_kcal >= 0),
+    calc_version common.version_label REFERENCES ref.calc_version (code),
+    created_at timestamptz NOT NULL DEFAULT now(),
+    updated_at timestamptz NOT NULL DEFAULT now(),
+    PRIMARY KEY (user_id, local_date)
+) PARTITION BY RANGE (local_date);
+COMMENT ON TABLE nutrition.daily_summary IS
+'DOC "Table B": running daily totals, updated in the same transaction as meal writes (doc 05 section 8)';

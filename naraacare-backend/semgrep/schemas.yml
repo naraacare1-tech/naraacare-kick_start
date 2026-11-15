@@ -1,0 +1,29 @@
+# Run against app/schemas only:  semgrep --config semgrep/schemas.yml --error app/schemas
+# Rule (doc 09 §3/§4): every string field in a request/response schema must use a Safe* type
+# from app/core/security/validators.py. A bare `str` fails CI.
+rules:
+  - id: no-bare-str-in-schemas
+    languages: [python]
+    severity: ERROR
+    message: >-
+      String field '$F' uses a bare `str`. Use a Safe* type from app.core.security.validators
+      (SafeName, SafeText, SafeSearchQuery, …) so input is validated against scripting/markup.
+    patterns:
+      - pattern-inside: |
+          class $C(...):
+            ...
+      - pattern-either:
+          - pattern: "$F: str"
+          - pattern: "$F: str = $V"
+          - pattern: "$F: str | None"
+          - pattern: "$F: str | None = $V"
+          - pattern: "$F: None | str"
+          - pattern: "$F: Optional[str]"
+          - pattern: "$F: Optional[str] = $V"
+          - pattern: "$F: list[str]"
+          - pattern: "$F: list[str] = $V"
+          - pattern: "$F: set[str]"
+          - pattern: "$F: tuple[str, ...]"
+          - pattern: "$F: dict[str, str]"
+          - pattern: "$F: Annotated[str, ...]"
+          - pattern: "$F: Annotated[str, ...] = $V"

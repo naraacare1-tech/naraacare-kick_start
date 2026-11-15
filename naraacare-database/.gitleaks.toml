@@ -1,0 +1,10 @@
+title = "naraacare-database gitleaks config"
+
+[extend]
+useDefault = true
+
+# Dummy local-only values in .env.example are intentionally not secrets.
+[[allowlists]]
+description = "Example env file with dummy values"
+paths = ['''\.env\.example$''']
+regexes = ['''local-dev-only[-a-z]*''']

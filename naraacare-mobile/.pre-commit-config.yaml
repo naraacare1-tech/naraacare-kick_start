@@ -1,0 +1,32 @@
+# Install once: pip install pre-commit==4.7.0 && pre-commit install
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: end-of-file-fixer
+        exclude: ^test/security/payloads/
+      - id: trailing-whitespace
+        exclude: ^test/security/payloads/
+      - id: check-yaml
+      - id: check-merge-conflict
+      - id: check-added-large-files
+        args: ["--maxkb=1024"]
+
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.30.1
+    hooks:
+      - id: gitleaks
+
+  - repo: local
+    hooks:
+      - id: dart-format
+        name: dart format
+        entry: dart format --output=none --set-exit-if-changed
+        language: system
+        files: \.dart$
+      - id: flutter-analyze
+        name: flutter analyze
+        entry: flutter analyze --fatal-infos
+        language: system
+        pass_filenames: false
+        files: \.(dart|yaml)$

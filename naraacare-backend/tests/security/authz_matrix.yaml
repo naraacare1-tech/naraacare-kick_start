@@ -1,0 +1,152 @@
+# Who may call each route (doc 07 SEC-1.5, Session 16). PRODUCT REVIEW: confirm every row.
+# test_authz_matrix.py fails when a route is missing here or a row no longer matches a route.
+#
+#   access: public            no token needed
+#           user              any signed-in user (no token -> 401)
+#           "staff:<r1> <r2>" staff role AND an address in STAFF_IP_ALLOWLIST (anything else -> 404)
+#   star:   <feature>         STANDARD users get 403 UPGRADE_REQUIRED (the entitlement feature)
+#   note:   why a row is unusual
+#
+# Object ownership (another user's id -> 404) is tested per id route in test_idor_all_ids.py.
+routes:
+  GET /api/v1/health/live: {access: public}
+  GET /api/v1/health/ready: {access: public}
+  POST /api/v1/auth/signup: {access: public}
+  POST /api/v1/auth/otp/verify: {access: public}
+  POST /api/v1/auth/otp/resend: {access: public}
+  POST /api/v1/auth/login: {access: public}
+  POST /api/v1/auth/oauth/google: {access: public}
+  POST /api/v1/auth/oauth/apple: {access: public}
+  POST /api/v1/auth/oauth/link: {access: public}
+  POST /api/v1/auth/token/refresh: {access: public}
+  POST /api/v1/auth/logout: {access: user}
+  POST /api/v1/auth/logout-all: {access: user}
+  POST /api/v1/auth/password/forgot: {access: public}
+  POST /api/v1/auth/password/reset: {access: public}
+  POST /api/v1/auth/password/change: {access: user}
+  GET /api/v1/me: {access: user}
+  PATCH /api/v1/me/profile: {access: user}
+  PUT /api/v1/me/settings: {access: user}
+  GET /api/v1/me/onboarding: {access: user}
+  PUT /api/v1/me/onboarding/steps/{step}: {access: user}
+  POST /api/v1/calculations/preview: {access: user}
+  POST /api/v1/me/onboarding/complete: {access: user}
+  GET /api/v1/me/goal-options: {access: user}
+  GET /api/v1/me/targets/today: {access: user}
+  GET /api/v1/usernames/availability: {access: user}
+  PUT /api/v1/me/username: {access: user}
+  GET /api/v1/me/entitlements: {access: user}
+  GET /api/v1/reference/bootstrap: {access: public}
+  GET /api/v1/reference/policies: {access: public}
+  GET /api/v1/privacy/consents: {access: user}
+  POST /api/v1/privacy/consents: {access: user}
+  GET /api/v1/privacy/status: {access: user}
+  POST /api/v1/privacy/reauth: {access: user}
+  POST /api/v1/privacy/exports: {access: user}
+  GET /api/v1/privacy/exports/{export_id}: {access: user}
+  GET /api/v1/privacy/exports/{export_id}/file: {access: user}
+  POST /api/v1/privacy/deletion-request: {access: user}
+  DELETE /api/v1/privacy/deletion-request: {access: user}
+  GET /api/v1/foods/search: {access: user}
+  GET /api/v1/foods/barcode/{code}: {access: user, star: barcode_logging}
+  GET /api/v1/foods/{food_id}: {access: user}
+  POST /api/v1/meals: {access: user}
+  GET /api/v1/meals: {access: user}
+  PUT /api/v1/meals/{meal_id}: {access: user}
+  DELETE /api/v1/meals/{meal_id}: {access: user}
+  GET /api/v1/meals/recent: {access: user}
+  GET /api/v1/meals/{meal_id}/breakdown: {access: user, star: meal_breakdown}
+  GET /api/v1/saved-meals: {access: user}
+  POST /api/v1/saved-meals: {access: user}
+  DELETE /api/v1/saved-meals/{saved_meal_id}: {access: user}
+  GET /api/v1/nutrition/daily-summary: {access: user}
+  POST /api/v1/nutrition/voice/parse: {access: user, star: voice_logging}
+  POST /api/v1/admin/foods: {access: "staff:nutritionist admin"}
+  PATCH /api/v1/admin/foods/{food_id}: {access: "staff:nutritionist admin"}
+  GET /api/v1/hydration/status: {access: user}
+  GET /api/v1/hydration/drinks: {access: user}
+  POST /api/v1/hydration/intakes: {access: user}
+  GET /api/v1/hydration/intakes: {access: user}
+  PUT /api/v1/hydration/intakes/{intake_id}: {access: user}
+  DELETE /api/v1/hydration/intakes/{intake_id}: {access: user}
+  PUT /api/v1/hydration/temperature: {access: user, star: advanced_hydration}
+  POST /api/v1/hydration/custom-drinks/estimate: {access: user, star: custom_drinks}
+  POST /api/v1/hydration/custom-drinks: {access: user, star: custom_drinks}
+  POST /api/v1/workouts: {access: user, star: advanced_hydration}
+  GET /api/v1/workouts: {access: user, star: advanced_hydration}
+  DELETE /api/v1/workouts/{workout_id}: {access: user}
+  POST /api/v1/devices: {access: user}
+  DELETE /api/v1/devices/{installation_id}: {access: user}
+  GET /api/v1/me/notification-preferences: {access: user}
+  PUT /api/v1/me/notification-preferences: {access: user}
+  GET /api/v1/me/reminders: {access: user}
+  PUT /api/v1/me/reminders: {access: user}
+  GET /api/v1/sleep/summary: {access: user, star: sleep}
+  POST /api/v1/sleep/entries: {access: user, star: sleep}
+  PUT /api/v1/sleep/entries/{entry_id}: {access: user, star: sleep}
+  DELETE /api/v1/sleep/entries/{entry_id}: {access: user, star: sleep}
+  PUT /api/v1/me/sleep-goal: {access: user}
+  GET /api/v1/billing/plans: {access: user}
+  POST /api/v1/billing/purchases/verify: {access: user}
+  GET /api/v1/billing/subscription: {access: user}
+  GET /api/v1/billing/history: {access: user}
+  POST /api/v1/billing/webhooks/google: {access: public, note: provider-signed (test_webhooks_forgery.py)}
+  POST /api/v1/billing/webhooks/apple: {access: public, note: provider-signed (test_webhooks_forgery.py)}
+  GET /api/v1/referrals/me: {access: user}
+  POST /api/v1/referrals/attribute: {access: user}
+  GET /api/v1/people/search: {access: user}
+  GET /api/v1/people/suggestions: {access: user}
+  GET /api/v1/connections: {access: user}
+  POST /api/v1/connections/requests: {access: user}
+  POST /api/v1/connections/requests/{connection_id}/accept: {access: user}
+  POST /api/v1/connections/requests/{connection_id}/decline: {access: user}
+  DELETE /api/v1/connections/{connection_id}: {access: user}
+  GET /api/v1/blocks: {access: user}
+  POST /api/v1/blocks: {access: user}
+  DELETE /api/v1/blocks/{user_id}: {access: user}
+  GET /api/v1/circles: {access: user}
+  POST /api/v1/circles: {access: user}
+  GET /api/v1/circles/{circle_id}: {access: user}
+  PATCH /api/v1/circles/{circle_id}: {access: user}
+  DELETE /api/v1/circles/{circle_id}: {access: user}
+  GET /api/v1/circles/{circle_id}/members: {access: user}
+  POST /api/v1/circles/{circle_id}/members: {access: user}
+  DELETE /api/v1/circles/{circle_id}/members/{member_id}: {access: user}
+  PUT /api/v1/circles/{circle_id}/members/{member_id}/role: {access: user}
+  GET /api/v1/circles/{circle_id}/members/{member_id}/avatars: {access: user}
+  POST /api/v1/circles/{circle_id}/leave: {access: user}
+  PUT /api/v1/circles/{circle_id}/shares: {access: user}
+  GET /api/v1/circles/{circle_id}/feed: {access: user}
+  PUT /api/v1/circles/{circle_id}/notification-settings: {access: user}
+  GET /api/v1/circle-invites: {access: user}
+  POST /api/v1/circle-invites/{circle_id}/accept: {access: user}
+  POST /api/v1/circle-invites/{circle_id}/decline: {access: user}
+  POST /api/v1/circle-invites/{circle_id}/later: {access: user}
+  POST /api/v1/circles/{circle_id}/invite-links: {access: user}
+  DELETE /api/v1/circles/{circle_id}/invite-links/{link_id}: {access: user}
+  POST /api/v1/invite-links/resolve: {access: user}
+  GET /api/v1/notifications: {access: user}
+  POST /api/v1/notifications/read: {access: user}
+  GET /api/v1/circles/{circle_id}/messages: {access: user}
+  POST /api/v1/circles/{circle_id}/messages: {access: user}
+  DELETE /api/v1/circles/{circle_id}/messages/{message_id}: {access: user}
+  POST /api/v1/circles/{circle_id}/messages/read: {access: user}
+  POST /api/v1/realtime/ticket: {access: user}
+  GET /api/v1/rin/usage: {access: user, note: STANDARD sees an empty allowance (the screens upsell)}
+  GET /api/v1/rin/conversations: {access: user, star: rin_ai}
+  POST /api/v1/rin/conversations: {access: user, star: rin_ai}
+  GET /api/v1/rin/conversations/{conversation_id}/messages: {access: user, star: rin_ai}
+  POST /api/v1/rin/conversations/{conversation_id}/messages: {access: user, star: rin_ai}
+  POST /api/v1/rin/actions/{action_id}/accept: {access: user, star: rin_ai}
+  POST /api/v1/rin/actions/{action_id}/dismiss: {access: user}
+  DELETE /api/v1/rin/conversations/{conversation_id}: {access: user}
+  DELETE /api/v1/rin/memory: {access: user}
+  GET /api/v1/me/streak: {access: user}
+  POST /api/v1/reports: {access: user}
+  GET /api/v1/reports: {access: user}
+  GET /api/v1/reports/{report_id}: {access: user}
+  GET /api/v1/reports/{report_id}/file: {access: user}
+  GET /api/v1/support/faqs: {access: user}
+  POST /api/v1/support/tickets: {access: user}
+  POST /api/v1/support/feature-requests: {access: user}
+  GET /api/v1/sync/changes: {access: user}

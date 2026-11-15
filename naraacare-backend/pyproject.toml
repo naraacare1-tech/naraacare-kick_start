@@ -1,0 +1,120 @@
+[project]
+name = "naraacare-backend"
+version = "0.1.0"
+description = "NaraaCare API and background workers"
+readme = "README.md"
+requires-python = "==3.13.*"
+# Exact pins (doc 03 §2). Integrations (anthropic, firebase-admin, google-*, app-store-server-library,
+# reportlab) are added, at the pinned versions from doc 03, in the session that first uses
+# them; this keeps the install and audit surface small. regex, email-validator and tzdata (Safe*
+# validators) were not in doc 03; they were pinned in Session 04.
+dependencies = [
+    "fastapi==0.162.0",
+    "uvicorn==0.54.0",
+    "pydantic==2.14.1",
+    "pydantic-settings==2.16.1",
+    "structlog==26.1.0",
+    "taskiq==0.13.0",
+    "taskiq-redis==1.2.4",
+    "redis==8.1.0",
+    "sqlalchemy[asyncio]==2.1.6",
+    "asyncpg==0.32.0",
+    "argon2-cffi==25.1.0",
+    "cryptography==50.0.2",
+    "regex==2026.9.29",
+    "email-validator==2.3.0",
+    "tzdata==2026.6",
+    "pyjwt==2.15.1",   # S05: EdDSA access tokens, Google/Apple ID token verification
+    "httpx2==2.16.0",  # S05: outbound HTTPS (provider JWKS, Apple token endpoint); also TestClient
+    "openai==3.37.0",  # Rin, drink estimates, report insights (owner 2026-11-07: OpenAI GPT-5 mini, Apache-2.0)
+    "websockets==17.3",  # S12: uvicorn WebSocket server for circle chat (no extras)
+    "reportlab==5.1.0",  # S14: PDF reports drawn natively (no HTML -> no HTML injection)
+    "pillow==13.0.0",  # S14: decode, bomb-check and re-encode support screenshots (EXIF dropped); S16: 13.0.0 fixes 39 CVEs in 12.3.0
+    "python-multipart==0.0.32",  # S14: multipart parser for POST /support/tickets
+]
+
+[dependency-groups]
+dev = [
+    "pytest==9.1.1",
+    "pytest-cov==7.1.0",
+    "ruff==0.17.2",
+    "mypy==2.4.0",
+    "bandit==1.9.4",
+    "pip-audit==2.10.1",
+    "pre-commit==4.7.0",
+    "fakeredis==2.40.0",
+    "pytest-asyncio==1.4.1",
+    "types-regex==2026.9.29.20261017",
+]
+
+[tool.uv]
+package = false
+required-version = "==0.13.6"
+
+# ---------------------------------------------------------------- ruff (doc 09 §4)
+[tool.ruff]
+line-length = 100
+target-version = "py313"
+# semgrep rule fixtures are intentionally "bad" code; CI checks out naraacare-database alongside
+extend-exclude = ["semgrep", "naraacare-database"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "N", "UP", "B", "S", "ASYNC", "DTZ", "T20", "SIM", "RUF", "PL"]
+ignore = ["PLR0913"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["S101", "PLR2004", "S105", "S106"]
+# Look-alike characters (full-width, Cyrillic) ARE the test data here.
+"tests/unit/core/test_validators.py" = ["RUF001"]
+"tools/**" = ["T201"]
+
+# ---------------------------------------------------------------- mypy
+[tool.mypy]
+python_version = "3.13"
+strict = true
+plugins = ["pydantic.mypy"]
+exclude = ["^semgrep/"]
+
+[[tool.mypy.overrides]]
+# No type information shipped: asyncpg (driver behind SQLAlchemy).
+module = ["asyncpg", "asyncpg.*"]
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+# No type stubs installed: PyYAML (tests only: authz matrix, red-team set; comes with pre-commit).
+module = ["yaml", "yaml.*"]
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+# No type information shipped: reportlab (PDF reports, S14).
+module = ["reportlab", "reportlab.*"]
+ignore_missing_imports = true
+
+[tool.pydantic-mypy]
+init_forbid_extra = true
+init_typed = true
+
+# ---------------------------------------------------------------- pytest
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra --strict-markers --cov=app --cov-report=term-missing"
+filterwarnings = ["error"]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+markers = [
+    "db: needs a migrated PostgreSQL (NARAACARE_TEST_DATABASE_URL); skipped otherwise",
+    "slow: long-running sweep (still part of the default run and CI)",
+]
+
+[tool.coverage.run]
+# SQLAlchemy's async layer runs code after each database call inside greenlets; without this,
+# coverage misses every line that follows an awaited query.
+concurrency = ["thread", "greenlet"]
+
+[tool.coverage.report]
+fail_under = 80
+exclude_also = ["if TYPE_CHECKING:"]
+
+# ---------------------------------------------------------------- bandit
+[tool.bandit]
+exclude_dirs = ["tests", "semgrep", ".venv"]

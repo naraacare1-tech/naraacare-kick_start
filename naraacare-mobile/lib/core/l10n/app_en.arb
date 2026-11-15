@@ -1,0 +1,1757 @@
+{
+  "@@locale": "en",
+  "appName": "NaraaCare",
+  "validationRequired": "This field is required.",
+  "validationUnsafe": "Please use letters, numbers and basic punctuation only.",
+  "validationFormat": "This doesn't look right. Please check and try again.",
+  "validationTooShort": "This is too short.",
+  "validationTooLong": "This is too long.",
+  "validationMismatch": "Passwords do not match.",
+  "validationWeakPassword": "Use at least 8 characters with one uppercase letter and one number.",
+  "validationOutOfRange": "This value is outside the allowed range.",
+  "errorNetwork": "No internet connection. We'll try again when you're back online.",
+  "errorTimeout": "This is taking too long. Please try again.",
+  "errorGeneric": "Something went wrong. Please try again.",
+  "errorRateLimited": "Too many attempts. Please wait a moment and try again.",
+  "errorSessionExpired": "Your session has expired. Please sign in again.",
+  "errorUpgradeRequired": "This feature is available with STAR.",
+  "errorCertificate": "We couldn't verify a secure connection. Please check your network.",
+  "errorConflict": "This entry was changed on another device.",
+  "offlineBanner": "You're offline. Changes will sync when you're back online.",
+  "rootedWarning": "This device appears to be rooted or jailbroken. Your data may be less secure.",
+  "biometricReason": "Unlock NaraaCare",
+  "biometricUnlock": "Unlock",
+  "tabHome": "Home",
+  "tabCareCircle": "Care Circle",
+  "tabRinAi": "Rin AI",
+  "tabProfile": "Profile",
+  "starBadge": "STAR",
+  "upsellTitle": "Unlock STAR",
+  "upsellBody": "Get detailed insights and more features with the STAR plan.",
+  "actionRetry": "Try again",
+  "actionClose": "Close",
+  "actionContinue": "Continue",
+  "showPassword": "Show password",
+  "hidePassword": "Hide password",
+  "pendingSync": "Waiting to sync",
+  "introSkip": "Skip",
+  "introNext": "Next →",
+  "introGetStarted": "Get Started",
+  "intro1Title": "Meet your health avatars",
+  "intro1Body": "Three avatars for water, food and sleep. They fill up through the day as you reach your goals.",
+  "intro2Title": "Goals made for your body",
+  "intro2Body": "Tell us about yourself once. We work out your daily water and calorie goals, then adjust them for hot days and workouts.",
+  "intro3Title": "Care for each other",
+  "intro3Body": "Share your avatars with family and friends in a Care Circle, cheer each other on, and ask Rin AI when you need help.",
+  "introStep": "{current} of {total}",
+  "@introStep": {
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "introWater": "Water",
+  "introWaterValue": "2.1 L",
+  "introWaterCaption": "of 3.5 L goal",
+  "introMeal": "Meal",
+  "introMealValue": "1,454",
+  "introMealCaption": "kcal today",
+  "introSleep": "Sleep",
+  "introSleepValue": "7h 4m",
+  "introSleepCaption": "Good sleep",
+  "introFromProfile": "FROM YOUR PROFILE",
+  "introTagFemale": "Female",
+  "introTagAge": "28 yrs",
+  "introTagHeight": "5 ft 5 in",
+  "introTagBody": "Mesomorph",
+  "introTagActivity": "Moderately active",
+  "introDailyWater": "Daily water goal",
+  "introDailyWaterValue": "3.7 L",
+  "introDailyCalories": "Daily calorie goal",
+  "introDailyCaloriesValue": "2,374 kcal",
+  "introCircleNotice": "Family circle · 1h ago",
+  "introCircleNoticeValue": "@priya hit her water goal",
+  "introStreak": "Active streak",
+  "introStreakValue": "7 days",
+  "introRin": "Rin AI",
+  "introRinBody": "Add about 30 g protein at dinner for a balanced day.",
+  "welcomeTagline": "Glow when you're well.\nKnow when they're not",
+  "welcomeGetStarted": "Get Started",
+  "haveAccountPrompt": "Already have an account?",
+  "signInLink": "Sign In",
+  "noAccountPrompt": "New here?",
+  "createAccountLink": "Create an Account",
+  "signUpTitle": "Create your account",
+  "signUpSubtitle": "Start your journey to a healthier you",
+  "emailLabel": "Email",
+  "emailHint": "Enter your email",
+  "passwordLabel": "Password",
+  "passwordCreateHint": "Create a password",
+  "passwordHint": "Enter your password",
+  "confirmPasswordLabel": "Confirm Password",
+  "confirmPasswordHint": "Re-enter your password",
+  "termsAgreePrefix": "I agree to the ",
+  "termsLink": "Terms & Conditions",
+  "termsAnd": " and ",
+  "privacyLink": "Privacy Policy",
+  "termsRequired": "Please accept the Terms & Conditions and Privacy Policy.",
+  "signUpButton": "Sign Up",
+  "orDivider": "or",
+  "continueWithGoogle": "Sign up with Google",
+  "continueWithApple": "Sign up with Apple",
+  "emailRegistered": "This email is already registered. Try Signing In instead.",
+  "passwordWeak": "This password is too common or too weak. Please choose another.",
+  "socialError": "It looks like there was an error signing into your account. Please try again.",
+  "appleUnavailable": "Unable to connect to Apple. Please check your internet connection and try again.",
+  "googleUnavailable": "Unable to connect to Google. Please check your internet connection and try again.",
+  "linkAccountTitle": "Link your account",
+  "linkAccountBody": "An account with this email already exists. Enter its password to link your sign-in.",
+  "linkAccountButton": "Link and sign in",
+  "verifyTitle": "Verify your email",
+  "verifyBody": "We sent a verification code to your email. Enter the 6-digit code below.",
+  "verifyButton": "Verify Email",
+  "resendPrompt": "Didn't receive the code?",
+  "resendCode": "Resend Code.",
+  "resendIn": "Resend available in {time}",
+  "@resendIn": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "codeResent": "New code sent successfully on your email",
+  "otpInvalid": "Invalid verification code. Please try again",
+  "otpInvalidAttempts": "Invalid verification code. {count, plural, =1{1 attempt left.} other{{count} attempts left.}}",
+  "@otpInvalidAttempts": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "otpExpired": "This code has expired. Request a new code.",
+  "otpLocked": "Too many wrong codes. Request a new code.",
+  "emailVerifiedTitle": "Email Verified",
+  "emailVerifiedBody": "Your account is now ready to use. Just one more step.",
+  "signInTitle": "Welcome Back",
+  "signInSubtitle": "Sign In to Continue",
+  "forgotPasswordLink": "Forgot Password?",
+  "signInButton": "Sign In",
+  "signInWithGoogle": "Sign in with Google",
+  "signInWithApple": "Sign in with Apple",
+  "invalidCredentials": "Incorrect email or password. Please try again.",
+  "accountLocked": "Too many attempts. Try again in {minutes, plural, =1{1 minute} other{{minutes} minutes}}.",
+  "@accountLocked": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "emailNotVerified": "Please verify your email first. We've sent you a new code.",
+  "forgotTitle": "Forgot Password",
+  "forgotBody": "Enter the email linked to your account and we'll send you a code to reset your password.",
+  "resetPasswordButton": "Reset Password",
+  "backToSignIn": "Back to Sign In",
+  "resetCodeTitle": "Check Your Email",
+  "resetCodeBody": "If an account exists for this email, we've sent a 6-digit code. Enter it below to continue.",
+  "resetCodeSpamHint": "Didn't receive the email? Check your spam folder or try another email.",
+  "continueButton": "Continue",
+  "newPasswordTitle": "Set New Password",
+  "newPasswordBody": "Your new password must be different from previously used passwords.",
+  "newPasswordLabel": "New Password",
+  "newPasswordHint": "Enter new password",
+  "confirmNewPasswordHint": "Re-enter new password",
+  "passwordRulesTitle": "Password must contain:",
+  "ruleLength": "At least 8 characters",
+  "ruleUppercase": "One uppercase letter",
+  "ruleNumber": "One number",
+  "passwordReused": "Please choose a password you haven't used before.",
+  "passwordChangedTitle": "Password Changed",
+  "passwordChangedBody": "Your password has been successfully updated. You can now sign in with your new credentials.",
+  "onboardingIntroTitle": "Let's build your healthy avatar",
+  "onboardingIntroBody": "NaraaCare uses your details to map food and water directly to your body.",
+  "onboardingIntroButton": "Build my avatar",
+  "stepOf": "{step}/{total}",
+  "@stepOf": {
+    "placeholders": {
+      "step": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "goBack": "Go Back",
+  "nextButton": "Next",
+  "whyItMatters": "Why it matters?",
+  "step1Title": "Choose your gender",
+  "step1Why": "Bodies need different amounts of energy and water.",
+  "sexFemale": "Female",
+  "sexMale": "Male",
+  "fullNameLabel": "Full Name",
+  "fullNameHint": "Enter your full name",
+  "step2Title": "How tall are you?",
+  "step2Why": "Helps calculate your BMI & nutrition.",
+  "unitCm": "cm",
+  "unitFtIn": "ft/in",
+  "unitKg": "kg",
+  "unitLb": "lb",
+  "feetInches": "{feet}’{inches}”",
+  "@feetInches": {
+    "placeholders": {
+      "feet": {
+        "type": "int"
+      },
+      "inches": {
+        "type": "int"
+      }
+    }
+  },
+  "step3Title": "What's your current weight?",
+  "step3Why": "We don't show anyone, not your family, not us. Your weight helps us estimate hydration needs and personalize your daily targets.",
+  "weightHint": "Enter your weight",
+  "goalLabel": "Your goal",
+  "goalHint": "Select your goal",
+  "step4Title": "What's your target weight?",
+  "step4Why": "Your target helps us support you in this journey.",
+  "targetHint": "Enter your target weight",
+  "healthyRange": "This target falls within the healthy BMI range {min}-{max} kg for your height.",
+  "@healthyRange": {
+    "placeholders": {
+      "min": {
+        "type": "int"
+      },
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "outsideRange": "You're outside the recommended BMI range {min}-{max} kg.",
+  "@outsideRange": {
+    "placeholders": {
+      "min": {
+        "type": "int"
+      },
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "conditionsLabel": "Any medical conditions or allergies?",
+  "conditionsHint": "Search conditions",
+  "conditionsNone": "None",
+  "step5Title": "How old are you?",
+  "step5Why": "Organ function changes with age. Helps personalize hydration & nutrition for you.",
+  "ageHint": "Enter your age",
+  "activityLabel": "How active are you?",
+  "step6Title": "Choose your body type",
+  "step6Why": "It gives us a better understanding of your metabolic needs. Select what best represents you from the 3 types.",
+  "bodyTypeChosen": "You chose {name}.",
+  "@bodyTypeChosen": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "resultTitle": "Your avatar is ready",
+  "resultName": "Name:",
+  "resultHeight": "Height:",
+  "resultWeight": "Weight:",
+  "resultAge": "Age:",
+  "resultGoal": "Goal:",
+  "resultTarget": "Target weight:",
+  "resultActivity": "Activity:",
+  "resultConditions": "Allergy:",
+  "resultBodyType": "Body type:",
+  "resultCalories": "Daily calories:",
+  "resultWater": "Daily water:",
+  "kcalValue": "{value} kcal",
+  "@kcalValue": {
+    "placeholders": {
+      "value": {
+        "type": "int"
+      }
+    }
+  },
+  "mlValue": "{value} mL",
+  "@mlValue": {
+    "placeholders": {
+      "value": {
+        "type": "int"
+      }
+    }
+  },
+  "editDetails": "Edit Details",
+  "saveAvatar": "Save my avatar",
+  "generatingTitle": "Generating your health profile…",
+  "savedTitle": "Saved Details",
+  "savedBody": "Redirecting in a moment...",
+  "goalNotAllowed": "This goal is not available for your current weight. Please choose another.",
+  "consentTitle": "Before we start",
+  "consentTerms": "I accept the Terms & Conditions",
+  "consentPrivacy": "I accept the Privacy Policy",
+  "consentHealth": "I agree that NaraaCare processes my health data to give me targets and tracking",
+  "consentAi": "Allow Rin AI to process my messages (optional)",
+  "consentRequired": "Required",
+  "consentAgree": "Agree and continue",
+  "greetingMorning": "Good Morning",
+  "greetingAfternoon": "Good Afternoon",
+  "greetingEvening": "Good Evening",
+  "greetingName": "{greeting}, {name}",
+  "@greetingName": {
+    "placeholders": {
+      "greeting": {
+        "type": "String"
+      },
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "avatarWater": "Water",
+  "avatarFood": "Food",
+  "avatarSleep": "Sleep",
+  "comingSoon": "Coming soon",
+  "usernameSheetTitle": "Create your NaraaCare username",
+  "usernameSheetBody": "Your username helps people find and connect with you.",
+  "usernameLabel": "Username",
+  "usernameHint": "e.g. priya.s",
+  "usernameAvailable": "Username available",
+  "usernameTaken": "Username is already taken",
+  "usernameTooSoon": "You can change your username once every 3 months.",
+  "usernameRule": "Your username should be unique and can include letters, special characters and numbers. You can change your username once every 3 months.",
+  "setUpLater": "Set up later",
+  "saveButton": "Save",
+  "settingsTitle": "Settings",
+  "settingsProfileSection": "PROFILE",
+  "settingsSubscriptionSection": "SUBSCRIPTIONS & PAYMENTS",
+  "settingsSupportSection": "SUPPORT & LEGAL",
+  "editProfile": "Edit Profile",
+  "account": "Account",
+  "notificationsReminders": "Notifications & Reminders",
+  "mySubscriptions": "My Subscriptions",
+  "referFriend": "Refer a Friend",
+  "termsTitle": "Terms and Conditions",
+  "privacyTitle": "Privacy policy",
+  "licensesTitle": "Licenses",
+  "helpSupport": "Help & Support",
+  "logOut": "Log Out",
+  "logOutConfirm": "Do you want to log out of NaraaCare on this device?",
+  "cancel": "Cancel",
+  "profileSaved": "Profile updated",
+  "bmiLabel": "BMI",
+  "ageLabel": "Age",
+  "heightLabel": "Height",
+  "weightLabel": "Weight",
+  "targetWeightLabel": "Target weight",
+  "bodyTypeLabel": "Body type",
+  "sexLabel": "Gender",
+  "changePassword": "Change Password",
+  "currentPasswordLabel": "Current Password",
+  "currentPasswordHint": "Enter current password",
+  "passwordUpdated": "Password updated",
+  "deleteAccount": "Delete Account",
+  "usernameSaved": "Username updated",
+  "linkOpenFailed": "Couldn't open the page. Please try again later.",
+  "kcalValueShort": "{value} kcal",
+  "@kcalValueShort": {
+    "placeholders": {
+      "value": {
+        "type": "int"
+      }
+    }
+  },
+  "ofGoalKcal": "of {goal} kcal",
+  "@ofGoalKcal": {
+    "placeholders": {
+      "goal": {
+        "type": "int"
+      }
+    }
+  },
+  "addMealButton": "Meal",
+  "nutritionInfo": "About your calorie goal",
+  "todaysNutrition": "Today's Nutrition",
+  "basedOnLoggedMeals": "Based on today's logged meals",
+  "tierFree": "Free",
+  "tierIncluded": "Included",
+  "caloriesOfGoal": "Calories ({eaten} / {goal} kcal)",
+  "@caloriesOfGoal": {
+    "placeholders": {
+      "eaten": {
+        "type": "int"
+      },
+      "goal": {
+        "type": "int"
+      }
+    }
+  },
+  "lastUpdatedAt": "Last updated • {time}",
+  "@lastUpdatedAt": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "unlockStarNutrients": "Get detailed insights on 10+ nutrients with STAR plan.",
+  "lockedNutrients": "{count, plural, =1{1 more nutrient with STAR} other{{count} more nutrients with STAR}}",
+  "@lockedNutrients": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "allNutrientsUnlocked": "All nutritional values unlocked",
+  "nutrientUnknown": "—",
+  "nutritionUnavailable": "Nutrition isn't available right now.",
+  "pendingMeals": "{count, plural, =1{1 meal is waiting to sync} other{{count} meals are waiting to sync}}",
+  "@pendingMeals": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "avatarEmpty": "Let's get started!",
+  "avatarFueling": "Fueling up",
+  "avatarEnergized": "Energized",
+  "avatarGoalMet": "Goal met",
+  "avatarOverfilled": "Over your goal",
+  "addMealTitle": "Nutrition Update",
+  "searchFoodHint": "Search here",
+  "searchFoodOrBarcodeHint": "Enter product name or barcode number",
+  "recentChips": "Recent",
+  "addItemsCount": "Add Items({count})",
+  "@addItemsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "saveMealButton": "Save Meal",
+  "updateMealButton": "Update Meal",
+  "viewNutritionSummary": "View Nutrition Summary",
+  "nutritionSummaryTitle": "Nutrition Summary",
+  "addToMeal": "Add to Meal",
+  "noFoodsFound": "No foods found. Try another name.",
+  "emptyMeal": "Search for a food to start your meal.",
+  "maxMealItems": "A meal can have up to 30 items.",
+  "quantityLabel": "Quantity",
+  "unitLabel": "Unit",
+  "removeItem": "Remove",
+  "increaseQuantity": "Increase",
+  "decreaseQuantity": "Decrease",
+  "voiceLogging": "Log by voice",
+  "barcodeLogging": "Scan a barcode",
+  "mealTypeLabel": "Meal",
+  "mealTypeBreakfast": "Breakfast",
+  "mealTypeLunch": "Lunch",
+  "mealTypeSnack": "Snack",
+  "mealTypeDinner": "Dinner",
+  "alsoSaveFavourite": "Also add to Saved Meals",
+  "savedMealNameLabel": "Saved meal name",
+  "savedMealNameHint": "e.g. Dal Chawal",
+  "mealSaved": "Meal saved",
+  "mealQueued": "Saved offline. It will sync when you're back online.",
+  "savedMealLimit": "You have saved the maximum of 50 meals. Remove one first.",
+  "limitTitle": "Daily meal limit reached",
+  "limitBodyStandard": "You've logged {limit} meals today, the most on the free plan. STAR lets you log up to 8 meals a day.",
+  "@limitBodyStandard": {
+    "placeholders": {
+      "limit": {
+        "type": "int"
+      }
+    }
+  },
+  "limitBodyStar": "You've logged {limit} meals today. You can log more tomorrow.",
+  "@limitBodyStar": {
+    "placeholders": {
+      "limit": {
+        "type": "int"
+      }
+    }
+  },
+  "gotIt": "Got it",
+  "recentUpdates": "Recent Updates",
+  "viewAll": "View All",
+  "savedMealsTab": "Saved Meals",
+  "lastTwoUpdates": "Last 2 Updates",
+  "otherEntry": "Other entry",
+  "onlyLastTwoEditable": "Only last 2 entries can be updated",
+  "editYourEntry": "Edit your entry",
+  "noRecentMeals": "No meals logged yet.",
+  "noSavedMeals": "No saved meals yet. Turn on \"Also add to Saved Meals\" when you save a meal.",
+  "useSavedMeal": "Add",
+  "deleteEntry": "Delete entry",
+  "deleteEntryConfirm": "Delete this meal? This cannot be undone.",
+  "delete": "Delete",
+  "entryUpdated": "Entry updated",
+  "entryDeleted": "Entry deleted",
+  "editWindowClosed": "This entry can no longer be edited.",
+  "syncingLabel": "Syncing",
+  "mealItemsCount": "{count, plural, =1{1 item} other{{count} items}}",
+  "@mealItemsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "voiceTitle": "Nutrition Update",
+  "voiceListening": "Listening for ingredients…",
+  "voiceTrySaying": "Try saying: \"2 roti and 1 katori dal\"",
+  "voiceTranscriptLabel": "What you said",
+  "voiceTranscriptHint": "Your meal in words",
+  "voiceStart": "Tap to speak",
+  "voiceStop": "Stop",
+  "voiceFindFoods": "Find foods",
+  "voiceUnmatched": "Not found: {items}",
+  "@voiceUnmatched": {
+    "placeholders": {
+      "items": {
+        "type": "String"
+      }
+    }
+  },
+  "voiceUnavailable": "Speech recognition isn't available on this device. You can type instead.",
+  "voiceDidNotHear": "We couldn't hear you. Check the microphone and try again, or type instead.",
+  "voiceNothingFound": "We couldn't match any foods. Try again or search by name.",
+  "checkBeforeSaving": "Check the items before saving.",
+  "barcodeTitle": "Scan barcode",
+  "barcodePermission": "Allow camera access to scan barcodes, or type the number below.",
+  "barcodeManualLabel": "Barcode number",
+  "barcodeManualHint": "8 to 14 digits",
+  "barcodeLookup": "Look up",
+  "barcodeNotFound": "We couldn't find this product. Try searching by name.",
+  "barcodeNotLoggable": "This product's nutrition data is incomplete. Try searching by name.",
+  "scanAnother": "Scan Another",
+  "per100g": "Per 100 g",
+  "servingSize": "Serving: {grams} g",
+  "@servingSize": {
+    "placeholders": {
+      "grams": {
+        "type": "String"
+      }
+    }
+  },
+  "searchByName": "Search by name",
+  "openFoodFactsCredit": "Product data: Open Food Facts (ODbL)",
+  "macroSplit": "Carbs {carbs}% · Protein {protein}% · Fat {fat}%",
+  "@macroSplit": {
+    "placeholders": {
+      "carbs": {
+        "type": "int"
+      },
+      "protein": {
+        "type": "int"
+      },
+      "fat": {
+        "type": "int"
+      }
+    }
+  },
+  "mealBreakdown": "Meal breakdown",
+  "infoGoalTitle": "How your calorie goal is set",
+  "infoGoalBody": "NaraaCare works out your daily calorie goal from the details you gave us: the energy your body burns at rest (from your gender, height, weight and age), plus your normal daily movement, adjusted for your goal. It never goes below 1,200 kcal a day for women or 1,500 kcal for men; if that happens, we'll tell you.",
+  "infoTodayGoal": "Today's goal: {kcal} kcal",
+  "@infoTodayGoal": {
+    "placeholders": {
+      "kcal": {
+        "type": "int"
+      }
+    }
+  },
+  "infoWorkoutsTitle": "Workouts give you more to eat",
+  "infoWorkoutsBody": "When you log a workout, the calories you burn are added to today's goal. For example, if your goal is 1,800 kcal and a run burns 400 kcal, you can eat 2,200 kcal today and stay on track.",
+  "infoNutrientsTitle": "Your daily nutrients",
+  "infoNutrientsBody": "Your calories are split into a balanced mix: 55% carbohydrates, 25% fat and 20% protein. STANDARD shows 6 nutrients: calories, protein, carbohydrates, fat, dietary fibre and total sugar. STAR adds 11 more.",
+  "infoTargets": "Today's targets: carbs {carbs} g, fat {fat} g, protein {protein} g",
+  "@infoTargets": {
+    "placeholders": {
+      "carbs": {
+        "type": "int"
+      },
+      "fat": {
+        "type": "int"
+      },
+      "protein": {
+        "type": "int"
+      }
+    }
+  },
+  "infoLoggingTitle": "Logging your meals",
+  "infoLoggingBody": "Search for a food, pick the amount and unit (katori, piece, cup, glass, tsp, tbsp) and add it to your meal. Add more items, then tap Save Meal. Use Recent and Saved Meals to log favourites quickly. Voice and barcode logging are part of STAR. You can change or delete your last 2 entries.",
+  "infoNoteTitle": "Please note",
+  "infoNoteBody": "Nutrition values are estimates and real foods vary. This isn't medical or dietary advice. If you have a medical condition, are pregnant, or follow a diet set by your doctor, follow their advice.",
+  "hydrationEmpty": "Let's get started!",
+  "hydrationProgress": "{intake} L of {goal} L goal",
+  "@hydrationProgress": {
+    "placeholders": {
+      "intake": {
+        "type": "String"
+      },
+      "goal": {
+        "type": "String"
+      }
+    }
+  },
+  "hydrationGoalCompleted": "Goal Completed",
+  "hydrationAboveGoal": "Above Goal · {intake} L",
+  "@hydrationAboveGoal": {
+    "placeholders": {
+      "intake": {
+        "type": "String"
+      }
+    }
+  },
+  "hydrationUnavailable": "Hydration isn't available right now.",
+  "bandWell": "Well hydrated",
+  "bandDrinkSoon": "Drink soon",
+  "bandLow": "Low",
+  "bandCritical": "Critical, drink now",
+  "goalPct": "{value} % of today's goal",
+  "@goalPct": {
+    "placeholders": {
+      "value": {"type": "int"}
+    }
+  },
+  "levelPct": "{value} %",
+  "@levelPct": {
+    "placeholders": {
+      "value": {
+        "type": "int"
+      }
+    }
+  },
+  "leftToDrink": "{litres} L left to drink today",
+  "@leftToDrink": {
+    "placeholders": {
+      "litres": {
+        "type": "String"
+      }
+    }
+  },
+  "dayEndingSoon": "Your day is ending soon. There's still time to reach your goal.",
+  "overhydrationCaution": "That's a lot of fluid today. Drinking far more than you need can be harmful.",
+  "temperatureNotUpdated": "Temperature not updated today: we're using 25 °C.",
+  "swipeHint": "Swipe up to add 100 ml of water, swipe down to remove 100 ml",
+  "swipeAdded": "{ml} ml of water added",
+  "@swipeAdded": {
+    "placeholders": {
+      "ml": {
+        "type": "int"
+      }
+    }
+  },
+  "swipeRemoved": "{ml} ml of water removed",
+  "@swipeRemoved": {
+    "placeholders": {
+      "ml": {
+        "type": "int"
+      }
+    }
+  },
+  "waterBelowZero": "Today's water can't go below zero.",
+  "addWaterButton": "Water",
+  "temperatureActivity": "Temperature & Activity",
+  "hydrationInfo": "About your water goal",
+  "todaysHydration": "Today's Hydration",
+  "tankLevel": "Hydration level",
+  "dailyGoal": "Daily goal",
+  "drinksToday": "Drinks today",
+  "waterFromFood": "Water from food",
+  "workoutSweat": "Lost in workouts",
+  "temperature": "Temperature",
+  "leftToDrinkLabel": "Left to drink",
+  "addIntakeTitle": "Add a drink",
+  "waterTab": "Water",
+  "otherDrinksTab": "Other drinks",
+  "searchDrinkHint": "Search drinks",
+  "customDrink": "Custom drink",
+  "amountMl": "Amount (ml)",
+  "addIntakeButton": "Add",
+  "intakeAdded": "Drink added",
+  "savedOffline": "Saved. It will sync when you're back online.",
+  "customDrinkName": "Drink name",
+  "customDrinkHint": "e.g. Banana Shake",
+  "estimateFactor": "Estimate hydration",
+  "estimateFromAi": "Estimated by Rin AI. Adjust it if you know better.",
+  "estimateDefault": "We couldn't estimate this drink, so we start at 85 %. Adjust it if you know better.",
+  "estimateNoConsent": "AI estimates need your AI consent (Privacy settings). We start at 85 %; adjust it if you know better.",
+  "factorPct": "{value} %",
+  "@factorPct": {
+    "placeholders": {
+      "value": {
+        "type": "int"
+      }
+    }
+  },
+  "factorExplain": "{value} % of this drink counts as water",
+  "@factorExplain": {
+    "placeholders": {
+      "value": {
+        "type": "int"
+      }
+    }
+  },
+  "saveCustomDrink": "Save drink",
+  "noDrinksYet": "No drinks logged today yet.",
+  "swipeDownEntry": "Water removed · {ml} ml",
+  "@swipeDownEntry": {
+    "placeholders": {
+      "ml": {
+        "type": "int"
+      }
+    }
+  },
+  "editEntry": "Edit your entry",
+  "saveChanges": "Save changes",
+  "changedElsewhere": "This entry was changed on another device. We've loaded the latest version.",
+  "temperatureActivityUpsell": "Set today's temperature and log workouts so your water goal follows your day. Part of STAR.",
+  "saveTemperature": "Save temperature",
+  "temperatureSaved": "Temperature set to {value}",
+  "@temperatureSaved": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "activity": "Activity",
+  "minutesValue": "{value} min",
+  "@minutesValue": {
+    "placeholders": {
+      "value": {
+        "type": "int"
+      }
+    }
+  },
+  "customMinutes": "Other duration (minutes)",
+  "saveWorkout": "Save workout",
+  "workoutSaved": "Workout saved",
+  "workoutWalking": "Walking",
+  "workoutGym": "Gym",
+  "workoutCycling": "Cycling",
+  "workoutSwimming": "Swimming",
+  "workoutRunning": "Running",
+  "workoutTrekking": "Trekking",
+  "hydrationInfoGoalTitle": "Your daily water goal",
+  "hydrationInfoGoalBody": "Your goal comes from your body (sex, height, weight, age, body type) and how active you are, using the Yamada 2022 water turnover model. With STAR it also follows the temperature and your workouts.",
+  "hydrationInfoTankTitle": "Your water avatar",
+  "hydrationInfoTankBody": "The avatar shows how full your body's water reserve is right now. It drains through the day and fills when you drink. Meals add a little water too.",
+  "hydrationInfoLoggingTitle": "Logging drinks",
+  "hydrationInfoLoggingBody": "Swipe up on the water card to add 100 ml of water, or swipe down to remove 100 ml. Tap Water to add other amounts and drinks. You can change or delete your last 2 entries.",
+  "hydrationInfoNoteBody": "Water needs are estimates and vary from person to person. This isn't medical advice. If your doctor has limited how much you should drink, follow their advice.",
+  "notificationsExplainerTitle": "Stay on track with reminders",
+  "notificationsExplainerBody": "NaraaCare can remind you to drink water, log meals and wind down for sleep. Reminders never show your health numbers on the lock screen, and you can change them any time.",
+  "allowNotifications": "Allow notifications",
+  "notNow": "Not now",
+  "pushUnavailable": "Notifications are off for NaraaCare. Turn them on in your phone's settings to get reminders. Your settings are saved.",
+  "reminderWaterTitle": "Time for some water",
+  "reminderWaterBody": "A few sips keep your avatar happy.",
+  "reminderMealTitle": "Log your meal",
+  "reminderMealBody": "Add what you ate to keep your day on track.",
+  "reminderSleepTitle": "Wind down",
+  "reminderSleepBody": "Getting ready for bed? Log your sleep in the morning.",
+  "reminderCheckinTitle": "Daily check-in",
+  "reminderCheckinBody": "Take a moment to check in with your avatars.",
+  "reminderProfileTitle": "Keep your profile current",
+  "reminderProfileBody": "Review your health profile for accurate goals.",
+  "remindersSection": "Reminders",
+  "notificationTypesSection": "Notify me about",
+  "settingsUnavailable": "Settings aren't available right now.",
+  "everyMinutes": "Every {value} minutes while you're awake",
+  "@everyMinutes": {
+    "placeholders": {
+      "value": {
+        "type": "int"
+      }
+    }
+  },
+  "addTime": "Add time",
+  "quietHoursNote": "No reminders between 22:30 and 07:00.",
+  "prefGoalCompletions": "Goal completions",
+  "prefStreakMilestones": "Streak milestones",
+  "prefHealthInsights": "Health insights",
+  "prefHydrationReminders": "Hydration reminders",
+  "prefNutritionReminders": "Meal reminders",
+  "prefSleepReminders": "Sleep reminders",
+  "prefDailyCheckin": "Daily check-in",
+  "prefHealthProfile": "Health profile reminders",
+  "prefConnectionRequests": "Connection requests",
+  "prefConnectionActivity": "Connection activity",
+  "prefReportsReady": "Reports ready",
+  "prefSubscriptionPayments": "Subscription and payments",
+  "hoursMinutes": "{hours} h {minutes} m",
+  "@hoursMinutes": {
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      },
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "sleepGood": "Good",
+  "sleepFair": "Fair",
+  "sleepLow": "Low",
+  "sleepNone": "Not logged",
+  "sleepNotLogged": "No sleep logged yet",
+  "sleepUnavailable": "Sleep isn't available right now.",
+  "sleepButton": "Sleep",
+  "sleepInfo": "About your sleep score",
+  "unlockSleepAvatar": "Unlock your Sleep Avatar",
+  "todaysSleep": "Today's Sleep",
+  "sleepOfGoal": "{achieved} of {goal}",
+  "@sleepOfGoal": {
+    "placeholders": {
+      "achieved": {
+        "type": "String"
+      },
+      "goal": {
+        "type": "String"
+      }
+    }
+  },
+  "nightWakings": "{count, plural, =1{1 night waking} other{{count} night wakings}}",
+  "@nightWakings": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sleepBuffersExplain": "We don't count the first {onset} minutes after you go to bed (falling asleep) or the last {wake} minutes before you wake. Each night waking also removes {waking} extra minutes.",
+  "@sleepBuffersExplain": {
+    "placeholders": {
+      "onset": {
+        "type": "int"
+      },
+      "wake": {
+        "type": "int"
+      },
+      "waking": {
+        "type": "int"
+      }
+    }
+  },
+  "sleepGoal": "Your sleep goal",
+  "updateSleep": "Update Sleep",
+  "sleepStartLabel": "Went to bed",
+  "wakeTimeLabel": "Woke up",
+  "nightWakingsTitle": "Night wakings",
+  "wokeAtLabel": "Woke at",
+  "backAsleepLabel": "Back asleep",
+  "addNightWaking": "Add night waking",
+  "saveSleep": "Save sleep",
+  "sleepSaved": "Sleep saved",
+  "sleepWakeAfterStart": "Wake-up time must be after bedtime.",
+  "sleepTooLong": "A sleep entry can be at most 16 hours.",
+  "sleepInFuture": "Wake-up time can't be in the future.",
+  "sleepWakingsInvalid": "Night wakings must be during your sleep and in order.",
+  "sleepOverlap": "This sleep overlaps another entry.",
+  "sleepInfoHowTitle": "How we count your sleep",
+  "sleepInfoHowBody": "Counted sleep = wake-up time minus bedtime, without the time it usually takes to fall asleep (15 minutes) and the last 15 minutes before waking. Each night waking removes the time you were awake plus 10 minutes to fall back asleep. Naps on the same day add up.",
+  "sleepInfoGoalTitle": "Your goal and score",
+  "sleepInfoGoalBody": "Your goal starts from your age (8 hours for adults, 7.5 hours from 65) and you can change it. The score is your counted sleep as a share of your goal, up to 100 %: 90 % and above is Good, 70-89 % Fair, below 70 % Low.",
+  "sleepInfoNoteBody": "Sleep scores are estimates from the times you enter. This isn't medical advice. If you have trouble sleeping often, talk to a doctor.",
+  "subscriptionUnavailable": "This isn't available right now. Please try again.",
+  "upgradeToStar": "Upgrade to STAR",
+  "planStandard": "STANDARD",
+  "planStar": "STAR",
+  "perMonthSuffix": "/ month",
+  "perYearSuffix": "/ year",
+  "saveBadge": "SAVE {percent}%",
+  "@saveBadge": {
+    "placeholders": {
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "activeBadge": "Active",
+  "recommendedBadge": "RECOMMENDED",
+  "yourCurrentPlan": "Your Current Plan",
+  "featHydrationNutrition": "Hydration & Nutrition tracking",
+  "featCareCircle": "Care Circle",
+  "featBasicReports": "Basic health reports",
+  "featMeals4": "4 meal logs/day",
+  "featReferral30": "30 day free STAR plan with referral program",
+  "featTicketSupport": "Ticket Support",
+  "featRin": "Rin AI",
+  "featInsights": "Advanced insights & trends",
+  "featEverythingStandard": "Everything in Standard",
+  "featCustomReports": "Custom health reports",
+  "featMeals8": "8 meal logs/day",
+  "featSleepAvatar": "Sleep Avatar unlocked",
+  "featBarcodeVoice": "Bar-code & Voice input available",
+  "featPrioritySupport": "Priority support",
+  "featReferral50": "50 day free STAR plan with referral program",
+  "starPlan": "STAR Plan",
+  "billingCycle": "Billing Cycle",
+  "pricePerMonthShort": "{price}/ mo",
+  "@pricePerMonthShort": {
+    "placeholders": {
+      "price": {
+        "type": "String"
+      }
+    }
+  },
+  "pricePerYearShort": "{price} / year",
+  "@pricePerYearShort": {
+    "placeholders": {
+      "price": {
+        "type": "String"
+      }
+    }
+  },
+  "startsToday": "Starts today",
+  "renewsOnLabel": "Renews on",
+  "paymentVia": "Payment via",
+  "paymentViaStores": "App Store / Google Play",
+  "chargedThroughStore": "You'll be charged through your Apple App Store/ Google Play account. You can manage or cancel anytime.",
+  "confirmSubscribe": "Confirm & Subscribe",
+  "storePriceLoading": "Loading the store price…",
+  "currentPlanCaps": "CURRENT PLAN",
+  "currentPlan": "Current plan",
+  "annualPrice": "Annual Price",
+  "monthlyPrice": "Monthly Price",
+  "nextBillingDate": "Next billing date",
+  "accessUntilLabel": "Access until",
+  "autoRenewal": "Auto-renewal",
+  "autoRenewalOn": "On",
+  "autoRenewalOff": "Off",
+  "receiptSent": "A receipt has been sent to your registered email address.",
+  "goToSubscriptions": "Go to My Subscriptions",
+  "planIncludes": "Your Plan Includes:",
+  "subscriptionActions": "Actions",
+  "updatePaymentMethod": "Update Payment Method",
+  "planNameYearly": "STAR Plan (Yearly)",
+  "planNameMonthly": "STAR Plan (Monthly)",
+  "paidBadge": "Paid",
+  "refundedBadge": "Refunded",
+  "receiptsByEmail": "Receipts are sent to your registered email.",
+  "ifYouCancel": "If you cancel:",
+  "cancelAccessTill": "You will have access till {date}.",
+  "@cancelAccessTill": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "cancelAccessTillPeriodEnd": "You will have access till the end of the paid period.",
+  "cancelAutoRenewOff": "Auto renewal will be turned off.",
+  "cancelNoCharge": "You won't be charged again.",
+  "cancelUpgradeBack": "You can upgrade back to STAR anytime if you change your mind.",
+  "cancelInStore": "You'll finish cancelling in your App Store / Google Play account.",
+  "stayOnStar": "Stay on STAR",
+  "subscriptionCancelled": "Subscription Cancelled",
+  "subscriptionCancelledBody": "Your STAR plan subscription has been cancelled.",
+  "cancelledAccessTill": "You have access to STAR plan features till {date}. After that you will be moved to STANDARD plan.",
+  "@cancelledAccessTill": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "planMonthly": "Monthly",
+  "planYearly": "Yearly",
+  "upgradeButton": "Upgrade",
+  "restorePurchases": "Restore purchases",
+  "purchasePending": "Your payment is pending. STAR unlocks as soon as the store confirms it.",
+  "storeUnavailable": "The store isn't available on this device right now.",
+  "purchaseFailed": "We couldn't confirm this purchase. You haven't lost anything; try Restore purchases.",
+  "paymentIssue": "There's a problem with your payment. Please update it in the store to keep STAR.",
+  "billingHistory": "Billing History",
+  "noBillingHistory": "No payments yet.",
+  "cancelSubscription": "Cancel Subscription",
+  "starFromReward": "You have STAR from a reward or promotion. Enjoy!",
+  "nowOnStar": "You're now on STAR plan.",
+  "nowOnStarBody": "Your health journey just got a major upgrade.",
+  "referTitle": "Refer 5 friends, get STAR free",
+  "referBody": "Share your link. When 5 friends each use NaraaCare on 30 days within their first 60, you get 30 days of STAR (50 days if you're already on STAR).",
+  "copyLink": "Copy link",
+  "linkCopied": "Link copied",
+  "referProgress": "{done} of {total} friends qualified",
+  "@referProgress": {
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "referRewardGranted": "Reward unlocked: {days} days of STAR",
+  "@referRewardGranted": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "friendQualified": "Qualified",
+  "friendNotQualified": "Didn't qualify in time",
+  "friendActiveDays": "{days} of 30 active days",
+  "@friendActiveDays": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "referRules": "Friends must be new to NaraaCare and sign up within 7 days of opening your link. One reward per person.",
+  "invitedTitle": "You've been invited to NaraaCare",
+  "invitedBody": "Create your account to get started. Your friend gets closer to a STAR reward when you use NaraaCare.",
+  "moreOptions": "More options",
+  "addWaterDrinkButton": "Add Water/Drink",
+  "addMealLongButton": "Add Meal",
+  "logSleepButton": "Log Sleep",
+  "pageOf": "Page {page} of {count}",
+  "@pageOf": {
+    "placeholders": {
+      "page": {
+        "type": "int"
+      },
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "accept": "Accept",
+  "addMembers": "Add Members",
+  "adminRequired": "Only a circle admin can do this.",
+  "admins": "ADMINS",
+  "allMembers": "All Members",
+  "backToCircles": "Back to Your Circles",
+  "cancelInvite": "Cancel invite",
+  "changeSharesLater": "You can change these anytime from the circle Settings.",
+  "chatSection": "CHAT",
+  "chooseShares": "Choose at least 1 avatar to share with all members of this circle.",
+  "circleActivity": "CIRCLE ACTIVITY",
+  "circleAdmin": "Circle Admin",
+  "circleChat": "Circle Chat",
+  "circleFull": "This circle is full (50 members).",
+  "circleName": "Circle name",
+  "circleNameHelper": "You can change this later",
+  "circleNameHint": "e.g. Gym Buddies",
+  "circleNotFound": "This circle is not available.",
+  "circlesUnavailable": "Could not load. Pull to try again.",
+  "connect": "Connect",
+  "connected": "Connected",
+  "connectedOnNaraaCare": "CONNECTED ON NARAACARE",
+  "connections": "Connections",
+  "copyInviteLink": "Copy invite link",
+  "createCircle": "Create a circle",
+  "createCircleButton": "Create Circle",
+  "createCircleTip": "Invite friends and family to share avatars and support each other",
+  "createCircleTitle": "Create a Care Circle",
+  "createCircleTitleShort": "Create a Circle",
+  "decline": "Decline",
+  "deleteMessageTitle": "Delete this message?",
+  "findPeople": "Find People",
+  "healthUpdates": "HEALTH UPDATES",
+  "invite": "Invite",
+  "inviteLink": "Invite Link",
+  "inviteLinkAfterCreate": "Create the circle first, then share an invite link from its Settings.",
+  "inviteLinkCopied": "Invite link copied. It works for 7 days.",
+  "inviteLinkExpired": "This invite link has expired.",
+  "inviteLinkLimit": "Too many invite links today. Try again tomorrow.",
+  "inviteNotFound": "This invite is no longer open.",
+  "invitePeopleBody": "Share this invite link with someone who isn't on NaraaCare yet so they can join your circle.",
+  "invitePeopleTitle": "Invite people on NaraaCare",
+  "invited": "Invited",
+  "invitedToJoin": "You are invited to join",
+  "invitesHeader": "INVITES",
+  "invitesSent": "Invites sent",
+  "joinCircle": "Join Circle",
+  "justNow": "Just now",
+  "lastAdmin": "A circle needs at least one admin.",
+  "leave": "Leave",
+  "leaveCircleBody": "You will no longer be able to see this circle's chat or shared health updates.",
+  "leaveCircleTitle": "Leave this circle?",
+  "makeAdmin": "Make admin",
+  "manageMembers": "Manage Members",
+  "maybeLater": "Maybe Later",
+  "mealLogged": "Meal logged",
+  "membersTitle": "Members",
+  "mentionInvalid": "You can only mention members of this circle.",
+  "messageDeleted": "Message deleted",
+  "messageNotAllowed": "This message contains characters that are not allowed.",
+  "more": "More",
+  "myConnections": "My Connections",
+  "namePicture": "Name & Picture",
+  "next": "Next",
+  "noConnectionsYet": "No connections yet.",
+  "noMessagesYet": "No messages yet. Say hello!",
+  "noNewUpdates": "No new updates",
+  "noNotificationsYet": "No notifications yet.",
+  "noResults": "No one found.",
+  "noUpdatesYet": "No updates yet today.",
+  "notifAdmin": "You are now an admin of this circle.",
+  "notifConnectionAccepted": "Your connection request was accepted.",
+  "notifConnectionRequest": "You have a new connection request.",
+  "notifDeleted": "A circle you were in was deleted.",
+  "notifGeneric": "Circle update",
+  "notifInvite": "You were invited to a circle.",
+  "notifMessage": "New message in the chat.",
+  "notifRemoved": "You were removed from this circle.",
+  "notificationSettingsTitle": "Notification Settings",
+  "notificationsTitle": "Notifications",
+  "peopleOnNaraaCare": "People on NaraaCare",
+  "prefAvatarUpdates": "Avatar updates",
+  "prefAvatarUpdatesBody": "Know when shared information is updated.",
+  "prefCircleUpdates": "Circle updates",
+  "prefCircleUpdatesBody": "Stay informed about important circle changes.",
+  "prefGoals": "Goal completions",
+  "prefGoalsBody": "Celebrate members reaching their health goals.",
+  "prefJoinLeave": "Member joins or leaves",
+  "prefJoinLeaveBody": "Get notified when members join or leave this circle.",
+  "prefMentions": "Mentions",
+  "prefMentionsBody": "Get notified if someone mentions you in chat.",
+  "prefNewMessages": "New message",
+  "prefNewMessagesBody": "Stay up to date with new messages in chats.",
+  "queryTooShort": "Type at least 3 characters.",
+  "removeAdmin": "Remove admin",
+  "removeFromCircle": "Remove from circle",
+  "requestSent": "Request sent",
+  "requested": "Requested",
+  "results": "RESULTS",
+  "save": "Save",
+  "saved": "Saved",
+  "searchByUsername": "Search by username",
+  "selectWallpaper": "SELECT WALLPAPER",
+  "send": "Send",
+  "sharesInvalid": "Share 1 to 3 avatars.",
+  "skip": "Skip",
+  "sleepStarOnly": "Sleep avatar is available with STAR plan",
+  "someone": "Someone",
+  "suggestedForYou": "SUGGESTED FOR YOU",
+  "tooManyMentions": "A message can mention at most 20 people.",
+  "typeHere": "Type here..",
+  "upgrade": "Upgrade",
+  "usernameRequired": "Please choose a username first.",
+  "viewMembers": "View Members",
+  "whyStar": "Why STAR?",
+  "whyStarBody": "STAR members can share and view sleep insights with their care circles.",
+  "yesterday": "Yesterday",
+  "you": "You",
+  "yourCircles": "Your Circles",
+  "yourSharedAvatars": "Your Shared Avatars",
+  "daysAgo": "{count}d ago",
+  "@daysAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "feedGoalCompleted": "{who} completed their {avatar} goal.",
+  "@feedGoalCompleted": {
+    "placeholders": {
+      "who": {
+        "type": "String"
+      },
+      "avatar": {
+        "type": "String"
+      }
+    }
+  },
+  "feedJoined": "{who} joined the circle.",
+  "@feedJoined": {
+    "placeholders": {
+      "who": {
+        "type": "String"
+      }
+    }
+  },
+  "feedLeft": "{who} left the circle.",
+  "@feedLeft": {
+    "placeholders": {
+      "who": {
+        "type": "String"
+      }
+    }
+  },
+  "feedUpdated": "{who} updated {avatar}.",
+  "@feedUpdated": {
+    "placeholders": {
+      "who": {
+        "type": "String"
+      },
+      "avatar": {
+        "type": "String"
+      }
+    }
+  },
+  "hoursAgo": "{count}h ago",
+  "@hoursAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "inviteCount": "{count, plural, =0{Invite} other{Invite ({count})}}",
+  "@inviteCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "invitedBy": "Invited by {name}",
+  "@invitedBy": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "invitedCount": "INVITED ({count})",
+  "@invitedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "isTyping": "{who} is typing…",
+  "@isTyping": {
+    "placeholders": {
+      "who": {
+        "type": "String"
+      }
+    }
+  },
+  "joinedDaysAgo": "{days, plural, =0{Joined today} =1{Joined since 1 day} other{Joined since {days} days}}",
+  "@joinedDaysAgo": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "leaveCircle": "Leave {name}",
+  "@leaveCircle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "leftCircle": "You left {name}",
+  "@leftCircle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "litresValue": "{litres} L",
+  "@litresValue": {
+    "placeholders": {
+      "litres": {
+        "type": "double",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "membersCount": "{count, plural, =1{1 member} other{{count} members}}",
+  "@membersCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "minutesAgo": "{count}m ago",
+  "@minutesAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "nextWithCount": "Next ({count})",
+  "@nextWithCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "notSharedAvatar": "{avatar} is not shared",
+  "@notSharedAvatar": {
+    "placeholders": {
+      "avatar": {
+        "type": "String"
+      }
+    }
+  },
+  "notifGoal": "{who} completed their hydration goal.",
+  "@notifGoal": {
+    "placeholders": {
+      "who": {
+        "type": "String"
+      }
+    }
+  },
+  "notifJoined": "{who} joined the circle.",
+  "@notifJoined": {
+    "placeholders": {
+      "who": {
+        "type": "String"
+      }
+    }
+  },
+  "notifLeft": "{who} left the circle.",
+  "@notifLeft": {
+    "placeholders": {
+      "who": {
+        "type": "String"
+      }
+    }
+  },
+  "notifMention": "{who} mentioned you in the chat.",
+  "@notifMention": {
+    "placeholders": {
+      "who": {
+        "type": "String"
+      }
+    }
+  },
+  "ofGoalLitres": "of {litres} L goal",
+  "@ofGoalLitres": {
+    "placeholders": {
+      "litres": {
+        "type": "double",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "shareWith": "Share with {name}",
+  "@shareWith": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "updatesToday": "{count, plural, =1{1 update today} other{{count} updates today}}",
+  "@updatesToday": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "aboutRin": "About Rin AI",
+  "aboutRinBody": "Rin is your AI health companion. It understands your health data and helps you make better choices every day.",
+  "allow": "Allow",
+  "edit": "Edit",
+  "less": "Less",
+  "rinActionExpired": "This suggestion has expired.",
+  "rinActionResolved": "This suggestion was already handled.",
+  "rinAddQuestion": "Should I add this to your avatar?",
+  "rinAddToAvatar": "Add to Avatar",
+  "rinAdded": "Added to your avatar",
+  "rinAi": "Rin AI",
+  "rinClearMemory": "Clear Rin's memory",
+  "rinConsentTitle": "Allow Rin to use your health data?",
+  "rinConsentBody": "To answer, Rin sends your own profile summary, today's and last week's totals and your question to our AI provider (Anthropic, outside India). Nothing about other people is shared. You can turn this off anytime in Settings.",
+  "rinConversations": "CONVERSATIONS",
+  "rinDeleteChat": "Delete Chat",
+  "rinDeleteTitle": "Delete this chat?",
+  "rinDeleteBody": "This will remove your entire conversation with Rin AI. It will not affect your avatar updates.",
+  "rinDeleted": "Your conversation with Rin AI has been deleted.",
+  "rinDisclaimer": "Rin AI is a support tool, not a substitute for professional medical advice.",
+  "rinEditTitle": "Edit meal",
+  "rinFeatureAvatar": "Reflect updates on your avatar.",
+  "rinFeatureChat": "Chat & get personalized insights",
+  "rinFeatureLog": "Log food, water & sleep by voice/text.",
+  "rinFeatureTips": "Smart recommendations just for you.",
+  "rinHelp": "Help",
+  "rinHelpTitle": "Rin AI help",
+  "rinHi": "Hi! 👋",
+  "rinIntro": "I'm Rin, your AI health companion. Ask me anything about your health, or choose a suggestion to get started.",
+  "rinLimitReached": "You've used this month's Rin allowance. It resets on the 1st of next month.",
+  "rinMemoryCleared": "Rin's memory has been cleared.",
+  "rinNotAdded": "Not added",
+  "rinResting": "Rin is resting right now. Please try again soon.",
+  "rinSearchHint": "Search conversations",
+  "rinSearchHistory": "Search History",
+  "rinSearchTitle": "Search in Rin AI",
+  "rinSuggestDinner": "What should I eat for dinner?",
+  "rinSuggestTired": "Why am I feeling tired?",
+  "rinSuggestToday": "How am I doing today?",
+  "rinSuggestWater": "How much water should I drink?",
+  "unlockRin": "Unlock Rin AI",
+  "unlockRinBody": "Your personal AI health companion. Understand your health, take guidance and take action.",
+  "rinDrinkCard": "Log {amount} of {drink}?",
+  "@rinDrinkCard": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "drink": {
+        "type": "String"
+      }
+    }
+  },
+  "rinHiName": "Hi {name}! 👋",
+  "@rinHiName": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "rinMealTotals": "Calories {kcal} kcal · Protein {protein} g · Carbs {carbs} g · Fat {fat} g",
+  "@rinMealTotals": {
+    "placeholders": {
+      "kcal": {
+        "type": "int"
+      },
+      "protein": {
+        "type": "int"
+      },
+      "carbs": {
+        "type": "int"
+      },
+      "fat": {
+        "type": "int"
+      }
+    }
+  },
+  "rinUsage": "{pct} % used this month",
+  "@rinUsage": {
+    "placeholders": {
+      "pct": {
+        "type": "String"
+      }
+    }
+  },
+  "profileConnections": "Connections",
+  "profileCircles": "Care Circles",
+  "profileAvatarLabel": "Your avatar",
+  "activeStreak": "Active Streak",
+  "longestStreak": "Longest Streak",
+  "streakCalendar": "Streak calendar",
+  "streakRule": "Your streak increases when you log any data (hydration, nutrition, sleep) in a day.",
+  "streakBrokenTitle": "Oh no! Streak Broken.",
+  "streakBrokenBody": "You didn't log any data yesterday. Don't worry, you can start again and keep your momentum going.",
+  "streakDays": "{count, plural, =1{1 day} other{{count} days}}",
+  "@streakDays": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "activeDay": "Active day",
+  "noData": "No Data",
+  "previousMonth": "Previous month",
+  "nextMonth": "Next month",
+  "loadFailed": "Couldn't load this. Check your connection and try again.",
+  "retry": "Try again",
+  "done": "Done",
+  "remove": "Remove",
+  "todayHeader": "TODAY",
+  "earlierHeader": "EARLIER",
+  "notifStreak": "Your streak reached {days} days!",
+  "@notifStreak": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "notifReportReady": "Your report is ready to download.",
+  "notifReportFailed": "We couldn't create your report. Please try again.",
+  "downloadReport": "Download Report",
+  "downloadReportHint": "View & analyse your activity summary.",
+  "createNewReport": "Create new report",
+  "monthlyReport": "Monthly Report",
+  "monthlyReportHint": "Get a summary of your data for any month.",
+  "customReport": "Custom Report",
+  "customReportHint": "Get a summary & insights for any date range.",
+  "whatsIncluded": "What's included",
+  "hydrationLabel": "Hydration",
+  "nutritionLabel": "Nutrition",
+  "sleepLabel": "Sleep",
+  "insightsLabel": "Insights",
+  "reportUpsell": "STAR members can choose a custom date range and get advanced health insights.",
+  "chooseMonth": "Choose a month",
+  "chooseYear": "Choose a year",
+  "reportNoData": "Log water, food or sleep first. A report needs at least one day with data.",
+  "createReport": "Create report",
+  "yourReports": "Your reports (kept for 7 days)",
+  "reportReady": "Ready",
+  "reportFailed": "Failed",
+  "reportExpired": "Expired",
+  "reportPreparing": "Preparing…",
+  "customizeReport": "Customize Report",
+  "selectDateRange": "Select Date Range",
+  "last7Days": "Last 7 days",
+  "last30Days": "Last 30 days",
+  "last3Months": "Last 3 months",
+  "last6Months": "Last 6 months",
+  "thisYear": "This Year",
+  "fromLabel": "From",
+  "toLabel": "To",
+  "enterStartDate": "Enter start date",
+  "enterEndDate": "Enter end date",
+  "whatToInclude": "What do you want to include?",
+  "generateReport": "Generate Report",
+  "reportPreview": "Report Preview",
+  "reportSummary": "Report Summary",
+  "reportPeriod": "{from} - {to} ({days, plural, =1{1 day} other{{days} days}})",
+  "@reportPeriod": {
+    "placeholders": {
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      },
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "reportTitle": "{sections} Report",
+  "@reportTitle": {
+    "placeholders": {
+      "sections": {
+        "type": "String"
+      }
+    }
+  },
+  "reportIncludes": "Report will include overall metrics, daily averages, trends and insights.",
+  "reportPreparingLong": "We're preparing your report. This usually takes a few seconds.",
+  "reportSlow": "This is taking longer than usual. You can leave this screen; we'll notify you when your report is ready.",
+  "reportFailedLong": "We couldn't create this report. Please create it again.",
+  "shareReport": "Share report",
+  "reportDownloaded": "Report Downloaded",
+  "reportSavedBody": "Your report is saved in the app. Use Share to save a copy to your phone's files.",
+  "reportSavedDownloads": "Saved to Downloads › NaraaCare on your phone. You can open it from the Files app.",
+  "reportSavedFiles": "Saved on your iPhone. Open the Files app › On My iPhone › NaraaCare › reports.",
+  "reportSize": "Size: {kb} KB",
+  "@reportSize": {
+    "placeholders": {
+      "kb": {
+        "type": "String"
+      }
+    }
+  },
+  "reportSaveFailed": "Couldn't save the report on this device.",
+  "reportLimitReached": "You can create 10 reports a day. Try again tomorrow.",
+  "reportRangeInvalid": "Choose dates up to today, at most 366 days apart.",
+  "reportNeedsStar": "This report option is part of STAR.",
+  "reportNeedsAiConsent": "Insights need your consent to AI processing. Your report was made without them.",
+  "faqs": "FAQs",
+  "faqsLong": "Frequently Asked Questions",
+  "contactSupport": "Contact Support",
+  "reportProblem": "Report a Problem",
+  "requestFeature": "Request a Feature",
+  "gettingStartedGuide": "Getting started guide",
+  "guide": "Guide",
+  "searchQuestions": "Search questions",
+  "noFaqMatch": "No questions match your search.",
+  "emailSupport": "Email Support",
+  "emailSupportBody": "Detailed inquiries & feedback.",
+  "sendAnEmail": "Send an email",
+  "callUs": "Call Us",
+  "callUsBody": "Direct support for urgent issues.",
+  "callUsStarOnly": "Phone support is available with the STAR plan.",
+  "couldNotOpenApp": "Couldn't open an app for this.",
+  "issueCategory": "ISSUE CATEGORY",
+  "catAppCrash": "App Crash",
+  "catDataSync": "Data Sync",
+  "catBilling": "Billing",
+  "catDeviceLink": "Device Link",
+  "catAccount": "Account",
+  "catOther": "Other",
+  "problemDescription": "PROBLEM DESCRIPTION",
+  "tellUsWhatHappened": "Tell us what happened...",
+  "uploadScreenshotOptional": "UPLOAD SCREENSHOT (OPTIONAL)",
+  "tapToUpload": "Tap to upload an image",
+  "uploadLimits": "PNG, JPG up to 10 MB",
+  "screenshotAttached": "Screenshot attached",
+  "uploadInvalid": "Upload a PNG or JPG image up to 10 MB.",
+  "submitReport": "Submit Report",
+  "responseTime": "Estimated response time: < 24 hours",
+  "ticketSent": "Thanks! Your report {ref} was sent.",
+  "@ticketSent": {
+    "placeholders": {
+      "ref": {
+        "type": "String"
+      }
+    }
+  },
+  "supportLimitReached": "You've sent 5 requests today. Try again tomorrow.",
+  "whatShouldWeAdd": "What should we add?",
+  "featureTitleHint": "eg: new sleep tracking method",
+  "howWouldThisHelp": "How would this help you?",
+  "sendRequest": "Send Request",
+  "featureRequestNote": "Our product team reviews every suggestion. Thank you for helping us grow.",
+  "featureRequestSent": "Thanks! Your suggestion was sent.",
+  "guideWaterTitle": "Log your drinks",
+  "guideWaterBody": "Swipe up on the Home avatar or tap Add Water/Drink. The avatar fills as you get closer to your daily need.",
+  "guideMealTitle": "Add your meals",
+  "guideMealBody": "Search for foods, scan a barcode or say what you ate. Your calories and nutrients add up through the day.",
+  "guideSleepTitle": "Track your sleep (STAR)",
+  "guideSleepBody": "Log when you went to bed and woke up to see your sleep score.",
+  "guideStreakTitle": "Keep your streak",
+  "guideStreakBody": "Log anything each day to grow your streak. Find it on your Profile.",
+  "guideCircleTitle": "Join a Care Circle",
+  "guideCircleBody": "Share your avatars with family and friends and cheer each other on.",
+  "guideReportTitle": "Download reports",
+  "guideReportBody": "Get a monthly PDF of your progress from Active Streak > Download report.",
+  "syncConflictBanner": "An entry was changed on another device. Showing the latest saved version.",
+  "dismiss": "Dismiss",
+  "privacyCentre": "Privacy",
+  "privacyCentreIntro": "See what you have agreed to, change optional choices, download your data or delete your account.",
+  "consentsRequiredHeader": "NEEDED TO USE NARAACARE",
+  "consentsOptionalHeader": "YOUR CHOICES",
+  "yourDataHeader": "YOUR DATA",
+  "requiredLabel": "Required",
+  "consentRecorded": "Accepted version {version} on {date}",
+  "@consentRecorded": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "consentRequiredExplain": "These are needed for the app to work. To stop them, delete your account.",
+  "consentGranted": "Saved. Thank you.",
+  "consentWithdrawn": "Withdrawn. This takes effect right away.",
+  "purposeHealthData": "Health data",
+  "purposeHealthDataBody": "Your health logs and profile are used to work out your targets and fill your avatars.",
+  "purposeRequiredBody": "The rules for using NaraaCare and how we handle your data.",
+  "purposeAi": "AI processing (Rin AI)",
+  "purposeAiBody": "Lets Rin AI, drink estimates and report insights send your own data to our AI provider. Turning it off stops these at once.",
+  "purposeCircleSharing": "Care Circle sharing",
+  "purposeCircleSharingBody": "Lets you share the avatars you choose with your Care Circles.",
+  "purposeMarketing": "News and offers",
+  "purposeMarketingBody": "Occasional emails about new features and offers.",
+  "downloadMyData": "Download my data",
+  "privacyNotice": "Privacy notice",
+  "exportIntro": "Get a copy of all the personal data NaraaCare keeps about you, as a ZIP file you can open on a computer.",
+  "exportWhatsIncluded": "Included: your profile, health logs, goals, Care Circles and messages, Rin AI chats, reports, payments and consents, as JSON and spreadsheet (CSV) files. Passwords and sign-in secrets are never included.",
+  "requestExport": "Request my data",
+  "exportPreparing": "We're preparing your file. You can leave this screen; we'll notify you when it's ready.",
+  "exportReady": "Your file is ready until {date}.",
+  "@exportReady": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "downloadAndShare": "Download and share",
+  "exportLimitNote": "You can ask for one copy a day. The file is kept for 7 days.",
+  "exportLimitReached": "You can request one data export a day. Try again tomorrow.",
+  "reauthTitle": "Confirm it's you",
+  "reauthPasswordBody": "Enter your password to continue.",
+  "reauthCodeBody": "We emailed you a 6-digit code. Enter it to continue.",
+  "reauthCodeLabel": "Code",
+  "reauthUseCode": "No password? Email me a code",
+  "reauthResend": "Send a new code",
+  "reauthCodeSent": "Code sent to your email.",
+  "reauthWrongPassword": "That password is not correct.",
+  "continueLabel": "Continue",
+  "okLabel": "OK",
+  "deleteAccountIntro": "Deleting your account is permanent.",
+  "deleteWhatGoes": "Your profile, health logs, avatars, Care Circle memberships, messages, Rin AI chats, reports and files will be erased.",
+  "deleteGrace": "You have 30 days to change your mind: sign in again and tap Cancel deletion.",
+  "deleteKept": "As the law requires, a record of your consents and store payments is kept for up to 8 years, without your name, email or account id.",
+  "deleteSignedOut": "You will be signed out on all your devices straight away.",
+  "deleteSubscriptionWarning": "Deleting your account does not cancel a STAR subscription. Cancel it in Google Play or the App Store first.",
+  "manageSubscription": "Manage subscription",
+  "deleteConfirmCheck": "I understand my account and data will be deleted after 30 days.",
+  "deleteAccountButton": "Delete my account",
+  "deletionScheduledTitle": "Deletion scheduled",
+  "deletionScheduledBody": "Your account will be deleted on {date}. We've emailed you. Sign in before then if you change your mind.",
+  "@deletionScheduledBody": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "deletionPendingTitle": "Your account is scheduled for deletion",
+  "deletionPendingBody": "It will be permanently deleted on {date}. Do you want to keep it?",
+  "@deletionPendingBody": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "cancelDeletion": "Cancel deletion",
+  "keepDeletionSignOut": "Keep deletion and sign out",
+  "deletionCancelled": "Deletion cancelled. Welcome back!",
+  "reconsentTitle": "We've updated our policies",
+  "reconsentBody": "Please read and accept the new versions to keep using NaraaCare.",
+  "acceptAndContinue": "Accept and continue",
+  "readFullPolicy": "Read the full Privacy Policy",
+  "noticeCollectTitle": "What we collect",
+  "noticeCollectBody": "Your name, email and username; your age, sex, height, weight, activity level, goals and any health conditions you choose to add; what you log (drinks, meals, workouts, sleep); your Care Circle messages and Rin AI chats; and basic device information needed to sign you in and send notifications.",
+  "noticeWhyTitle": "Why we use it",
+  "noticeWhyBody": "To work out your daily targets, show your progress, run Care Circles and Rin AI, keep your account secure, and handle your subscription. We never sell your data or use it for advertising.",
+  "noticeNotCollectTitle": "What we don't collect",
+  "noticeNotCollectBody": "No phone number, date of birth, precise location, contacts, photos (except a screenshot you choose to send to support) or data from other apps.",
+  "noticeProcessorsTitle": "Who helps us",
+  "noticeProcessorsBody": "Our hosting and email providers; Google and Apple for sign-in, payments and notifications; and Anthropic, our AI provider for Rin AI, only if you turn on AI processing. They may only use your data to provide their service to us.",
+  "noticeRetentionTitle": "How long we keep it",
+  "noticeRetentionBody": "Your health data stays while you have an account and is erased 30 days after you ask us to delete it. Security logs are kept for up to 1 year, inactive Rin AI chats for 12 months, and consent and payment records (without your identity) for up to 8 years.",
+  "noticeRightsTitle": "Your rights",
+  "noticeRightsBody": "You can see and correct your data in the app, download a copy, withdraw optional consents at any time, and delete your account. Under India's Digital Personal Data Protection Act you can also raise a grievance with us and, if not resolved, with the Data Protection Board of India.",
+  "noticeGrievanceTitle": "Grievance contact",
+  "noticeGrievanceBody": "Write to {contact}. We reply within 7 days.",
+  "@noticeGrievanceBody": {
+    "placeholders": {
+      "contact": {
+        "type": "String"
+      }
+    }
+  },
+  "noticeGrievancePending": "our support team (Help & Support)",
+  "shareAvatarTitle": "Share your {avatar} avatar",
+  "@shareAvatarTitle": {"placeholders": {"avatar": {"type": "String"}}},
+  "shareAvatarHint": "Only people in NaraaCare see it. Today's progress is shared, nothing else.",
+  "shareAvatarNobody": "Join a Care Circle or connect with someone to share your avatar.",
+  "shareToCircles": "Your circles",
+  "shareToConnections": "Connections",
+  "shareSend": "Share",
+  "avatarShared": "Shared",
+  "feedShared": "{who} shared their {avatar} avatar.",
+  "@feedShared": {"placeholders": {"who": {"type": "String"}, "avatar": {"type": "String"}}},
+  "notifAvatarShared": "{who} shared their {avatar} avatar with you.",
+  "@notifAvatarShared": {"placeholders": {"who": {"type": "String"}, "avatar": {"type": "String"}}},
+  "notifCircleAvatarShared": "{who} shared their {avatar} avatar in your circle.",
+  "@notifCircleAvatarShared": {"placeholders": {"who": {"type": "String"}, "avatar": {"type": "String"}}},
+  "sharedProgress": "{value} % of today's goal",
+  "@sharedProgress": {"placeholders": {"value": {"type": "int"}}}
+}

@@ -1,0 +1,7 @@
+We received a request to delete your NaraaCare account. You have been signed out on all devices.
+
+Your account and all your data will be permanently deleted in 30 days. To keep your account, sign in to the app before then and tap Cancel deletion.
+
+If you did not ask for this, sign in now, cancel the deletion and change your password.
+
+Deleting your account does not cancel a store subscription. Cancel it in Google Play or the App Store.

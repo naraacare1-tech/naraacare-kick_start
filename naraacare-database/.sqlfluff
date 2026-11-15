@@ -1,0 +1,35 @@
+[sqlfluff]
+dialect = postgres
+# Flyway placeholders look like ${app_rw_password}
+templater = placeholder
+max_line_length = 120
+large_file_skip_byte_limit = 0
+# Excluded on purpose:
+#   LT05  long lines: CHECK constraints and COMMENTs read better unwrapped (max_line_length still 120 for the rest)
+#   RF04  keywords as identifiers: columns like key/type/version/source are legal in PostgreSQL; renaming is churn
+#   AM04  unknown column count: pgTAP idiom `SELECT * FROM finish()`
+#   ST09  join condition order: stylistic, no correctness value
+exclude_rules = LT05, RF04, AM04, ST09
+
+[sqlfluff:templater:placeholder]
+param_style = flyway_var
+
+[sqlfluff:indentation]
+indented_joins = false
+indented_using_on = true
+tab_space_size = 4
+
+[sqlfluff:rules:capitalisation.keywords]
+capitalisation_policy = upper
+
+[sqlfluff:rules:capitalisation.literals]
+capitalisation_policy = upper
+
+[sqlfluff:rules:capitalisation.functions]
+extended_capitalisation_policy = lower
+
+[sqlfluff:rules:capitalisation.identifiers]
+extended_capitalisation_policy = lower
+
+[sqlfluff:rules:capitalisation.types]
+extended_capitalisation_policy = lower

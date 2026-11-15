@@ -1,0 +1,9 @@
+title = "naraacare-backend gitleaks config"
+
+[extend]
+useDefault = true
+
+# Dummy local-only values in .env.example and the XSS payload list are intentionally not secrets.
+[[allowlists]]
+description = "Example env file and security test payloads"
+paths = ['''\.env\.example$''', '''tests/security/payloads/.*''', '''semgrep/.*\.py$''']

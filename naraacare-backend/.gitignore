@@ -1,0 +1,34 @@
+# Secrets and local config — never commit
+.env
+.env.*
+!.env.example
+*.pem
+*.p8
+*.key
+*service-account*.json
+
+# Local dev outbox (emails with OTP codes) and file storage
+var/
+
+# Python / tooling
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+htmlcov/
+dist/
+build/
+
+# OS / editors
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# CI checks out the database repo here for the integration tests
+naraacare-database/

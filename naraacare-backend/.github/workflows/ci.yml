@@ -1,0 +1,131 @@
+name: ci
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  UV_VERSION: "0.13.6"
+  PYTHON_VERSION: "3.13.17"
+  FLYWAY_VERSION: "13.11.1"
+  FLYWAY_SHA256: c5397ad1c58dbbac94682f29322ec54896f15e9827c5dc3e02ca40240077d3f7
+
+jobs:
+  secret-scan:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+      - name: Install gitleaks 8.30.1 (checksum verified)
+        run: |
+          curl -sSfL -o /tmp/gitleaks.tgz https://github.com/gitleaks/gitleaks/releases/download/v8.30.1/gitleaks_8.30.1_linux_x64.tar.gz
+          echo "551f6fc83ea457d62a0d98237cbad105af8d557003051f41f3e7ca7b3f2470eb  /tmp/gitleaks.tgz" | sha256sum -c -
+          tar -xzf /tmp/gitleaks.tgz -C /usr/local/bin gitleaks
+      - run: gitleaks git --redact --verbose --config .gitleaks.toml .
+
+  quality:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: astral-sh/setup-uv@07a047e608db84b3d8c06cd9a7c7dcc9c355c18e # v10.3.2
+        with:
+          version: ${{ env.UV_VERSION }}
+          python-version: ${{ env.PYTHON_VERSION }}
+      - run: uv sync --frozen
+      # Database integration tests (-m db) run against the real schema: PostgreSQL 18 and Flyway are
+      # installed on the runner (no containers) and naraacare-database is migrated at DATABASE_REF.
+      - name: Check out naraacare-database
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: naraacare1-tech/naraacare-database
+          ref: ${{ vars.DATABASE_REF || 'main' }}
+          token: ${{ secrets.DATABASE_REPO_READ_TOKEN }}
+          path: naraacare-database
+      - name: Install PostgreSQL 18 (PGDG apt repository)
+        run: |
+          sudo apt-get update -q
+          sudo apt-get install -yq postgresql-common
+          sudo /usr/share/postgresql-common/pgdg/apt.postgresql.org.sh -y
+          pg_lsclusters -h | while read -r ver name _; do sudo pg_dropcluster --stop "$ver" "$name"; done
+          sudo apt-get install -yq postgresql-18
+          sudo pg_ctlcluster 18 main status || sudo pg_ctlcluster 18 main start
+          echo "/usr/lib/postgresql/18/bin" >> "$GITHUB_PATH"
+          sudo -u postgres psql -c "ALTER USER postgres PASSWORD 'local-dev-only-postgres'"
+      - name: Install Flyway ${{ env.FLYWAY_VERSION }} (checksum verified)
+        run: |
+          curl -sSfL -o /tmp/flyway.tgz "https://download.red-gate.com/maven/release/com/redgate/flyway/flyway-commandline/${FLYWAY_VERSION}/flyway-commandline-${FLYWAY_VERSION}-linux-x64.tar.gz"
+          echo "${FLYWAY_SHA256}  /tmp/flyway.tgz" | sha256sum -c -
+          sudo tar -xzf /tmp/flyway.tgz -C /opt
+          echo "/opt/flyway-${FLYWAY_VERSION}" >> "$GITHUB_PATH"
+      - name: Migrate the database (dummy local credentials)
+        working-directory: naraacare-database
+        run: cp .env.example .env && bash tools/local_setup.sh
+      - name: Lint
+        run: uv run ruff check .
+      - name: Format
+        run: uv run ruff format --check .
+      - name: Types (mypy --strict)
+        run: uv run mypy app tests tools
+      - name: Payload list regenerated
+        run: uv run python tools/build_payloads.py --check
+      - name: Tests (unit + integration incl. database + security payload sweep) with coverage gate
+        env:
+          NARAACARE_TEST_DATABASE_URL: postgresql+asyncpg://app_rw:local-dev-only-app-rw@localhost:5432/naraacare
+          NARAACARE_TEST_ADMIN_URL: postgresql://postgres:local-dev-only-postgres@localhost:5432/naraacare
+        run: uv run pytest
+      - name: Coverage of app/core/security >= 95 % (Session 04 definition of done)
+        run: uv run coverage report --include="app/core/security/*" --fail-under=95
+
+  security:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: astral-sh/setup-uv@07a047e608db84b3d8c06cd9a7c7dcc9c355c18e # v10.3.2
+        with:
+          version: ${{ env.UV_VERSION }}
+          python-version: ${{ env.PYTHON_VERSION }}
+      - run: uv sync --frozen
+      - name: Bandit (SAST)
+        run: uv run bandit -c pyproject.toml -r app
+      - name: Dependency audit
+        run: uv run pip-audit --strict
+      - name: Semgrep custom rules — self-test
+        run: uvx --from semgrep==1.182.1 semgrep --metrics=off --test semgrep/
+      - name: Semgrep custom rules — scan
+        run: |
+          uvx --from semgrep==1.182.1 semgrep --metrics=off --error --config semgrep/general.yml app
+          uvx --from semgrep==1.182.1 semgrep --metrics=off --error --config semgrep/schemas.yml app/schemas
+      - name: Semgrep OWASP / Python rulesets
+        run: uvx --from semgrep==1.182.1 semgrep --metrics=off --error --config p/python --config p/owasp-top-ten app
+
+  startup:
+    # The API is deployed as a plain Python app (no container image): install the runtime
+    # dependencies only and check it starts with the production flags and answers its health check.
+    runs-on: ubuntu-24.04
+    needs: [quality, security]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: astral-sh/setup-uv@07a047e608db84b3d8c06cd9a7c7dcc9c355c18e # v10.3.2
+        with:
+          version: ${{ env.UV_VERSION }}
+          python-version: ${{ env.PYTHON_VERSION }}
+      - run: uv sync --frozen --no-dev
+      - name: API starts and passes its liveness check
+        run: |
+          cp .env.example .env
+          uv run --no-sync uvicorn app.main:create_app --factory --host 127.0.0.1 --port 8000             --no-server-header --no-access-log > api.log 2>&1 &
+          for i in $(seq 1 30); do
+            if curl -fsS -H "Host: localhost" http://127.0.0.1:8000/api/v1/health/live; then exit 0; fi
+            sleep 1
+          done
+          cat api.log
+          exit 1
