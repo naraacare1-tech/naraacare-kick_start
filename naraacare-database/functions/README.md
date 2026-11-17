@@ -141,6 +141,7 @@ Conventions: doc 05 section 7, doc 07 SEC-4.1/4.3. Errors: `22023` invalid input
 | `ops.fn_expired_attachments(integer)` | function, definer | migration_owner | volatile | app_worker | Worker: support screenshots past retention: key cleared and returned for deletion |
 | `ops.fn_export_user(uuid)` | function, definer | migration_owner | stable | app_worker | Worker: all rows a user owns as JSON per table (catalog-driven; secrets excluded) |
 | `ops.fn_is_quiet(time without time zone,time without time zone,time without time zone)` | function | migration_owner | immutable | app_worker | TRUE when a local time falls in the quiet hours (wraps midnight) |
+| `ops.fn_ops_health()` | function, definer | migration_owner | stable | app_worker | Worker health check for owner alerts: stuck/failed reports, failed store notifications, paid-without-STAR count, AI spend this month (counts only) |
 | `ops.fn_ping()` | function | migration_owner | immutable | app_readonly, app_rw, app_worker | Readiness probe: returns 1 (no table access) |
 | `ops.fn_report_days(uuid)` | function, definer | migration_owner | stable | app_worker | Worker: daily aggregates of a report job's period, for the requested sections only |
 | `ops.fn_report_extras(uuid)` | function, definer | migration_owner | stable | app_worker | Worker: report page extras (previous-period averages, meal shares, counts, macro targets, sleep thresholds) |

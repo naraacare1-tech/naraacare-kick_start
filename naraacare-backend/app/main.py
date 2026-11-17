@@ -16,10 +16,11 @@ from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
 from pathlib import Path
 from typing import Any
+from zoneinfo import ZoneInfoNotFoundError
 
 import httpx2
 import structlog
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from starlette.middleware.cors import CORSMiddleware
 from starlette.middleware.trustedhost import TrustedHostMiddleware
 
@@ -57,6 +58,7 @@ from app.core.security.oauth import (
     http_fetcher,
     load_apple_private_key,
 )
+from app.core.security.request_context import current_request_id
 from app.core.security.tokens import build_token_service
 from app.db.engine import create_engines
 from app.domain.ai.drink_estimator import DrinkEstimator, OpenAIDrinkClient
@@ -80,10 +82,12 @@ from app.domain.social.service import SocialService
 from app.domain.support.service import SupportContact, SupportService
 from app.domain.sync.service import SyncService
 from app.integrations.app_store import AppleJwsVerifier, load_roots
-from app.integrations.email import EmailSender, OutboxSender, SmtpSender
+from app.integrations.email import OutboxSender, SmtpSender
+from app.integrations.error_alerts import ErrorAlerts
 from app.integrations.google_oauth import ServiceAccount
 from app.integrations.google_play import GooglePlayClient
 from app.integrations.open_food_facts import OpenFoodFacts
+from app.integrations.ops_monitor import MonitoredEmail, OpsMonitor
 from app.integrations.pubsub_auth import PubSubVerifier
 from app.integrations.storage import build_storage
 from app.middleware.access_log import AccessLogMiddleware
@@ -107,7 +111,7 @@ def _secret(value: Any) -> str | None:
     return value.get_secret_value() if value is not None else None
 
 
-def _email_sender(settings: Settings) -> EmailSender:
+def _email_sender(settings: Settings) -> OutboxSender | SmtpSender:
     if settings.EMAIL_BACKEND == "outbox":
         return OutboxSender(
             sender=settings.EMAIL_FROM_ADDRESS, directory=Path(settings.EMAIL_OUTBOX_DIR)
@@ -176,8 +180,18 @@ def _init_auth(app: FastAPI) -> None:
             google_client_ids=settings.GOOGLE_OAUTH_CLIENT_IDS,
             apple_audiences=[settings.APPLE_BUNDLE_ID, settings.APPLE_SERVICE_ID],
         )
+    if getattr(state, "error_alerts", None) is None:
+        state.error_alerts = ErrorAlerts(
+            sender=_email_sender(settings),
+            to=settings.ERROR_ALERT_EMAIL,
+            environment=settings.APP_ENV,
+            app_version=settings.APP_VERSION,
+        )
+    if getattr(state, "ops_monitor", None) is None:
+        state.ops_monitor = OpsMonitor(state.error_alerts)
     if getattr(state, "email", None) is None:
-        state.email = _email_sender(settings)
+        # Wrapped: a failed send raises the "OTP emails not arriving" alert.
+        state.email = MonitoredEmail(_email_sender(settings), state.ops_monitor)
     if getattr(state, "revocations", None) is None:
         state.revocations = Revocations(state.store, settings.ACCESS_TOKEN_TTL_SECONDS)
     if getattr(state, "reference", None) is None:
@@ -201,6 +215,7 @@ def _init_auth(app: FastAPI) -> None:
             rate_limiter=state.rate_limiter,
             revocations=state.revocations,
             store=state.store,
+            monitor=state.ops_monitor,
         )
     if getattr(state, "profile_service", None) is None:
         state.profile_service = ProfileService(db=state.db, reference=state.reference)
@@ -277,6 +292,7 @@ def _init_billing(app: FastAPI) -> None:
                 service_account_email=settings.GOOGLE_RTDN_SERVICE_ACCOUNT_EMAIL,
             ),
             package_name=settings.GOOGLE_PLAY_PACKAGE_NAME,
+            monitor=state.ops_monitor,
             manage_urls={
                 "android": settings.PLAY_MANAGE_SUBSCRIPTIONS_URL,
                 "ios": settings.APP_STORE_MANAGE_SUBSCRIPTIONS_URL,
@@ -338,6 +354,7 @@ def _init_rin(app: FastAPI) -> None:
             fallback_model=getattr(state, "rin_fallback_model", None)
             or _rin_model(settings, fallback=True),
             fallback_prices=AiPrices.fallback_from_settings(settings),
+            monitor=state.ops_monitor,
         )
     state.hydration_service.ai_meter = state.rin_service
 
@@ -402,9 +419,26 @@ async def lifespan(app: FastAPI) -> AsyncIterator[None]:
     finally:
         await app.state.social_service.hub.close_all()
         await app.state.security_events.stop()
+        await app.state.error_alerts.drain()
         await app.state.http.aclose()
         await app.state.db.dispose()
         await app.state.store.aclose()
+
+
+def _on_unexpected(exc: Exception, request: Request) -> None:
+    """Email the unhandled error to ERROR_ALERT_EMAIL. The route template is used, never the real
+    path, so ids and other values in the URL stay out of the email."""
+    alerts: ErrorAlerts | None = getattr(request.app.state, "error_alerts", None)
+    if alerts is None:
+        return
+    route = getattr(request.scope.get("route"), "path", None) or "unmatched route"
+    where = f"{request.method} {route}"
+    monitor: OpsMonitor | None = getattr(request.app.state, "ops_monitor", None)
+    if isinstance(exc, ZoneInfoNotFoundError) and monitor is not None:
+        # A user's day boundary (streak, today's totals) could not be worked out.
+        monitor.day_job_problem("Timezone error", {"Where": where}, key=where, exc=exc)
+        return
+    alerts.report(where=where, exc=exc, request_id=current_request_id())
 
 
 def create_app(settings: Settings | None = None) -> FastAPI:
@@ -421,7 +455,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         lifespan=lifespan,
     )
     app.state.settings = settings
-    install_exception_handlers(app, on_unsafe_input=on_unsafe_input)
+    install_exception_handlers(app, on_unsafe_input=on_unsafe_input, on_unexpected=_on_unexpected)
 
     # add_middleware wraps: the LAST one added is the OUTERMOST. Listed here inner -> outer.
     app.add_middleware(RateLimitMiddleware)

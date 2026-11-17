@@ -24,7 +24,8 @@ from pydantic import BaseModel, ConfigDict, Field
 
 from app.core.security.validators import contains_unsafe_content
 from app.domain.ai.guardrails import FALLBACK_REPLY, to_plain_text
-from app.domain.ai.rin_model import Usage, usage_of
+from app.domain.ai.rin_model import Usage, failure_kind, usage_of
+from app.integrations.ops_monitor import NO_MONITOR, OpsMonitor
 
 log = structlog.get_logger(__name__)
 
@@ -111,11 +112,22 @@ def clean_sentences(raw: list[str], *, limit: int = MAX_SENTENCE) -> list[str]:
     return out
 
 
-async def generate_insights(model: InsightModel, summary: dict[str, Any]) -> InsightResult | None:
+async def generate_insights(
+    model: InsightModel, summary: dict[str, Any], *, monitor: OpsMonitor = NO_MONITOR
+) -> InsightResult | None:
     try:
         parsed, usage = await model.generate(summary)
     except Exception as exc:  # the report is still built without insights
         log.warning("report_insights_failed", error=type(exc).__name__)
+        kind = failure_kind(exc)
+        monitor.ai_error(
+            where="report insights", kind=kind, status=getattr(exc, "status_code", None)
+        )
+        monitor.report_problem(
+            "AI insights failed (the report was built without them)",
+            {"Error type": type(exc).__name__, "Kind": kind},
+            key=f"insights:{type(exc).__name__}",
+        )
         return None
     if parsed is None:
         return InsightResult(trend="", recommendations=[], usage=usage, model=model.model)

@@ -23,6 +23,7 @@ from app.domain.ai.pricing import AiPrices
 from app.domain.ai.rin_model import Usage
 from app.domain.reports.builder import AdvancedInsights, ReportMeta, build_pdf, summarise
 from app.domain.reports.insights import InsightModel, generate_insights
+from app.integrations.ops_monitor import NO_MONITOR, OpsMonitor
 from app.integrations.storage import ObjectStorage, new_key
 from app.repositories import report_repo
 from app.repositories.base import Database
@@ -48,6 +49,7 @@ async def _build_one(
     insight_model: InsightModel | None,
     budget_micro_inr: int,
     prices: AiPrices,
+    monitor: OpsMonitor,
 ) -> int:
     report_id = job["report_id"]
     sections: list[str] = list(job["sections"])
@@ -64,7 +66,7 @@ async def _build_one(
         >= prices.cost_micro_inr(INSIGHT_RESERVE)
     ):
         summary = dataclasses.asdict(summarise(days, tracker_sections, extras))
-        result = await generate_insights(insight_model, summary)
+        result = await generate_insights(insight_model, summary, monitor=monitor)
         if result is not None:
             advanced = AdvancedInsights(result.trend, result.recommendations)
             usage = result.usage
@@ -108,6 +110,7 @@ async def generate_reports(
     insight_model: InsightModel | None,
     budget_micro_inr: int,
     prices: AiPrices,
+    monitor: OpsMonitor = NO_MONITOR,
 ) -> ReportStats:
     stats = ReportStats()
     jobs = [dict(j) for j in await db.run(lambda s: report_repo.claim_jobs(s, CLAIM_BATCH))]
@@ -121,12 +124,19 @@ async def generate_reports(
                 insight_model=insight_model,
                 budget_micro_inr=budget_micro_inr,
                 prices=prices,
+                monitor=monitor,
             )
             stats.built += 1
             log.info("report_built", report_id=str(report_id), size_bytes=size)
         except Exception as exc:  # one bad job never stops the batch
             stats.failed += 1
             log.warning("report_failed", report_id=str(report_id), error=type(exc).__name__)
+            monitor.report_problem(
+                "Report PDF generation failed",
+                {"Error type": type(exc).__name__, "Attempt": int(job.get("attempts") or 1)},
+                key=f"build:{type(exc).__name__}",
+                exc=exc,
+            )
             await db.run(
                 partial(
                     report_repo.finish_job, report_id=report_id, ok=False, error_code="build_failed"

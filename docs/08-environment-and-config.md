@@ -55,7 +55,10 @@ Legend: **Req** = required (startup fails if missing) · **Secret** = must come 
 | `EMAIL_FROM_ADDRESS` | ✓ | | `no-reply@mail.naraacare.app` | |
 | `SMTP_HOST` / `SMTP_PORT` / `SMTP_USERNAME` | ✓ outside dev (host) | | `smtp.example.invalid` / `587` / `naraacare` | any transactional email provider; STARTTLS required |
 | `SMTP_PASSWORD` | | ✓ | `dummy` | SMTP credential |
-| `SUPPORT_INBOX_ADDRESS` | ✓ | | `support@naraacare.app` | ticket forwarding |
+| `SUPPORT_INBOX_ADDRESS` | ✓ | | `support@naraacare.com` | ticket forwarding (user queries) |
+| `SUPPORT_CONTACT_EMAIL` | | | `support@naraacare.com` | public address on the Help screen; empty = inbox |
+| `ERROR_ALERT_EMAIL` | | | `info@naraacare.com` | unhandled API errors (500) and failed jobs are emailed here: plain text, no user data, throttled (1 per error per 15 min, 30/h); empty = off. Also carries the owner alerts (OTP email, Google/Apple sign-in, AI credits, Rin health, payments, reports, day jobs): `app/integrations/ops_monitor.py` |
+| `AI_ACCOUNT_MONTHLY_BUDGET_INR` | | | empty | our OpenAI spend limit per month; alert email at 80% and 95% (empty = no budget alerts) |
 | `GOOGLE_OAUTH_CLIENT_IDS` | ✓ | | `123-android.apps.googleusercontent.com,123-ios…` | accepted `aud` values |
 | `GOOGLE_JWKS_URL` / `APPLE_JWKS_URL` | ✓ | | `https://www.googleapis.com/oauth2/v3/certs` / `https://appleid.apple.com/auth/keys` | provider public keys for ID-token verification (https only) |
 | `APPLE_TOKEN_URL` | ✓ | | `https://appleid.apple.com/auth/token` | Sign in with Apple code exchange (revocation token) |
@@ -121,7 +124,7 @@ Mobile config is **non-secret only** and loaded per flavor with `flutter run --f
 | `APPLE_REDIRECT_URI` | `https://api.dev.naraacare.app/api/v1/auth/oauth/apple/callback` | Android web flow |
 | `REFERRAL_LINK_DOMAIN` | `naraacare.app` | deep-link host allow-list |
 | `TERMS_URL` / `PRIVACY_URL` | `https://naraacare.app/terms` | fallback if policy API is down |
-| `SUPPORT_EMAIL` | `support@naraacare.app` | |
+| `SUPPORT_EMAIL` | `support@naraacare.com` | |
 | `FEATURE_FLAGS` | `voice_logging=true,barcode=true` | UI-only toggles; server still enforces |
 | `STORE_PRODUCT_IDS` | `star_monthly,star_yearly` | in-app purchase product ids |
 | `LOG_HTTP` | `false` | must be `false` for staging/prod builds (assert) |

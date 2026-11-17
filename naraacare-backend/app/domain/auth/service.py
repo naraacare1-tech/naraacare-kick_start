@@ -35,6 +35,7 @@ from app.core.security.passwords import check_confirmation, check_policy, is_reu
 from app.core.security.tokens import TokenError, TokenService, new_refresh_token, refresh_token_hash
 from app.domain.entitlements import service as entitlements
 from app.integrations.email import EmailSender, send_quietly
+from app.integrations.ops_monitor import NO_MONITOR, OpsMonitor
 from app.middleware.rate_limit import RateLimiter
 from app.repositories import auth_repo, privacy_repo, profile_repo
 from app.repositories.base import Database, DbSession
@@ -95,7 +96,9 @@ class AuthService:
         rate_limiter: RateLimiter,
         revocations: Revocations,
         store: Any,
+        monitor: OpsMonitor = NO_MONITOR,
     ) -> None:
+        self.monitor = monitor
         self.settings = settings
         self.db = db
         self.tokens = tokens
@@ -217,6 +220,9 @@ class AuthService:
             return outcome, pair
 
         outcome, pair = await self.db.run(work)
+        if outcome.status != "not_found":
+            # Many wrong or expired codes in a row usually mean the emails are not arriving.
+            self.monitor.otp_checked(ok=pair is not None)
         if pair is None:
             raise _otp_failure(outcome.status, outcome["attempts_left"])
         return pair
@@ -343,10 +349,17 @@ class AuthService:
     async def _verify_provider(self, provider: str, token: str, nonce: str) -> ProviderIdentity:
         try:
             if provider == "google":
-                return await self.oauth.verify_google(token, nonce)
-            return await self.oauth.verify_apple(token, nonce)
+                identity = await self.oauth.verify_google(token, nonce)
+            else:
+                identity = await self.oauth.verify_apple(token, nonce)
         except TokenError:
+            self.monitor.oauth_checked(provider, ok=False)
             raise AppError(ErrorCode.UNAUTHENTICATED) from None
+        except Exception:  # provider keys unreachable and the like: counted, then a 500
+            self.monitor.oauth_checked(provider, ok=False)
+            raise
+        self.monitor.oauth_checked(provider, ok=True)
+        return identity
 
     async def social_sign_in(
         self,

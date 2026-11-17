@@ -4,7 +4,7 @@ On a dev machine without Redis the taskiq worker cannot start, so report and exp
 "queued" forever. This runs the same task functions from ``app.workers.broker`` directly:
 
 * every 10 s: reports.generate, privacy.generate_exports, support.forward
-* every 10 min: reports.expire, privacy.expire_exports
+* every 10 min: reports.expire, privacy.expire_exports, ops.health_check (owner alerts)
 
 Reminder/social pushes, billing reconcile, erasure and retention are left to the real worker.
 
@@ -41,12 +41,15 @@ def _check_environment() -> None:
 
 
 async def _run(name: str, job: Callable[[], Awaitable[str]]) -> None:
+    from app.workers import broker  # noqa: PLC0415 - loaded after the environment check
+
     try:
         result = await job()
     except Exception as exc:  # one failing job never stops the loop
         print(f"{time.strftime('%H:%M:%S')} {name}: {type(exc).__name__}", flush=True)
+        await broker.report_job_error(name, exc)
         return
-    if not result.startswith(("built 0, failed 0", "forwarded 0", "expired 0")):
+    if not result.startswith(("built 0, failed 0", "forwarded 0", "expired 0", "checked")):
         print(f"{time.strftime('%H:%M:%S')} {name}: {result}", flush=True)
 
 
@@ -57,14 +60,16 @@ async def main() -> None:
     if broker._settings.APP_ENV != "dev":
         sys.exit("dev_worker: refuses to run outside APP_ENV=dev; use the taskiq worker")
 
-    fast = {
+    fast: dict[str, Callable[[], Awaitable[str]]] = {
         "reports.generate": broker.generate_reports_job,
         "privacy.generate_exports": broker.generate_exports_job,
         "support.forward": broker.forward_support_job,
     }
-    slow = {
+    slow: dict[str, Callable[[], Awaitable[str]]] = {
         "reports.expire": broker.expire_reports_job,
         "privacy.expire_exports": broker.expire_exports_job,
+        # Owner alerts; missed-run checks need the real scheduler (Redis), so they are skipped.
+        "ops.health_check": lambda: broker.run_health_check(check_missed_runs=False),
     }
     print("dev_worker: running (Ctrl+C to stop)", flush=True)
     last_slow = 0.0
