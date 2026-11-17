@@ -94,6 +94,9 @@ class Settings(BaseSettings):
     SUPPORT_EMAIL_RESPONSE: str | None = "Expected response: 4-6 hours"
     SUPPORT_PHONE: str | None = Field(default=None, pattern=r"^\+[0-9 ]{8,20}$")
     SUPPORT_PHONE_HOURS: str | None = "Available: 9 AM - 6 PM IST"
+    # Unhandled API errors and failed background jobs are emailed here (plain text, no user data,
+    # throttled). Unset = no alert emails (the errors are still logged).
+    ERROR_ALERT_EMAIL: str | None = Field(default=None, pattern=r"^[^@\s]{1,64}@[^@\s]{1,190}$")
 
     # --- identity providers
     GOOGLE_OAUTH_CLIENT_IDS: CommaList
@@ -147,6 +150,9 @@ class Settings(BaseSettings):
     # When the account has no credits left every OpenAI model is refused: Rin then answers in the
     # free basic mode (app/domain/ai/basic_rin.py) instead.
     RIN_FALLBACK_MODEL: str = "gpt-5-nano"
+    # Our OpenAI spend limit per calendar month (owner alert at 80% and 95%). Unset = no budget
+    # alerts; quota errors from OpenAI are still alerted.
+    AI_ACCOUNT_MONTHLY_BUDGET_INR: Decimal | None = Field(default=None, gt=0)
     AI_FALLBACK_PRICE_INPUT_USD_PER_MTOK: Decimal = Field(default=Decimal("0.05"), ge=0)
     AI_FALLBACK_PRICE_CACHED_INPUT_USD_PER_MTOK: Decimal = Field(default=Decimal("0.005"), ge=0)
     AI_FALLBACK_PRICE_OUTPUT_USD_PER_MTOK: Decimal = Field(default=Decimal("0.40"), ge=0)

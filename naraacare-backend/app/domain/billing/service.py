@@ -35,6 +35,7 @@ from app.core.security.authz import Principal
 from app.domain.entitlements.service import Entitlement, EntitlementService
 from app.integrations.app_store import AppleJwsVerifier, AppleVerificationError, renewal_auto_renew
 from app.integrations.google_play import GooglePlayClient, PlayError, PlaySubscription
+from app.integrations.ops_monitor import NO_MONITOR, OpsMonitor
 from app.integrations.pubsub_auth import PubSubAuthError, PubSubVerifier
 from app.repositories import billing_repo
 from app.repositories.base import Database
@@ -82,7 +83,9 @@ class BillingService:
         pubsub: PubSubVerifier | None,
         package_name: str,
         manage_urls: Mapping[str, str],
+        monitor: OpsMonitor = NO_MONITOR,
     ) -> None:
+        self.monitor = monitor
         self.db = db
         self.entitlements = entitlements
         self.play = play
@@ -157,11 +160,15 @@ class BillingService:
     ) -> dict[str, Any]:
         # A retried request (same Idempotency-Key) is safe: the database upserts by purchase token.
         if body["platform"] == "android":
-            await self._verify_play(principal, body)
+            status = await self._verify_play(principal, body)
         else:
-            await self._verify_apple(principal, body)
+            status = await self._verify_apple(principal, body)
 
-        return entitlement_out(await self.entitlements.get(principal.user_id))
+        entitlement = await self.entitlements.get(principal.user_id)
+        if status in {"active", "in_grace", "canceled"} and entitlement.tier == "standard":
+            # The store says paid, but our rules did not grant STAR (e.g. unknown product id).
+            self.monitor.paid_without_star(where=f"purchase verify ({body['platform']})")
+        return entitlement_out(entitlement)
 
     async def _bind(self, principal: Principal, state: dict[str, Any]) -> None:
         _, status = await self.db.run(
@@ -171,13 +178,16 @@ class BillingService:
         if status == "token_in_use":
             raise AppError(ErrorCode.PURCHASE_TOKEN_IN_USE)
 
-    async def _verify_play(self, principal: Principal, body: Mapping[str, Any]) -> None:
+    async def _verify_play(self, principal: Principal, body: Mapping[str, Any]) -> str:
         token = body.get("purchase_token")
         if self.play is None or not token:
             raise AppError(ErrorCode.PURCHASE_INVALID)
         try:
             sub = await self.play.subscription(token)
-        except PlayError:
+        except PlayError as exc:
+            self.monitor.payment_error(
+                where="purchase verify (Play)", error_type=type(exc).__name__
+            )
             raise AppError(ErrorCode.PURCHASE_INVALID) from None
         if sub.product_id != body["product_id"]:
             raise AppError(ErrorCode.PURCHASE_INVALID)
@@ -199,6 +209,7 @@ class BillingService:
             # Not fatal: the reconcile job retries; Play only refunds after 3 days.
             log.warning("play_acknowledge_pending")
         await self._record_play_order(sub, token)
+        return sub.status
 
     async def _record_play_order(self, sub: PlaySubscription, token: str) -> None:
         if not sub.order_id:
@@ -227,13 +238,16 @@ class BillingService:
             )
         )
 
-    async def _verify_apple(self, principal: Principal, body: Mapping[str, Any]) -> None:
+    async def _verify_apple(self, principal: Principal, body: Mapping[str, Any]) -> str:
         jws = body.get("signed_transaction")
         if self.apple is None or not jws:
             raise AppError(ErrorCode.PURCHASE_INVALID)
         try:
             txn = self.apple.transaction(jws)
-        except AppleVerificationError:
+        except AppleVerificationError as exc:
+            self.monitor.payment_error(
+                where="purchase verify (App Store)", error_type=type(exc).__name__
+            )
             raise AppError(ErrorCode.PURCHASE_INVALID) from None
         if txn.product_id != body["product_id"]:
             raise AppError(ErrorCode.PURCHASE_INVALID)
@@ -266,6 +280,7 @@ class BillingService:
                 occurred_at=txn.purchase_date,
             )
         )
+        return status
 
     # ------------------------------------------------------------------ webhooks
     async def _once(
@@ -286,7 +301,10 @@ class BillingService:
             return
         try:
             outcome: Literal["processed", "ignored"] = await handler()
-        except Exception:
+        except Exception as exc:
+            self.monitor.payment_error(
+                where=f"store webhook ({platform})", error_type=type(exc).__name__
+            )
             await self.db.run(
                 lambda s: billing_repo.finish_notification(
                     s, platform=platform, uid=_safe_ref(uid), status="failed"
@@ -307,7 +325,9 @@ class BillingService:
             raise AppError(ErrorCode.UNAUTHENTICATED)
         try:
             await self.pubsub.verify(authorization)
-        except PubSubAuthError:
+        except PubSubAuthError as exc:
+            # Also what a wrong push audience / service account in .env looks like.
+            self.monitor.payment_error(where="Play webhook auth", error_type=type(exc).__name__)
             raise AppError(ErrorCode.UNAUTHENTICATED) from None
         try:
             envelope = json.loads(raw)
@@ -327,7 +347,10 @@ class BillingService:
                 token = sub_note["purchaseToken"]
                 try:
                     sub = await play.subscription(token)
-                except PlayError:
+                except PlayError as exc:
+                    self.monitor.payment_error(
+                        where="Play webhook lookup", error_type=type(exc).__name__
+                    )
                     return "ignored"
                 await self._apply(
                     platform="google_play",
@@ -368,7 +391,8 @@ class BillingService:
         apple = self.apple
         try:
             note = apple.verify(signed_payload)
-        except AppleVerificationError:
+        except AppleVerificationError as exc:
+            self.monitor.payment_error(where="App Store webhook", error_type=type(exc).__name__)
             raise AppError(ErrorCode.UNAUTHENTICATED) from None
         data = note.get("data") or {}
         if data.get("bundleId") != apple.bundle_id:
@@ -383,7 +407,10 @@ class BillingService:
                 return "ignored"
             try:
                 txn = apple.transaction(signed_txn)
-            except AppleVerificationError:
+            except AppleVerificationError as exc:
+                self.monitor.payment_error(
+                    where="App Store webhook transaction", error_type=type(exc).__name__
+                )
                 return "ignored"
             auto_renew = renewal_auto_renew(apple, data.get("signedRenewalInfo"))
             status = _apple_status(type_, subtype, txn.expires_date)

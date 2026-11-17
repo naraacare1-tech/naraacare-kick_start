@@ -181,6 +181,19 @@ Database, backend and mobile are built; docs and the implementation status are w
 - [x] Nutrition voice: recogniser errors now stop "listening" with a message; English (India) only when the phone has it. On the emulator the virtual microphone must be switched on (Extended controls > Microphone > "Virtual microphone uses host audio input").
 - [ ] Tests to write: sign-out resets providers (widget test with two accounts); Invites row renders (widget); wave painter golden at 0 / 0.5 / 1; OpenAI model adapters with recorded responses (stream with tool calls, refusal, length); monthly cap (gate at the cap, reset on the 1st, drink estimate skipped at the cap, insights skipped below the reserve); pgTAP for V026-V028 (`700_ai` updated, `fn_get_profile.member_since`, report month before sign-up refused, retired goal refused); report builder basic insights per threshold; MediaStore save (instrumented test on Android 10+); intro slides / step 6 / step 7 widget tests; share button produces a PNG.
 
+## Support and error-alert emails (2026-11-17)
+
+- Done: user queries go to `support@naraacare.com` (`SUPPORT_INBOX_ADDRESS`, `SUPPORT_CONTACT_EMAIL`); unhandled API errors and failed worker jobs email `info@naraacare.com` (`ERROR_ALERT_EMAIL`, `app/integrations/error_alerts.py`).
+- Owner: create both mailboxes on the naraacare.com domain; send from a naraacare.com address (`EMAIL_FROM_ADDRESS`) once a domain SMTP provider is set up.
+- Tests to write: alert throttle (same error once per 15 min, hourly cap, skipped count in next email); alert body never contains the exception message, path values or emails; 500 handler calls the hook with the route template; worker middleware reports failed jobs; no email when `ERROR_ALERT_EMAIL` is empty.
+
+## Owner alerts to info@naraacare.com (2026-11-17)
+
+- Done: the 8 urgent alerts (OTP email, Google/Apple sign-in, AI credits/quota, Rin down/slow, paid without STAR, payment validation, report PDF, day jobs) in `app/integrations/ops_monitor.py`; worker health check `ops.health_check` every 5 min with `ops.fn_ops_health` (database). See [setup/owner-alerts.md](../setup/owner-alerts.md).
+- Owner: set `AI_ACCOUNT_MONTHLY_BUDGET_INR` to the monthly limit set at platform.openai.com.
+- Later: bounce spike needs the production email provider's bounce webhook (SMTP cannot see bounces). An outside uptime check (the worker cannot alert when the worker itself is down).
+- Tests to write: RateWindow thresholds per alert; budget 80/95 levels; MonitoredEmail re-raises; auth OTP/OAuth counting; Rin ai_error + rin_reply calls; billing paid-without-STAR and payment_error points; report job and insights alerts; worker job-to-alert mapping and missed-run check; `ops.fn_ops_health` pgTAP (counts, rin-basic excluded, worker-only grant).
+
 ## Rin fallback chain (2026-11-11)
 - [x] When OUR OpenAI account limits Rin (owner): gpt-5-mini -> on rate limit / overload / model error RIN_FALLBACK_MODEL (gpt-5-nano, own prices AI_FALLBACK_PRICE_*) -> when the account has no credits, hits its spending limit or the key is bad (every model refused), or both models fail: basic mode (app/domain/ai/basic_rin.py), free, from the user's own context: today's numbers, fixed tips, drink and meal proposal cards; no "AI paused" note, and each reply counts toward the user's monthly limit like a gpt-5-mini reply of the same size (usage row model rin-basic, tokens estimated at 4 characters each). Logs openai_account_unavailable for the owner. No key configured = basic mode instead of 503. The per-user Rs 10 cap is unchanged.
 - [x] Checked against the dev database: no credits -> basic (lower model not called); rate limit -> lower model answers; both limited -> basic with a drink card.

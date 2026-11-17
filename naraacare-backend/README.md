@@ -139,7 +139,8 @@ Every key is in `.env.example` and validated by `app/core/config.py` (a test fai
 | `STORAGE_ROOT_DIR`, `STORAGE_CONTAINER_*` | ✓ (containers) | | object storage: `filesystem` in dev; the hosting provider's adapter is added in Session 17 |
 | `EMAIL_BACKEND`, `EMAIL_OUTBOX_DIR`, `EMAIL_FROM_ADDRESS`, `SMTP_HOST`, `SMTP_PORT`, `SMTP_USERNAME` | ✓ (from) | | email: `outbox` (dev, files) or `smtp` (required outside dev; any provider) |
 | `SMTP_PASSWORD` | | ✓ | SMTP credential |
-| `SUPPORT_INBOX_ADDRESS` | ✓ | | support email |
+| `SUPPORT_INBOX_ADDRESS` | ✓ | | support email (`support@naraacare.com`) |
+| `ERROR_ALERT_EMAIL` | | | error alert email (`info@naraacare.com`); empty = off |
 | `GOOGLE_OAUTH_CLIENT_IDS`, `APPLE_BUNDLE_ID`, `APPLE_SERVICE_ID`, `APPLE_TEAM_ID`, `APPLE_SIWA_KEY_ID` | ✓ | | social login audiences |
 | `GOOGLE_JWKS_URL`, `APPLE_JWKS_URL`, `APPLE_TOKEN_URL` | ✓ | | provider public keys + Apple code exchange (https only) |
 | `APPLE_SIWA_PRIVATE_KEY_P8` | ✓ | ✓ | Sign in with Apple key |

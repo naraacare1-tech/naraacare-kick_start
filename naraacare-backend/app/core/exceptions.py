@@ -27,6 +27,9 @@ log = structlog.get_logger(__name__)
 # Called with (field names, request) when input was rejected as unsafe; wired to the security-event
 # writer in main.py. Kept as a hook so this module has no database dependency.
 UnsafeInputHook = Callable[[list[str], Request], Awaitable[None]]
+# Called with (exception, request) for unhandled exceptions; wired to the error-alert email in
+# main.py. Must not raise.
+UnexpectedErrorHook = Callable[[Exception, Request], None]
 
 
 class AppError(Exception):
@@ -75,7 +78,9 @@ def _field_name(loc: tuple[int | str, ...]) -> str:
 
 
 def install_exception_handlers(
-    app: FastAPI, on_unsafe_input: UnsafeInputHook | None = None
+    app: FastAPI,
+    on_unsafe_input: UnsafeInputHook | None = None,
+    on_unexpected: UnexpectedErrorHook | None = None,
 ) -> None:
     async def handle_app_error(request: Request, exc: Exception) -> JSONResponse:
         if not isinstance(exc, AppError):  # registered for AppError only
@@ -123,6 +128,8 @@ def install_exception_handlers(
     async def handle_unexpected(request: Request, exc: Exception) -> JSONResponse:
         # exc_info goes through format_exc_info + redaction; the response carries nothing of it.
         log.error("unhandled_exception", exc_type=type(exc).__name__, exc_info=exc)
+        if on_unexpected is not None:
+            on_unexpected(exc, request)
         return error_response(ErrorCode.INTERNAL_ERROR)
 
     app.add_exception_handler(AppError, handle_app_error)

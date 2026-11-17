@@ -26,6 +26,7 @@ import json
 import uuid
 from collections.abc import AsyncIterator, Mapping, Sequence
 from datetime import UTC, date, datetime, time
+from time import monotonic
 from typing import Annotated, Any, Literal
 from uuid import UUID
 
@@ -58,6 +59,7 @@ from app.domain.ai.rin_model import (
 from app.domain.hydration.service import HydrationService
 from app.domain.nutrition.meal_type import suggest_meal_type
 from app.domain.nutrition.service import NutritionService
+from app.integrations.ops_monitor import NO_MONITOR, OpsMonitor
 from app.repositories import nutrition_repo, rin_repo
 from app.repositories.base import Database, DbSession
 
@@ -124,7 +126,9 @@ class RinService:
         enabled: bool,
         fallback_model: RinModel | None = None,
         fallback_prices: AiPrices | None = None,
+        monitor: OpsMonitor = NO_MONITOR,
     ) -> None:
+        self.monitor = monitor
         self.db = db
         self.model = model
         self.fallback_model = fallback_model
@@ -308,6 +312,7 @@ class RinService:
         local_now = time((seconds // 3600) % 24, (seconds % 3600) // 60)
         models = [m for m in (self.model, self.fallback_model) if m is not None]
         attempt: _Attempt | None = None
+        started = monotonic()
         for model in models:
             current = _Attempt()
             try:
@@ -326,6 +331,11 @@ class RinService:
                 log.warning(
                     "rin_model_failed", model=model.model, error=type(exc).__name__, kind=kind
                 )
+                self.monitor.ai_error(
+                    where=f"Rin ({model.model})",
+                    kind=kind,
+                    status=getattr(exc, "status_code", None),
+                )
                 if kind != "retry":
                     # Our OpenAI account cannot answer (no credits / spending limit / key): every
                     # model would fail, so go straight to basic mode. Owner action: top up.
@@ -338,6 +348,8 @@ class RinService:
                 continue
             attempt = current
             break
+        if models:  # no models configured = basic mode by design, not an outage
+            self.monitor.rin_reply(ok=attempt is not None, seconds=monotonic() - started)
         if attempt is None:
             async for chunk in self._basic_reply(
                 user_id, conversation_id, prompt, context, local_now

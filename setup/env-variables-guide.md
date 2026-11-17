@@ -65,8 +65,10 @@ Go to https://myaccount.google.com/apppasswords and delete the "Naaracare" app p
 
 | Variable | What it's for | What to put |
 |---|---|---|
-| `SUPPORT_INBOX_ADDRESS` 🟠 | Where help-and-support messages from users go | A real inbox you read, like `support@naraacare.app`. Create it with any email host on your domain (Zoho Mail, Google Workspace, Microsoft 365, or your registrar's email). |
-| `SUPPORT_CONTACT_EMAIL` 🟢 | The email shown on the app's Help screen | Leave empty to show `SUPPORT_INBOX_ADDRESS`. Set it only if you want a different public address. |
+| `SUPPORT_INBOX_ADDRESS` 🟠 | Where help-and-support messages from users go | NaraaCare uses `support@naraacare.com`. A real inbox you read. Create it with any email host on your domain (Zoho Mail, Google Workspace, Microsoft 365, or your registrar's email). |
+| `SUPPORT_CONTACT_EMAIL` 🟢 | The email shown on the app's Help screen | `support@naraacare.com`. Leave empty to show `SUPPORT_INBOX_ADDRESS`. |
+| `ERROR_ALERT_EMAIL` 🟢 | Where error alerts go: crashes in the API (500 errors) and failed background jobs | NaraaCare uses `info@naraacare.com`. Each email names the place and error type, never user data. The same error is sent at most once every 15 minutes. Leave empty to turn alerts off. It also gets the owner alerts listed in [owner-alerts.md](owner-alerts.md). |
+| `AI_ACCOUNT_MONTHLY_BUDGET_INR` 🟢 | Your OpenAI spend limit per month, in rupees | The same amount as the monthly budget you set at platform.openai.com > Limits. You get an email at 80% and 95%. Leave empty for no budget emails. |
 | `OPEN_FOOD_FACTS_USER_AGENT` 🟢 | Tells the free food database who is calling it (they ask for a contact email) | `NaraaCare/0.1 (support@naraacare.app)` is already right once that inbox exists |
 
 Until you have the domain, you can keep `EMAIL_BACKEND=outbox` and read OTP codes from `naraacare-backend/var/outbox/` instead (see [email-otp-setup.md](email-otp-setup.md)). Then nothing personal is used at all.

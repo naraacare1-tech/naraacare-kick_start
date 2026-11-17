@@ -8,11 +8,14 @@ exports, account erasure and retention (S15).
 
 from __future__ import annotations
 
+import time
 from pathlib import Path
+from typing import Any
 
 import httpx2
 import redis.asyncio as redis_asyncio
-from taskiq import TaskiqScheduler
+import structlog
+from taskiq import TaskiqMessage, TaskiqMiddleware, TaskiqResult, TaskiqScheduler
 from taskiq.schedule_sources import LabelScheduleSource
 from taskiq_redis import RedisStreamBroker
 
@@ -25,10 +28,13 @@ from app.domain.reference import ReferenceCache
 from app.domain.reports.insights import InsightModel, OpenAIInsightModel
 from app.integrations.app_store import AppleJwsVerifier, AppStoreApiClient, load_roots
 from app.integrations.email import OutboxSender, SmtpSender
+from app.integrations.error_alerts import ErrorAlerts
 from app.integrations.fcm import FcmClient
 from app.integrations.google_oauth import ServiceAccount
 from app.integrations.google_play import GooglePlayClient
+from app.integrations.ops_monitor import OpsMonitor
 from app.integrations.storage import ObjectStorage, build_storage
+from app.repositories import ops_repo
 from app.repositories.base import Database
 from app.workers.jobs import billing as billing_jobs
 from app.workers.jobs import privacy as privacy_jobs
@@ -39,6 +45,7 @@ from app.workers.jobs import support as support_jobs
 
 _settings = load_settings()
 configure_logging(_settings.LOG_LEVEL)
+log = structlog.get_logger(__name__)
 
 # Redis Streams give at-least-once delivery with acknowledgements, so jobs must be idempotent.
 # Only the worker needs Redis (the API runs without it).
@@ -47,6 +54,73 @@ if _settings.REDIS_URL is None:
 _REDIS_URL = _settings.REDIS_URL.get_secret_value()
 broker = RedisStreamBroker(url=_REDIS_URL, queue_name="naraacare")
 scheduler = TaskiqScheduler(broker=broker, sources=[LabelScheduleSource(broker)])
+
+_alerts: ErrorAlerts | None = None
+
+
+def _error_alerts() -> ErrorAlerts:
+    global _alerts  # noqa: PLW0603 - one alerter per worker process (its throttle is in memory)
+    if _alerts is None:
+        _alerts = ErrorAlerts(
+            sender=_profile_resources().email,
+            to=_settings.ERROR_ALERT_EMAIL,
+            environment=_settings.APP_ENV,
+            app_version=_settings.APP_VERSION,
+        )
+    return _alerts
+
+
+_monitor: OpsMonitor | None = None
+
+
+def _ops_monitor() -> OpsMonitor:
+    global _monitor  # noqa: PLW0603 - one monitor per worker process
+    if _monitor is None:
+        _monitor = OpsMonitor(_error_alerts())
+    return _monitor
+
+
+# Day jobs (owner alert "Streak or day-rollover job failed"): the longest gap between two runs
+# before the health check calls the run missed. Streaks themselves need no job (database trigger).
+DAY_JOBS = {"notify.send_reminders": 10 * 60, "notify.day_ending_soon": 45 * 60}
+REPORT_JOBS = {"reports.generate", "reports.expire"}
+BILLING_JOBS = {"billing.reconcile_subscriptions"}
+LAST_RUN_KEY = "ops:last_run:"
+
+
+async def report_job_error(task_name: str, exc: BaseException) -> None:
+    """Email a failed job to ERROR_ALERT_EMAIL: the matching owner alert for day, report and
+    billing jobs, a crash email for the rest (throttled; never raises)."""
+    monitor = _ops_monitor()
+    facts = {"Job": task_name, "Error type": type(exc).__name__}
+    if task_name in DAY_JOBS:
+        monitor.day_job_problem("Day job failed", facts, key=task_name, exc=exc)
+    elif task_name in REPORT_JOBS:
+        monitor.report_problem("Report job failed", facts, key=task_name, exc=exc)
+    elif task_name in BILLING_JOBS:
+        monitor.payment_error(where=f"job {task_name}", error_type=type(exc).__name__)
+    else:
+        _error_alerts().report(where=f"job {task_name}", exc=exc)
+    await _error_alerts().drain()
+
+
+class _ErrorAlertMiddleware(TaskiqMiddleware):
+    async def on_error(
+        self, message: TaskiqMessage, result: TaskiqResult[Any], exception: BaseException
+    ) -> None:
+        await report_job_error(message.task_name, exception)
+
+    async def post_execute(self, message: TaskiqMessage, result: TaskiqResult[Any]) -> None:
+        if message.task_name in DAY_JOBS and not result.is_err:
+            try:
+                await _push_resources().redis.set(
+                    LAST_RUN_KEY + message.task_name, int(time.time()), ex=7 * 86400
+                )
+            except Exception as exc:  # bookkeeping only
+                log.warning("last_run_not_saved", error=type(exc).__name__)
+
+
+broker.add_middlewares(_ErrorAlertMiddleware())
 
 
 @broker.task(task_name="ops.heartbeat", schedule=[{"cron": "*/5 * * * *"}])
@@ -232,7 +306,9 @@ async def generate_reports_job() -> str:
         insight_model=jobs.insight_model,
         budget_micro_inr=inr_to_micro(_settings.RIN_MONTHLY_BUDGET_INR),
         prices=AiPrices.from_settings(_settings),
+        monitor=_ops_monitor(),
     )
+    await _error_alerts().drain()
     return f"built {stats.built}, failed {stats.failed}"
 
 
@@ -319,3 +395,37 @@ async def apply_retention_job() -> str:
         db=_push_resources().db, storage=_profile_resources().storage
     )
     return f"purged {sum(counts.values())}"
+
+
+# --- Owner alerts (2026-11-17): health check every 5 minutes (worker role: ops.fn_ops_health).
+async def _missed_day_jobs(monitor: OpsMonitor) -> None:
+    redis = _push_resources().redis
+    now = int(time.time())
+    for task_name, max_gap in DAY_JOBS.items():
+        raw = await redis.get(LAST_RUN_KEY + task_name)
+        if raw is None:  # first check after a fresh start: start the clock now
+            await redis.set(LAST_RUN_KEY + task_name, now, ex=7 * 86400)
+            continue
+        gap = now - int(raw)
+        if gap > max_gap:
+            monitor.day_job_problem(
+                "Day job missed its schedule",
+                {"Job": task_name, "Last run": f"{gap // 60} min ago", "Expected": "on schedule"},
+                key=f"missed:{task_name}",
+            )
+
+
+async def run_health_check(*, check_missed_runs: bool) -> str:
+    monitor = _ops_monitor()
+    row = await _push_resources().db.run(ops_repo.health, readonly=True)
+    budget = _settings.AI_ACCOUNT_MONTHLY_BUDGET_INR
+    monitor.health(row, ai_budget_micro_inr=inr_to_micro(budget) if budget else None)
+    if check_missed_runs:
+        await _missed_day_jobs(monitor)
+    await _error_alerts().drain()
+    return "checked"
+
+
+@broker.task(task_name="ops.health_check", schedule=[{"cron": "*/5 * * * *"}])
+async def health_check_job() -> str:
+    return await run_health_check(check_missed_runs=True)

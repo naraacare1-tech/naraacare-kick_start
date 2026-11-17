@@ -106,6 +106,7 @@ routes:
   DELETE /api/v1/blocks/{user_id}: {access: user}
   GET /api/v1/circles: {access: user}
   POST /api/v1/circles: {access: user}
+  POST /api/v1/avatar-shares: {access: user}
   GET /api/v1/circles/{circle_id}: {access: user}
   PATCH /api/v1/circles/{circle_id}: {access: user}
   DELETE /api/v1/circles/{circle_id}: {access: user}
