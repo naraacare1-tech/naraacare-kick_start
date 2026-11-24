@@ -6,6 +6,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:naraacare/core/l10n/generated/app_localizations.dart';
+import 'package:naraacare/core/security/system_prompt.dart';
 import 'package:naraacare/features/notifications/data/notifications_api.dart';
 import 'package:naraacare/features/notifications/notifications_providers.dart';
 import 'package:naraacare/features/profile/profile_providers.dart';
@@ -88,6 +89,10 @@ class LocalReminders {
   /// Asks the OS (Android 13+ / iOS). True if notifications may be shown.
   Future<bool> requestPermission() async {
     await _init();
+    return await SystemPrompt.guard(_askOs);
+  }
+
+  Future<bool> _askOs() async {
     if (!_supported) return false;
     if (Platform.isAndroid) {
       final android = _plugin

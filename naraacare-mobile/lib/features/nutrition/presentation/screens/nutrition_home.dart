@@ -16,6 +16,7 @@ import 'package:naraacare/shared/widgets/nc_avatar_card.dart';
 import 'package:naraacare/shared/widgets/nc_avatar_figure.dart';
 import 'package:naraacare/shared/widgets/nc_avatar_menu.dart';
 import 'package:naraacare/shared/widgets/nc_bottom_sheet.dart';
+import 'package:naraacare/shared/widgets/nc_update_badge.dart';
 
 String avatarStateLabel(AppLocalizations l10n, AvatarStateCode state) =>
     switch (state) {
@@ -51,6 +52,7 @@ class NutritionAvatarCard extends ConsumerWidget {
             look: AvatarLook.food,
             fill: data == null ? 0 : (data.fillPct / 100).clamp(0, 1),
             onShare: () => showAvatarShareSheet(context, AvatarType.nutrition),
+            sideBadge: const NcUpdateBadge(tracker: UpdateTracker.food),
             actions: [
               NcAvatarAction(
                 icon: Icons.more_vert,
@@ -90,15 +92,8 @@ class NutritionAvatarCard extends ConsumerWidget {
             ),
           ),
         ),
-        if (pending.isNotEmpty)
-          Padding(
-            padding: const EdgeInsets.only(top: NcSpace.xs),
-            child: Text(
-              l10n.pendingMeals(pending.length),
-              style: Theme.of(context).textTheme.bodySmall
-                  ?.copyWith(color: nc.textSecondary),
-            ),
-          ),
+        // No text under the avatar (owner 2026-11-24): meals waiting to sync
+        // show as "pending" on the card.
       ],
     );
   }

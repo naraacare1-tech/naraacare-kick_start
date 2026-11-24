@@ -126,7 +126,7 @@ def test_sahil_run_drops_62_5_percent_at_once() -> None:
     after = engine.compute(CTX, day, at(12))
     assert round(after.tank_ml) == 1600
     assert round(before.level_pct - after.level_pct, 1) == 62.5 or after.level_pct == 0
-    assert round(after.daily_goal_ml) == 5047
+    assert round(after.daily_goal_ml) == 5752  # Very Active 2.00 + 699.7 mL (2026-11 MVP doc)
     assert round(after.workout_sweat_ml) == 1000
 
 
@@ -137,10 +137,23 @@ def test_balance_capped_at_plus_300_and_level_clamped() -> None:
     assert empty.level_pct == 0 and empty.band == "critical"
 
 
-def test_meal_credit_is_a_fifth_of_need_over_three() -> None:
+def test_food_water_follows_logged_kcal() -> None:
+    # 0.20 x 3,053 mL x min(1, kcal / target): half the target logged = 305 mL (2026-11 MVP doc).
+    day = day_of(meals=[(at(8), 1000.0)], base_target_kcal=2000.0)
+    s = engine.compute(CTX, day, at(8))
+    assert round(s.food_water_ml) == 305
+    assert s.state == "empty"  # food water is not part of the headline (OQ-17)
+
+
+def test_food_water_is_capped_at_a_fifth_of_need() -> None:
+    meals = [(at(h), 900.0) for h in (8, 13, 16, 20)]  # 3,600 kcal against a 2,000 kcal target
+    s = engine.compute(CTX, day_of(meals=meals, base_target_kcal=2000.0), at(21))
+    assert round(s.food_water_ml) == 611  # 0.20 x 3,053, never more
+
+
+def test_old_three_meal_rule_without_kcal_inputs() -> None:
     s = engine.compute(CTX, day_of(meal_credits=[at(8)]), at(8))
     assert round(s.food_water_ml) == 204
-    assert s.state == "empty"  # food water is not part of the headline (OQ-17)
 
 
 @pytest.mark.parametrize(

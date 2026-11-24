@@ -29,6 +29,11 @@ abstract final class NcColors {
   static const avatarWater = Color(0xFF38BDF8);
   static const avatarNutrition = Color(0xFF22C55E);
   static const avatarSleep = Color(0xFF8B5CF6);
+  // Google "G" logo on the Google sign-in button (Google brand colours).
+  static const googleBlue = Color(0xFF4285F4);
+  static const googleGreen = Color(0xFF34A853);
+  static const googleYellow = Color(0xFFFBBC05);
+  static const googleRed = Color(0xFFEA4335);
 }
 
 /// Spacing (doc 02 section 1.2).

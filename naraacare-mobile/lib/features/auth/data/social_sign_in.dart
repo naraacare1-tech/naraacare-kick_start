@@ -6,6 +6,7 @@ import 'package:crypto/crypto.dart';
 import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:naraacare/core/config/app_config.dart';
+import 'package:naraacare/core/security/system_prompt.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 /// What a provider gives back, ready for POST /auth/oauth/{google,apple}.
@@ -67,7 +68,7 @@ class PlatformSocialSignIn implements SocialSignIn {
         nonce: _sha256Hex(nonce),
       );
       _googleReady = true;
-      final account = await google.authenticate();
+      final account = await SystemPrompt.guard(google.authenticate);
       final idToken = account.authentication.idToken;
       if (idToken == null) throw const SocialSignInFailed();
       return (idToken: idToken, nonce: nonce);
@@ -85,9 +86,11 @@ class PlatformSocialSignIn implements SocialSignIn {
   Future<AppleCredential> apple() async {
     final nonce = _rawNonce();
     try {
-      final credential = await SignInWithApple.getAppleIDCredential(
-        scopes: const [AppleIDAuthorizationScopes.email],
-        nonce: _sha256Hex(nonce),
+      final credential = await SystemPrompt.guard(
+        () => SignInWithApple.getAppleIDCredential(
+          scopes: const [AppleIDAuthorizationScopes.email],
+          nonce: _sha256Hex(nonce),
+        ),
       );
       final token = credential.identityToken;
       if (token == null) throw const SocialSignInFailed();

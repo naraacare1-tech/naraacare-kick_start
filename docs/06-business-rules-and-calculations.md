@@ -39,12 +39,12 @@ female: BMR = 10 × weight_kg + 6.25 × height_cm − 5 × age − 161
 
 | Activity level (onboarding label → code) | Multiplier [product] |
 |---|---|
-| Little or no exercise → `sedentary` | 0.75 |
-| Walks or light workouts 1–3 days → `lightly_active` | 1.00 |
-| Exercise 3–5 days/week → `moderately_active` | 1.02 |
-| Exercise most days / physical job → `very_active` | 1.07 |
+| Little or no exercise → `sedentary` | 1.2 |
+| Walks or light workouts 1–3 days → `lightly_active` | 1.375 |
+| Exercise 3–5 days/week → `moderately_active` | 1.55 |
+| Exercise most days / physical job → `very_active` | 1.725 |
 
-⚠️ OQ-12: these are far below standard factors; mapping per OQ-13. Planned gym workouts are **not** part of this selection; they are logged separately (Step 7).
+Owner 2026-11-24: the 2026-11 MVP document's standard factors replace 0.75 / 1.00 / 1.02 / 1.07 (calc_version 2026.2; nutritionist sign-off still needed, OQ-12). Planned gym workouts are **not** part of this selection; they are logged separately (Step 7).
 
 ### 2.3 Step 3 — BMI guardrails
 `BMI = weight_kg / (height_m)²` (shown with 1 decimal).
@@ -93,7 +93,7 @@ The 11 STAR micronutrients, fiber and sugar have **no targets** in DOC. Totals a
 
 ### 2.7 Step 7 — Exercise (net intake)
 `effective_allowance = base_daily_target + Σ exercise_kcal(today)`
-Exercise kcal formula is **not in DOC** (OQ-16). Proposed: `kcal = MET × weight_kg × duration_h`, rounded half-up.
+Exercise kcal (2026-11 MVP doc step 7, owner 2026-11-24): net `kcal = (MET − 1) × weight_kg × duration_h`, rounded half-up (the resting 1 MET is already in the TDEE). Before 2026-11-24 the gross `MET × kg × h` was used (OQ-16).
 
 | Workout | MET [proposal] | Sweat mL/kg/h (DOC) |
 |---|---|---|
@@ -122,12 +122,12 @@ Half-open boundaries close DOC's decimal gaps (49.5 → fueling; 99.9 → energi
 ### 2.9 Worked examples (verified)
 
 **Example 1 — moderately active male, standard gain**
-Male, 30 y, 180 cm, 70 kg, ×1.02, +500.
-BMR = 700 + 1125 − 150 + 5 = **1680** · TDEE = 1680 × 1.02 = 1713.6 → **1714** · BMI = 70 / 1.8² = **21.6** (Normal; gain allowed) · target = 1714 + 500 = **2214** · floor 1500 → no override · carbs 2214×0.55/4 = 304.4 → **304 g** · fat 2214×0.25/9 = 61.5 → **62 g** · protein 2214×0.2/4 = 110.7 → **111 g** · logs 1107 kcal food, 0 exercise → fill = 1107/2214 = **50.0 % → energized**.
+Male, 30 y, 180 cm, 70 kg, ×1.55, +500.
+BMR = 700 + 1125 − 150 + 5 = **1680** · TDEE = 1680 × 1.55 = **2604** · BMI = 70 / 1.8² = **21.6** (Normal; gain allowed) · target = 2604 + 500 = **3104** · floor 1500 → no override · carbs 3104×0.55/4 = 426.8 → **427 g** (the MVP doc prints 304 g, a typo) · fat 3104×0.25/9 = 86.2 → **86 g** · protein 3104×0.2/4 = **155 g** · logs 1552 kcal food, 0 exercise → fill = 1552/3104 = **50.0 % → energized**.
 
 **Example 2 — sedentary female, standard loss (safety floor)**
-Female, 25 y, 160 cm, 65 kg, ×0.75, −500.
-BMR = 650 + 1000 − 125 − 161 = **1364** · TDEE = 1023 · BMI = **25.4** (Overweight; all goals) · target = 523 → **clamped to 1200, override_flag = true** · carbs **165 g**, fat 33.3 → **33 g**, protein **60 g** · workout 200 kcal → allowance **1400** · food 1450 → fill = **103.6 % → goal_met** (DOC shows 103.5 % due to truncation; the API returns 1 decimal, rounded half-up).
+Female, 25 y, 160 cm, 65 kg, ×1.2, −500.
+BMR = 650 + 1000 − 125 − 161 = **1364** · TDEE = 1364 × 1.2 = 1636.8 → **1637** · BMI = **25.4** (Overweight; all goals) · target = 1137 → **clamped to 1200, override_flag = true** · carbs **165 g**, fat 33.3 → **33 g**, protein **60 g** · workout 200 kcal → allowance **1400** · food 1450 → fill = **103.6 % → goal_met** (DOC shows 103.5 % due to truncation; the API returns 1 decimal, rounded half-up).
 
 ### 2.10 Food logging maths (DOC data flow)
 
@@ -193,7 +193,7 @@ body_factor: ectomorph 0.97 · mesomorph 1.00 · endomorph 1.03
 TWT = 861.9 × activity_number + 37.34 × LBW + athlete_bonus + age_effect + temp_effect − 665.4
 age_effect  = 29.42 × age − 0.3625 × age²
 temp_effect = 1.937 × T² − 23.15 × T
-activity_number: sedentary 1.55 · active 1.85 · athlete 2.20 (athlete_bonus = 699.7, else 0)
+activity_number (2026-11 MVP doc, owner 2026-11-24): sedentary 1.55 · lightly active 1.70 · moderately active 1.85 · very active 2.00 with athlete_bonus = 699.7 (else 0)
 ```
 The age/temperature tables in DOC are samples of these formulas (e.g. age 30 → 556; 25 °C → 632). Always use the formula, never table lookup. −665.4 assumes normal humidity, sea level, India.
 
@@ -231,7 +231,7 @@ per_minute       = rate / 60
 | Custom drink | AI estimate; 0.85 if unsure; user confirms | STAR |
 
 - Swipe up: +100 mL water; swipe down: −100 mL water (an adjustment entry; rejected if the day's water volume would go below 0).
-- Food: each meal with `hydration_credit` adds `0.20 × daily_need / 3` (max 3 per day).
+- Food (2026-11 MVP doc step 6, owner 2026-11-24): `food water = 0.20 × daily_need × min(1, kcal logged ÷ base target kcal)` (base target without workout kcal), added at each meal as the increase over the earlier meals, so snacks cannot exceed 20 %. Before: `0.20 × daily_need / 3` for the first 3 meals.
 
 ### 3.7 Avatar tank
 ```
@@ -268,7 +268,7 @@ Woman, 65 kg, 162 cm, 32 y, endomorph, sedentary, 25 °C, no workout.
 - TWT = 1335.95 + 1719.39 + 570.24 + 631.88 − 665.4 = **3,592 mL**
 - Need = 0.85 × 3592.06 = **3,053 mL**
 - Sleep rate 29.79 mL/h × 8 h = **238 mL** overnight · awake rate = (3053.25 − 238.33)/16 = **175.9 mL/h** (2.93 mL/min)
-- Meal credit = 0.20 × 3053 / 3 = **204 mL** · tank = **1,300 mL**
+- Food water with half the calorie target logged = 0.20 × 3053 × 0.5 = **305 mL** (all of it: **611 mL**) · tank = **1,300 mL**
 
 | Time | Event | Balance (mL) | Level |
 |---|---|---|---|
@@ -281,7 +281,7 @@ Woman, 65 kg, 162 cm, 32 y, endomorph, sedentary, 25 °C, no workout.
 Left to drink at 09:30 = 378 + 175.9 × 13.5 h = **2,753 mL**. Without drinking the level falls 175.9/1300 = **13.5 %/h**. At 22 °C need = **2,880 mL**; at 35 °C **3,844 mL**.
 
 ### 3.10 Worked example — Sahil (DOC, verified)
-Man, 80 kg, 28 y, active (1.85), 30 °C, 60-min run. DOC omits height and body type; **175 cm mesomorph** reproduces DOC exactly.
+Man, 80 kg, 28 y, very active (2.00 + 699.7 mL), 30 °C, 60-min run, 175 cm mesomorph: TWT 5,590 mL, need before workouts 4,752 mL, daily need **5,752 mL**. (The MVP doc's 5,047 mL still uses the old 1.85 level.)
 LBW = 60.09 kg · TWT = 4,761 mL · need before workouts = 4,047 · run sweat = 12.5 × 80 × 1 = 1,000 · **daily need = 5,047 mL** · tank = 1,600 mL → the run drops the level **62.5 %** at once.
 
 ### 3.11 STANDARD example

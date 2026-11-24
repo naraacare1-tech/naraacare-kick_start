@@ -553,12 +553,8 @@ class _Start extends ConsumerWidget {
     final name = (ref.watch(meProvider).value?.profile.fullName ?? '')
         .split(' ')
         .first;
-    final suggestions = [
-      (Icons.description_outlined, l10n.rinSuggestToday),
-      (Icons.restaurant_outlined, l10n.rinSuggestDinner),
-      (Icons.battery_alert_outlined, l10n.rinSuggestTired),
-      (Icons.water_drop_outlined, l10n.rinSuggestWater),
-    ];
+    // One suggestion only (owner 2026-11-24): "How am I doing today?".
+    final suggestions = [(Icons.description_outlined, l10n.rinSuggestToday)];
     return ListView(
       padding: EdgeInsets.all(nc.screenPadding),
       children: [

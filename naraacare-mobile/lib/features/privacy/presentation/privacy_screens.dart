@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
-import 'package:naraacare/core/config/providers.dart';
 import 'package:naraacare/core/errors/api_error.dart';
 import 'package:naraacare/core/l10n/generated/app_localizations.dart';
 import 'package:naraacare/core/providers.dart';
@@ -14,6 +13,7 @@ import 'package:naraacare/core/security/screen_guard.dart';
 import 'package:naraacare/core/theme/app_theme.dart';
 import 'package:naraacare/core/theme/tokens.dart';
 import 'package:naraacare/features/auth/presentation/auth_errors.dart';
+import 'package:naraacare/features/legal/legal_document_screen.dart';
 import 'package:naraacare/features/privacy/data/privacy_api.dart';
 import 'package:naraacare/features/privacy/privacy_providers.dart';
 import 'package:naraacare/features/profile/presentation/report_screens.dart';
@@ -452,7 +452,6 @@ class PrivacyNoticeScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
     final nc = context.nc;
-    final config = ref.watch(appConfigProvider);
     final contact = ref.watch(supportInfoProvider).value?.$2.email;
     final sections = [
       (l10n.noticeCollectTitle, l10n.noticeCollectBody),
@@ -479,7 +478,7 @@ class PrivacyNoticeScreen extends ConsumerWidget {
             const SizedBox(height: NcSpace.cardGap),
           ],
           OutlinedButton(
-            onPressed: () => openLegalLink(context, config.privacyUrl),
+            onPressed: () => showLegalDocument(context, LegalDocument.privacy),
             child: Text(l10n.readFullPolicy),
           ),
         ],

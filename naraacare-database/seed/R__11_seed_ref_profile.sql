@@ -7,18 +7,21 @@ ON CONFLICT (code) DO UPDATE SET label = excluded.label, display_order = exclude
 
 INSERT INTO ref.hydration_activity (code, label, activity_number, athlete_bonus_ml) VALUES
 ('sedentary', 'Sedentary (mostly sitting)', 1.55, 0),
-('active', 'Active (on your feet most of the day)', 1.85, 0),
-('athlete', 'Athlete (training hard)', 2.20, 699.7)
+('light', 'Lightly active (on your feet, moving)', 1.70, 0),
+('active', 'Moderately active (on your feet all day)', 1.85, 0),
+('athlete', 'Very active (training hard)', 2.00, 699.7)
 ON CONFLICT (code) DO UPDATE SET
     label = excluded.label, activity_number = excluded.activity_number,
     athlete_bonus_ml = excluded.athlete_bonus_ml, updated_at = now();
 
--- Mapping onboarding answer -> TDEE multiplier + hydration activity: OQ-12 / OQ-13 (pending sign-off).
+-- Mapping onboarding answer -> TDEE multiplier + hydration activity (owner 2026-11-24: the 2026-11 MVP
+-- document, nutrition step 2 and hydration step 3; replaces the OQ-12 / OQ-13 values 0.75 / 1.00 /
+-- 1.02 / 1.07). Nutritionist sign-off still needed before launch (OQ-12).
 INSERT INTO ref.activity_level (code, label, onboarding_label, tdee_multiplier, hydration_activity_code, display_order) VALUES
-('sedentary', 'Sedentary', 'Little or no exercise', 0.75, 'sedentary', 1),
-('lightly_active', 'Lightly active', 'Walks or light workouts 1-3 days', 1.00, 'sedentary', 2),
-('moderately_active', 'Moderately active', 'Exercise 3-5 days/week', 1.02, 'active', 3),
-('very_active', 'Very active', 'Exercise most days / physical job', 1.07, 'active', 4)
+('sedentary', 'Sedentary', 'Little or no exercise', 1.200, 'sedentary', 1),
+('lightly_active', 'Lightly active', 'Walks or light workouts 1-3 days', 1.375, 'light', 2),
+('moderately_active', 'Moderately active', 'Exercise 3-5 days/week', 1.550, 'active', 3),
+('very_active', 'Very active', 'Exercise most days / physical job', 1.725, 'athlete', 4)
 ON CONFLICT (code) DO UPDATE SET
     label = excluded.label, onboarding_label = excluded.onboarding_label,
     tdee_multiplier = excluded.tdee_multiplier, hydration_activity_code = excluded.hydration_activity_code,

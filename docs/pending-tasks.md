@@ -250,3 +250,65 @@ Decisions (2026-11-05): write the S16 security suite AND every deferred S09-S15 
 - [ ] Whole session. Carried in: hosting provider choice (OQ-45), Android release signing, OQ-46 (Sentry data residency).
 - [x] Decisions (2026-11-05, owner): finish Session 16 before starting S17; hosting provider chosen later by the owner (OQ-45 stays open); load tests with k6 (AGPL-3.0, internal use only, never modified or shipped); **no crash reporting at launch** (OQ-46): store crash reports (Play Console, App Store Connect) and server logs only, Sentry may be added later.
 - [ ] Tests to write later: k6 scenarios with thresholds as CI pass/fail; plan tests; release config tests; post-deploy smoke tests (synthetic canary); store sandbox purchase on production-signed builds (license testers / TestFlight).
+
+## Mobile fixes: logout, app icon, no DEV ribbon (2026-11-20)
+
+Tests to write:
+- `AuthController.signOut`: when `wipeLocalData` throws, status still becomes `signedOut` and `onSignedOut` runs.
+- `authControllerProvider` wipe: when reminders `clear()` throws, `wipeLocalUserData` still runs.
+- Release APK check in CI: `aapt2 dump resources` lists `drawable/ic_stat_naraacare` (kept by `res/raw/keep.xml`).
+- Fix existing failures, not caused by this change: all `test/app_smoke_test.dart` tests (`pumpAndSettle` times out) and 7 tests in `test/core/routing/router_test.dart`.
+
+## AI data isolation tests (2026-11-22)
+
+Checked live on the dev database (2026-11-22): acting as user B, every Rin read of user A is refused
+(`fn_rin_context`, `fn_rin_lookup`, `fn_usage_month`, `fn_history`, `fn_conversations`), and
+`fn_history(B, <A's chat>)` returns no rows. Add these to `naraacare-database/tests/700_ai.sql`
+(today only fn_messages / write / delete of another user's chat are tested):
+- `ai.fn_rin_context(A)` and `ai.fn_rin_lookup(A, ...)` as actor B raise 42501.
+- `ai.fn_history(B, <A's conversation>)` returns 0 rows.
+- `ai.fn_pending_action` / `ai.pr_resolve_pending_action` on A's action as B raise 42501.
+- `ai.fn_usage_month(A)` as B raises 42501.
+- Backend: a `get_my_data` tool call can only ever read the token's user (the tool has no user parameter).
+
+## Home avatar UI: screen scaling, side badge, cleaner page (2026-11-24)
+
+Tests to write:
+- `screenScaleFor`: 390 dp = 1.0; 320 dp clamps to 0.85; 800 dp clamps to 1.3; text part caps at 1.15.
+- App text scale = user text size (max 130 %) x screen scale (`app.dart`).
+- `NcAvatarFigure` with a fixed `height` scales with the screen; inside `NcAvatarStage` it does not.
+- `AvatarUpdates.post` shows the badge on the matching tracker only and clears it after 4 s.
+- Water swipe, add drink, new meal and new sleep show the side badge, not a toast; editing sleep keeps the toast.
+- Over-hydration caution shows as the red side badge when no update is showing.
+- Home shows no text between the avatar and the button.
+- Visual check of the badge position on a 360 dp and a 412 dp phone.
+
+## Splash, Rin suggestion, field labels, profile-target refresh, in-app legal (2026-11-24)
+
+Done: splash waits for the first frame and holds the last frame 1.5 s (one controller, no timers);
+Rin shows only "How am I doing today?"; text-field labels sit inside the box (NcFilledInputBorder);
+Edit Profile reloads nutrition and water; app.pr_update_profile refreshes today's nutrition summary
+when targets change (checked live in a rolled-back transaction: 2,245 -> 2,345 kcal); Terms and
+Privacy open in-app from assets/legal/*.json (tools/legal_to_json.py, from the owner's PDFs).
+
+Tests to write:
+- pgTAP: after `app.pr_update_profile` with a snapshot, today's `nutrition.daily_summary.base_target_kcal`
+  equals the new snapshot's; days before today are unchanged.
+- Edit Profile save invalidates `dailySummaryProvider` and `hydrationStatusProvider`.
+- `LegalDoc.fromJson` parses every block type; both assets load; no block is empty.
+- Legal screen renders headings, summaries, bullets and tables; opens from Settings and Sign Up (signed out).
+- Splash: the last frame shows with "remove animations"; `onFinished` fires after settle + animation + hold.
+- Text field: the floating label is inside the filled box (golden or position test).
+
+Decided 2026-11-24 (owner): use the 2026-11 MVP document. Done: TDEE 1.2 / 1.375 / 1.55 / 1.725;
+water activity 1.55 / 1.70 / 1.85 / 2.00 + 699.7 mL (V030 adds 'light'); net workout kcal (MET - 1);
+food water = 0.20 x need x min(1, kcal logged / base target); calc_version 2026.2; GET /me recomputes
+today's targets once for users whose latest snapshot is an older version. Unit tests updated
+(523 pass); integration expectations updated (they need the test database to run).
+
+Tests to write:
+- `ProfileService.refresh_outdated_targets`: recomputes once when the snapshot version is older,
+  does nothing when current or onboarding is incomplete, never raises; GET /me still answers.
+- pgTAP: `hydration.fn_day_inputs` returns `meals` (time, kcal of non-deleted items) and
+  `base_target_kcal`; `activity.pr_log_workout` stores (MET - 1) x kg x h.
+- Nutritionist sign-off on the new values (OQ-12) before launch.

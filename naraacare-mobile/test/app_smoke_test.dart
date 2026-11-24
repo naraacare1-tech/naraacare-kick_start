@@ -76,19 +76,13 @@ Future<Harness> _pump(
 }
 
 void main() {
-  for (final flavor in [Flavor.dev, Flavor.staging]) {
-    testWidgets('${flavor.name} build shows the environment ribbon', (
-      tester,
-    ) async {
+  // No environment ribbon in any flavor (owner 2026-11-20).
+  for (final flavor in Flavor.values) {
+    testWidgets('${flavor.name} build has no ribbon', (tester) async {
       await _pump(tester, flavor);
-      expect(find.byType(Banner), findsOneWidget);
+      expect(find.byType(Banner), findsNothing);
     });
   }
-
-  testWidgets('prod build has no ribbon', (tester) async {
-    await _pump(tester, Flavor.prod);
-    expect(find.byType(Banner), findsNothing);
-  });
 
   testWidgets('first launch goes from splash to the intro slides', (
     tester,

@@ -15,6 +15,7 @@ class NcButton extends StatelessWidget {
     this.variant = NcButtonVariant.primary,
     this.loading = false,
     this.icon,
+    this.leading,
   });
 
   final String label;
@@ -22,6 +23,9 @@ class NcButton extends StatelessWidget {
   final NcButtonVariant variant;
   final bool loading;
   final IconData? icon;
+
+  /// Shown before the label (e.g. a brand logo such as the Google "G").
+  final Widget? leading;
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +44,10 @@ class NcButton extends StatelessWidget {
         : Row(
             mainAxisSize: MainAxisSize.min,
             children: [
+              if (leading != null) ...[
+                leading!,
+                const SizedBox(width: NcSpace.buttonGap),
+              ],
               Flexible(child: Text(label, overflow: TextOverflow.ellipsis)),
               if (icon != null) ...[
                 const SizedBox(width: NcSpace.inputGap),

@@ -1,0 +1,13 @@
+# App icon (owner 2026-11-20): the NaraaCare logo on white, not the Flutter logo.
+# Sources are 1024 px images built from assets/brand/logo.png (see assets/launcher/README.md).
+# Regenerate after changing them:
+#   flutter pub run flutter_launcher_icons
+flutter_launcher_icons:
+  android: true
+  image_path: "assets/launcher/icon.png"
+  adaptive_icon_background: "#FFFFFF"
+  adaptive_icon_foreground: "assets/launcher/icon_foreground.png"
+  min_sdk_android: 24
+  ios: true
+  remove_alpha_ios: true
+  background_color_ios: "#FFFFFF"

@@ -2,7 +2,6 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:naraacare/core/config/providers.dart';
 import 'package:naraacare/core/errors/api_error.dart';
 import 'package:naraacare/core/l10n/generated/app_localizations.dart';
 import 'package:naraacare/core/routing/routes.dart';
@@ -14,7 +13,7 @@ import 'package:naraacare/features/auth/presentation/auth_args.dart';
 import 'package:naraacare/features/auth/presentation/auth_errors.dart';
 import 'package:naraacare/features/auth/presentation/widgets/auth_scaffold.dart';
 import 'package:naraacare/features/auth/presentation/widgets/social_buttons.dart';
-import 'package:naraacare/shared/widgets/legal_links.dart';
+import 'package:naraacare/features/legal/legal_document_screen.dart';
 import 'package:naraacare/shared/widgets/nc_button.dart';
 import 'package:naraacare/shared/widgets/nc_text_field.dart';
 
@@ -93,7 +92,6 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
-    final config = ref.watch(appConfigProvider);
     return AuthScaffold(
       title: l10n.signUpTitle,
       subtitle: l10n.signUpSubtitle,
@@ -153,8 +151,10 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                     _terms = v;
                     if (v) _termsError = false;
                   }),
-                  onTerms: () => openLegalLink(context, config.termsUrl),
-                  onPrivacy: () => openLegalLink(context, config.privacyUrl),
+                  onTerms: () =>
+                      showLegalDocument(context, LegalDocument.terms),
+                  onPrivacy: () =>
+                      showLegalDocument(context, LegalDocument.privacy),
                 ),
                 const SizedBox(height: NcSpace.cardGap),
                 FormErrorText(_formError),

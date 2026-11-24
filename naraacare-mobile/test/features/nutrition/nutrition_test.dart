@@ -325,9 +325,12 @@ void main() {
       await h.tapText(tester, h.l10n.saveMealButton);
       await tester.tap(find.text(h.l10n.saveMealButton).last);
       await tester.pumpAndSettle();
-      expect(find.text(h.l10n.mealQueued), findsOneWidget);
+      // The confirmation is the side badge beside the avatar (no toast, no
+      // text under the avatar).
+      expect(find.text(h.l10n.badgeSaved), findsOneWidget);
+      expect(find.text(h.l10n.badgeSyncsLater), findsOneWidget);
       expect(await Outbox(h.db).count(), 1);
-      expect(find.text(h.l10n.pendingMeals(1)), findsOneWidget);
+      expect(find.text(h.l10n.pendingMeals(1)), findsNothing);
       final queued = (await Outbox(h.db).pending()).single;
       final id = (jsonDecode(queued.body!) as Map)['client_entry_id'];
 
@@ -345,7 +348,6 @@ void main() {
       expect(posts, hasLength(1));
       expect((posts.single! as Map)['client_entry_id'], id);
       expect(await Outbox(h.db).count(), 0);
-      expect(find.text(h.l10n.pendingMeals(1)), findsNothing);
     });
   });
 

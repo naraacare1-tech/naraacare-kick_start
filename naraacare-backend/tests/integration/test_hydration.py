@@ -66,7 +66,7 @@ def test_status_before_any_drink(flow: Flow) -> None:
     assert status["tank_ml"] == 1400  # 2 % of 70 kg
     assert status["temperature"]["c"] == 25 and status["temperature"]["stale"] is False
     assert 1500 <= status["daily_goal_ml"] <= 6000
-    assert status["advanced"] is False and status["calc_version"] == "2026.1"
+    assert status["advanced"] is False and status["calc_version"] == "2026.2"
 
 
 def test_log_replay_and_status(flow: Flow) -> None:
@@ -154,15 +154,15 @@ async def test_star_temperature_workout_and_allowance(flow: Flow) -> None:
     )
     assert run.status_code == 201, run.text
     out = run.json()
-    assert (out["sweat_ml"], out["kcal"]) == (875.0, 686)  # 12.5 x 70; 9.8 x 70
+    assert (out["sweat_ml"], out["kcal"]) == (875.0, 616)  # 12.5 x 70; (9.8 - 1) x 70 net
     assert out["status"]["workout_sweat_ml"] == 875
     summary = flow.client.get(
         "/api/v1/nutrition/daily-summary",
         params={"date": out["workout"]["date"]},
         headers=user.headers,
     ).json()
-    assert summary["exercise_kcal"] == 686
-    assert summary["effective_allowance_kcal"] == summary["target_kcal"] + 686
+    assert summary["exercise_kcal"] == 616
+    assert summary["effective_allowance_kcal"] == summary["target_kcal"] + 616
 
     workout_id = out["workout"]["workout_id"]
     stale = flow.client.delete(

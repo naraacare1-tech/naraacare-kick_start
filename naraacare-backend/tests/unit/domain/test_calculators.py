@@ -31,12 +31,14 @@ def test_example_1_moderately_active_male_standard_gain() -> None:
     )
     assert (t.bmr_kcal, t.tdee_kcal, t.bmi, t.bmi_category) == (
         1680,
-        1714,
+        2604,
         Decimal("21.6"),
         "normal",
     )
-    assert (t.calculated_target_kcal, t.base_target_kcal, t.safety_override) == (2214, 2214, False)
-    assert (t.carbs_g, t.fat_g, t.protein_g) == (304, 62, 111)
+    # 2026-11 MVP doc Example 1 (multiplier 1.55). The doc prints carbs 304 g, which is a typo:
+    # 3104 x 0.55 / 4 = 427 g; its fat 86 g and protein 155 g match.
+    assert (t.calculated_target_kcal, t.base_target_kcal, t.safety_override) == (3104, 3104, False)
+    assert (t.carbs_g, t.fat_g, t.protein_g) == (427, 86, 155)
 
 
 def test_example_2_sedentary_female_standard_loss_hits_the_safety_floor() -> None:
@@ -53,11 +55,11 @@ def test_example_2_sedentary_female_standard_loss_hits_the_safety_floor() -> Non
     )
     assert (t.bmr_kcal, t.tdee_kcal, t.bmi, t.bmi_category) == (
         1364,
-        1023,
+        1637,
         Decimal("25.4"),
         "overweight_obese",
     )
-    assert (t.calculated_target_kcal, t.base_target_kcal, t.safety_override) == (523, 1200, True)
+    assert (t.calculated_target_kcal, t.base_target_kcal, t.safety_override) == (1137, 1200, True)
     assert (t.carbs_g, t.fat_g, t.protein_g) == (165, 33, 60)
 
 
@@ -149,10 +151,12 @@ def test_sahil_need_with_a_run() -> None:
         activity_level="very_active",
     )
     base = hydration.base_need(CTX, sahil, temp_c=30, workout_sweat_ml=12.5 * 80 * 1)
+    # Very Active = 2.00 plus the 699.7 mL athlete term (2026-11 MVP doc). The doc's Sahil example
+    # (5,047 mL) was still computed with the old 1.85 level.
     assert half_up_float(base.lean_body_weight_kg, 2) == Decimal("60.09")
-    assert half_up_float(base.water_movement_ml) == 4761
-    assert half_up_float(base.need_before_workouts_ml) == 4047
-    assert half_up_float(base.daily_need_ml) == 5047
+    assert half_up_float(base.water_movement_ml) == 5590
+    assert half_up_float(base.need_before_workouts_ml) == 4752
+    assert half_up_float(base.daily_need_ml) == 5752
 
 
 def test_need_is_clamped_to_product_limits() -> None:
@@ -199,7 +203,7 @@ def test_snapshot_has_exactly_the_snapshot_columns() -> None:
         "water_movement_ml",
         "base_water_need_ml",
     }
-    assert snap["base_target_kcal"] == 2214
+    assert snap["base_target_kcal"] == 3104
     assert snap["base_water_need_ml"] == result.water_need_ml
 
 

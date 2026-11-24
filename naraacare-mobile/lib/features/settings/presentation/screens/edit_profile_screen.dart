@@ -9,6 +9,8 @@ import 'package:naraacare/core/security/input_validators.dart';
 import 'package:naraacare/core/theme/app_theme.dart';
 import 'package:naraacare/core/theme/tokens.dart';
 import 'package:naraacare/features/auth/presentation/auth_errors.dart';
+import 'package:naraacare/features/hydration/hydration_providers.dart';
+import 'package:naraacare/features/nutrition/nutrition_providers.dart';
 import 'package:naraacare/features/onboarding/presentation/widgets/condition_search.dart';
 import 'package:naraacare/features/onboarding/presentation/widgets/goal_dropdown.dart';
 import 'package:naraacare/features/onboarding/presentation/widgets/measure_inputs.dart';
@@ -172,7 +174,13 @@ class _EditProfileFormState extends ConsumerState<_EditProfileForm> {
     });
     try {
       await ref.read(profileApiProvider).patchProfile(changes);
-      ref.invalidate(meProvider);
+      // Weight, height, age, sex, goal, activity or body type change today's
+      // calorie and water targets on the server: reload Home's avatars too,
+      // not just the profile (owner 2026-11-24).
+      ref
+        ..invalidate(meProvider)
+        ..invalidate(dailySummaryProvider)
+        ..invalidate(hydrationStatusProvider);
       if (!mounted) return;
       showNcToast(context, l10n.profileSaved);
       context.pop();

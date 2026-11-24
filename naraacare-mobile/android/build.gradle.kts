@@ -31,6 +31,14 @@ subprojects {
                 .getMethod("setNamespace", String::class.java)
                 .invoke(android, pkg ?: group.toString())
         }
+        // Old plugins (flutter_jailbreak_detection 1.10.0 compiles against android-33) fail their
+        // own release AAR-metadata check because the AndroidX they pull in asks for compileSdk 34+.
+        // AGP locks compileSdk before a root-script hook can raise it, so skip that check for those
+        // plugins only. The app itself (:app, compileSdk 36) still runs the check.
+        tasks.matching { it.name.startsWith("check") && it.name.endsWith("AarMetadata") }.configureEach {
+            val sdk = android.javaClass.getMethod("getCompileSdk").invoke(android) as Int?
+            if (sdk != null && sdk < 34) enabled = false
+        }
         // Plugins written for AGP 9 built-in Kotlin (e.g. screen_protector 1.5.3) skip the Kotlin
         // plugin, but android.builtInKotlin=false here, so their Kotlin would never compile.
         if (file("src/main/kotlin").exists()) {

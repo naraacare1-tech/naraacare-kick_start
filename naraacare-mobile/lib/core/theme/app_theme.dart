@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:naraacare/core/theme/nc_input_border.dart';
 import 'package:naraacare/core/theme/tokens.dart';
 import 'package:naraacare/core/theme/typography.dart';
 
@@ -112,9 +113,9 @@ abstract final class AppTheme {
       error: nc.error,
       surface: nc.surface,
     );
-    final inputBorder = OutlineInputBorder(
+    // Filled box, label inside it (not on the top edge; owner 2026-11-24).
+    final inputBorder = NcFilledInputBorder(
       borderRadius: BorderRadius.circular(NcRadius.m),
-      borderSide: BorderSide.none,
     );
     return ThemeData(
       useMaterial3: true,
@@ -140,7 +141,11 @@ abstract final class AppTheme {
         ),
         hintStyle: TextStyle(color: nc.textSecondary),
         errorStyle: TextStyle(color: nc.error),
-        contentPadding: const EdgeInsets.all(NcSpace.cardPadding),
+        // 12 dp top/bottom leaves room for the label inside the box.
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: NcSpace.cardPadding,
+          vertical: NcSpace.buttonGap,
+        ),
       ),
       filledButtonTheme: FilledButtonThemeData(
         style: FilledButton.styleFrom(

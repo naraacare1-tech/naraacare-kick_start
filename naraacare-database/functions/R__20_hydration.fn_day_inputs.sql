@@ -5,7 +5,8 @@
 --              its calc_version and base need, plus timezone and the wake / sleep times.
 --   advanced:  the advanced_hydration feature (OQ-04). STANDARD ignores temperatures and workouts
 --              (kept after a downgrade, hidden, doc 06 section 9), so they are still returned.
---   temperatures, intakes, workouts, meal_credits (logged_at of the meals with a food credit):
+--   temperatures, intakes, workouts, meals (time and kcal; meal_credits is the old 3-meal rule, kept
+--              for older API builds):
 --              non-deleted rows of that local date in time order.
 -- Errors: 42501 not the actor (-> 404), P0001 ONBOARDING_INCOMPLETE (no profile or snapshot yet).
 -- Created as api_definer, which owns every API function (doc 05 section 7); LOCAL = this script only.
@@ -59,6 +60,19 @@ BEGIN
         'calc_version', v_snapshot.calc_version,
         'inputs', v_snapshot.inputs,
         'base_water_need_ml', v_snapshot.base_water_need_ml,
+        -- Food water = 0.20 x daily need x min(1, kcal logged / base target) (owner 2026-11-24,
+        -- 2026-11 MVP doc hydration step 6): the base target without workout kcal, and every meal's kcal.
+        'base_target_kcal', v_snapshot.base_target_kcal,
+        'meals', coalesce((
+            SELECT jsonb_agg(jsonb_build_object('at', m.logged_at, 'kcal', coalesce(k.kcal, 0))
+                ORDER BY m.logged_at, m.id)
+            FROM nutrition.meal AS m
+            LEFT JOIN LATERAL (
+                SELECT sum(i.calories_kcal) AS kcal FROM nutrition.meal_item AS i
+                WHERE i.meal_id = m.id AND i.meal_logged_at = m.logged_at AND i.deleted_at IS NULL
+            ) AS k ON TRUE
+            WHERE m.user_id = p_user_id AND m.local_date = p_date AND m.deleted_at IS NULL
+        ), '[]'::jsonb),
         'temperatures', coalesce((
             SELECT jsonb_agg(jsonb_build_object('c', t.temperature_c, 'from', t.effective_from)
                 ORDER BY t.effective_from, t.id)

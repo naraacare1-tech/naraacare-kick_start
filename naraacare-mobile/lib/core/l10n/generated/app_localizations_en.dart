@@ -1719,6 +1719,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get sleepSaved => 'Sleep saved';
 
   @override
+  String get badgeSaved => 'Saved';
+
+  @override
+  String get badgeSyncsLater => 'Syncs when online';
+
+  @override
   String get sleepWakeAfterStart => 'Wake-up time must be after bedtime.';
 
   @override

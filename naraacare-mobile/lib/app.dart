@@ -3,11 +3,11 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:naraacare/core/config/providers.dart';
 import 'package:naraacare/core/l10n/generated/app_localizations.dart';
 import 'package:naraacare/core/providers.dart';
 import 'package:naraacare/core/session/auth_controller.dart';
 import 'package:naraacare/core/theme/app_theme.dart';
+import 'package:naraacare/core/theme/responsive.dart';
 import 'package:naraacare/core/theme/tokens.dart';
 import 'package:naraacare/shared/widgets/app_switcher_privacy.dart';
 import 'package:naraacare/shared/widgets/biometric_lock.dart';
@@ -21,7 +21,6 @@ class NaraaCareApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final config = ref.watch(appConfigProvider);
     return MaterialApp.router(
       onGenerateTitle: (context) => AppLocalizations.of(context).appName,
       debugShowCheckedModeBanner: false,
@@ -36,11 +35,16 @@ class NaraaCareApp extends ConsumerWidget {
       supportedLocales: AppLocalizations.supportedLocales,
       builder: (context, child) {
         final media = MediaQuery.of(context);
+        // The user's text size (dynamic type, up to 130 %, doc 02 section
+        // 1.4) times the screen scale (smaller on small phones, larger on big
+        // ones; owner 2026-11-24).
+        final userScale = media.textScaler
+            .clamp(maxScaleFactor: NcSize.maxTextScale)
+            .scale(1);
         Widget app = MediaQuery(
-          // Dynamic type up to 130 % (doc 02 section 1.4).
           data: media.copyWith(
-            textScaler: media.textScaler.clamp(
-              maxScaleFactor: NcSize.maxTextScale,
+            textScaler: TextScaler.linear(
+              userScale * textScreenScaleFor(media.size),
             ),
           ),
           child: Column(
@@ -62,13 +66,9 @@ class NaraaCareApp extends ConsumerWidget {
           authenticator: ref.watch(authenticatorProvider),
           child: app,
         );
-        app = AppSwitcherPrivacy(child: app);
-        if (config.isProduction) return app;
-        return Banner(
-          message: config.flavor.name.toUpperCase(),
-          location: BannerLocation.topEnd,
-          child: app,
-        );
+        // No flavor ribbon (owner 2026-11-20): dev/staging builds look like
+        // production (the launcher name still says "NaraaCare Dev").
+        return AppSwitcherPrivacy(child: app);
       },
     );
   }

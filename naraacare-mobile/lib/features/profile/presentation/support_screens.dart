@@ -9,6 +9,7 @@ import 'package:naraacare/core/errors/api_error.dart';
 import 'package:naraacare/core/l10n/generated/app_localizations.dart';
 import 'package:naraacare/core/routing/routes.dart';
 import 'package:naraacare/core/security/input_validators.dart';
+import 'package:naraacare/core/security/system_prompt.dart';
 import 'package:naraacare/core/theme/app_theme.dart';
 import 'package:naraacare/core/theme/tokens.dart';
 import 'package:naraacare/features/auth/presentation/auth_errors.dart';
@@ -302,7 +303,9 @@ class _ProblemState extends ConsumerState<ReportProblemScreen> {
 
   Future<void> _pick() async {
     final l10n = AppLocalizations.of(context);
-    final file = await ImagePicker().pickImage(source: ImageSource.gallery);
+    final file = await SystemPrompt.guard(
+      () => ImagePicker().pickImage(source: ImageSource.gallery),
+    );
     if (file == null) return;
     final bytes = await file.readAsBytes();
     final lower = file.name.toLowerCase();

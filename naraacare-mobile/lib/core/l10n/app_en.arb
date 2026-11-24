@@ -857,6 +857,8 @@
   "addNightWaking": "Add night waking",
   "saveSleep": "Save sleep",
   "sleepSaved": "Sleep saved",
+  "badgeSaved": "Saved",
+  "badgeSyncsLater": "Syncs when online",
   "sleepWakeAfterStart": "Wake-up time must be after bedtime.",
   "sleepTooLong": "A sleep entry can be at most 16 hours.",
   "sleepInFuture": "Wake-up time can't be in the future.",

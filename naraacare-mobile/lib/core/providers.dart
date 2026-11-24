@@ -18,6 +18,7 @@ import 'package:naraacare/core/sync/conflict_resolver.dart';
 import 'package:naraacare/core/sync/outbox.dart';
 import 'package:naraacare/core/sync/sync_engine.dart';
 import 'package:naraacare/core/sync/sync_pull.dart';
+import 'package:naraacare/core/utils/logger.dart';
 import 'package:naraacare/features/notifications/data/local_reminders.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
@@ -149,8 +150,16 @@ final authControllerProvider = Provider<AuthController>((ref) {
     session: ref.watch(sessionStoreProvider),
     api: ref.watch(apiClientProvider),
     wipeLocalData: () async {
-      // Nothing of the previous user keeps ringing after sign-out.
-      await ref.read(localRemindersProvider).clear();
+      // Nothing of the previous user keeps ringing after sign-out. Each step
+      // runs even if the other fails: a reminders error must never leave the
+      // previous user's health data on the phone.
+      try {
+        await ref.read(localRemindersProvider).clear();
+      } on Object catch (e) {
+        log.warning('local_reminders_clear_failed', {
+          'type': e.runtimeType.toString(),
+        });
+      }
       await wipeLocalUserData(ref.read(databaseProvider));
     },
     onSignedOut: ref.read(restartAppProvider),

@@ -16,6 +16,8 @@ from decimal import Decimal
 from typing import Any
 from zoneinfo import ZoneInfo
 
+import structlog
+
 from app.core.error_catalogue import ErrorCode
 from app.core.exceptions import AppError
 from app.core.security.authz import Principal
@@ -27,6 +29,8 @@ from app.domain.nutrition import calculator as nutrition
 from app.domain.reference import ReferenceCache
 from app.repositories import privacy_repo, profile_repo
 from app.repositories.base import Database, DbSession
+
+log = structlog.get_logger(__name__)
 
 # API field -> profile column / procedure parameter
 COLUMN = {
@@ -103,6 +107,47 @@ class ProfileService:
         if row is None:
             raise AppError(ErrorCode.NOT_FOUND)
         return self.unpack(row), entitlement
+
+    async def refresh_outdated_targets(self, principal: Principal, d: ProfileRow) -> bool:
+        """Recompute TODAY's targets once when they come from an older calculation version.
+
+        Owner 2026-11-24 moved to the 2026-11 MVP formulas (calc_version 2026.2). Without this, an
+        existing user would keep the old targets until they edited their profile. Called on
+        GET /me (every app start), so each user moves over on their next visit; past days keep their
+        snapshots. A profile whose goal is no longer allowed keeps its targets (the next edit
+        resolves it). Never raises: GET /me must not fail because of it. True when it recomputed.
+        """
+        if d.row["onboarding_completed_at"] is None:
+            return False
+        ctx = await self.reference.calc_context()
+
+        async def work(s: DbSession) -> bool:
+            latest = await profile_repo.latest_targets(s, principal.user_id)
+            if latest is None or latest["calc_version"] == ctx.calc_version:
+                return False
+            row = await profile_repo.get_profile(s, principal.user_id)
+            if row is None:
+                return False
+            today = local_today(row["timezone"])
+            try:
+                inputs, t = self._compute(ctx, row, today)
+            except AppError:
+                return False
+            # No profile field changes; the snapshot replaces today's targets and refreshes today's
+            # nutrition summary (app.pr_update_profile).
+            await profile_repo.update_profile(
+                s, principal.user_id, {}, targets_domain.snapshot(inputs, t, ctx)
+            )
+            return True
+
+        try:
+            refreshed = await self.db.run(work, user_id=principal.user_id)
+        except Exception as exc:  # GET /me must still answer
+            log.warning("targets_refresh_failed", error=type(exc).__name__)
+            return False
+        if refreshed:
+            log.info("targets_refreshed", calc_version=ctx.calc_version)
+        return refreshed
 
     @staticmethod
     def profile_out(d: ProfileRow, today: date | None = None) -> dict[str, Any]:

@@ -19,6 +19,7 @@ import 'package:naraacare/shared/widgets/nc_chip.dart';
 import 'package:naraacare/shared/widgets/nc_error_banner.dart';
 import 'package:naraacare/shared/widgets/nc_text_field.dart';
 import 'package:naraacare/shared/widgets/nc_toast.dart';
+import 'package:naraacare/shared/widgets/nc_update_badge.dart';
 
 /// N3 "Nutrition Update" (Add Meal): search (debounced 300 ms) with
 /// Hinglish aliases, recent food chips, the items with quantity stepper and
@@ -360,7 +361,15 @@ class _SaveMealSheetState extends ConsumerState<_SaveMealSheet> {
         ..invalidate(recentMealsProvider)
         ..read(mealDraftProvider.notifier).clear();
       if (!mounted) return;
-      showNcToast(context, result.queued ? l10n.mealQueued : l10n.mealSaved);
+      // Shown beside the avatar on Home (where this flow ends), not as a
+      // toast over the button.
+      ref
+          .read(avatarUpdatesProvider.notifier)
+          .post(
+            UpdateTracker.food,
+            result.queued ? l10n.badgeSaved : l10n.mealSaved,
+            offline: result.queued,
+          );
       Navigator.of(context).pop();
       context.go(Routes.home);
     } on ApiError catch (e) {

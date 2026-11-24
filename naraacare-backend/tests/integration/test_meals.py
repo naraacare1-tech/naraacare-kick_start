@@ -138,9 +138,9 @@ def test_apple_example_summary_and_avatar(flow: Flow) -> None:
     assert (daily["calories"], daily["meal_count"], daily["meal_limit"]) == (78, 1, 4)
     assert Decimal(str(nutrient(daily, "carbohydrates"))) == Decimal(21)
     assert daily["locked_nutrients_count"] == 11
-    assert daily["target_kcal"] == 2214
-    assert body["avatar"] == {"fill_pct": "3.5", "state": "fueling"} or (
-        Decimal(str(body["avatar"]["fill_pct"])) == Decimal("3.5")
+    assert daily["target_kcal"] == 3104  # doc example 1 with multiplier 1.55 (2026-11 MVP doc)
+    assert body["avatar"] == {"fill_pct": "2.5", "state": "fueling"} or (
+        Decimal(str(body["avatar"]["fill_pct"])) == Decimal("2.5")
         and body["avatar"]["state"] == "fueling"
     )
 
@@ -156,10 +156,10 @@ async def test_star_daily_summary_has_vitamin_c(flow: Flow) -> None:
 async def test_doc_example_1_avatar_is_energized_at_50_percent(flow: Flow) -> None:
     user = User(flow)
     food_id = uuid.uuid4()
-    # 738 kcal / 100 g x 150 g (medium piece) = 1107 kcal = half of 2214.
+    # 1034.667 kcal / 100 g x 150 g (medium piece) = 1552 kcal = half of 3104 (doc example 1).
     await sql(
         "INSERT INTO nutrition.food_item (id, name, category_code, basis, is_cooked, source_ref,"
-        " calories_kcal) VALUES ($1, $2, 'whole_fruit', 'g', false, 'pytest', 738)",
+        " calories_kcal) VALUES ($1, $2, 'whole_fruit', 'g', false, 'pytest', 1034.667)",
         food_id,
         f"Example food {food_id.hex[:6]}",
     )

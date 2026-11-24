@@ -72,10 +72,10 @@ def test_full_onboarding_preview_equals_completed_targets(app_factory: AppFactor
 
     preview = flow.client.post("/api/v1/calculations/preview", headers=headers).json()
     assert preview["targets"] == {  # doc 06 example 1
-        "kcal": 2214,
-        "carbs_g": 304,
-        "fat_g": 62,
-        "protein_g": 111,
+        "kcal": 3104,
+        "carbs_g": 427,
+        "fat_g": 86,
+        "protein_g": 155,
         "safety_override": False,
     }
     assert Decimal(str(preview["bmi"])) == Decimal("21.6") and preview["bmi_category"] == "normal"

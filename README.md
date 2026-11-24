@@ -73,4 +73,6 @@ Documentation and session-wise implementation plan for **NaraaCare**, an avatar-
 ## Setup guides
 
 - [Hosting setup (PDF)](setup/hosting-setup.pdf): accounts and services to connect for production, where every setting comes from, example backend / database / mobile env files, launch order.
+- [Free hosting on Oracle Cloud (PDF)](setup/hosting-oracle-free.pdf): step-by-step guide to run the backend, database and worker on an Oracle Always Free server at `api.naraacare.com` (source: [hosting-oracle-free.html](setup/hosting-oracle-free.html)).
+- [Hosting on this Windows PC](setup/hosting-windows-pc.md): run the API, worker and nightly backup on this PC at boot and reach it at `https://api.naraacare.com` through Cloudflare Tunnel (testing only; scripts in `naraacare-backend/deploy/windows/`).
 - Local setup: [database](setup/database-setup.md), [frontend](setup/frontend-setup.md), [email OTP](setup/email-otp-setup.md), [STAR test user](setup/star-user-setup.md).

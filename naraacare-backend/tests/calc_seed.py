@@ -1,4 +1,4 @@
-"""A copy of the calc_version 2026.1 reference data (naraacare-database seed/R__10, R__11) for unit
+"""A copy of the calc_version 2026.2 reference data (naraacare-database seed/R__10, R__11) for unit
 tests of the calculators. ``tests/integration/test_profile_flow.py`` compares it with
 ``ref.fn_calc_context()`` from a real database, so the two cannot drift apart unnoticed."""
 
@@ -10,7 +10,7 @@ from typing import Any
 from app.domain.common.calc_context import CalcContext
 
 SEED: dict[str, Any] = {
-    "calc_version": "2026.1",
+    "calc_version": "2026.2",
     "constants": {
         "nutr.bmr.weight_coeff": 10,
         "nutr.bmr.height_coeff": 6.25,
@@ -65,14 +65,23 @@ SEED: dict[str, Any] = {
         "hyd.state.day_ending_soon_hours": 3,
     },
     "activity_levels": {
-        "sedentary": {"tdee_multiplier": 0.75, "activity_number": 1.55, "athlete_bonus_ml": 0},
-        "lightly_active": {"tdee_multiplier": 1.00, "activity_number": 1.55, "athlete_bonus_ml": 0},
+        # 2026-11 MVP document (owner 2026-11-24): standard TDEE multipliers, four water levels.
+        "sedentary": {"tdee_multiplier": 1.2, "activity_number": 1.55, "athlete_bonus_ml": 0},
+        "lightly_active": {
+            "tdee_multiplier": 1.375,
+            "activity_number": 1.70,
+            "athlete_bonus_ml": 0,
+        },
         "moderately_active": {
-            "tdee_multiplier": 1.02,
+            "tdee_multiplier": 1.55,
             "activity_number": 1.85,
             "athlete_bonus_ml": 0,
         },
-        "very_active": {"tdee_multiplier": 1.07, "activity_number": 1.85, "athlete_bonus_ml": 0},
+        "very_active": {
+            "tdee_multiplier": 1.725,
+            "activity_number": 2.00,
+            "athlete_bonus_ml": 699.7,
+        },
     },
     "body_types": {"ectomorph": 0.97, "mesomorph": 1.00, "endomorph": 1.03},
     "weight_goals": {
