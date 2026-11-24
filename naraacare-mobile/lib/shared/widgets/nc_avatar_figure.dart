@@ -3,6 +3,7 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:naraacare/core/theme/app_theme.dart';
+import 'package:naraacare/core/theme/responsive.dart';
 import 'package:naraacare/core/theme/tokens.dart';
 
 /// Outfit colour of the avatar figure (Figma "Home/Water", "Home/Nutrition",
@@ -48,19 +49,28 @@ class NcAvatarFigure extends StatelessWidget {
     this.height,
     this.fill,
     this.semanticLabel,
+    this.scaleWithScreen = true,
   });
 
   final String? sex;
   final AvatarLook look;
+
+  /// Height in Figma dp; scaled to the phone (see responsive.dart) unless
+  /// [scaleWithScreen] is false (the caller already fitted it to the space).
   final double? height;
   final double? fill;
   final String? semanticLabel;
+  final bool scaleWithScreen;
 
   static String asset(String? sex, AvatarLook look) =>
       'assets/avatars/${sex == 'female' ? 'female' : 'male'}_${look.name}.webp';
 
   @override
   Widget build(BuildContext context) {
+    final base = this.height;
+    final height = base != null && scaleWithScreen
+        ? context.scaled(base)
+        : base;
     final level = fill;
     if (level == null) {
       return Image.asset(
@@ -351,6 +361,7 @@ class NcAvatarStage extends StatefulWidget {
     this.fill,
     this.actions = const [],
     this.onShare,
+    this.sideBadge,
   });
 
   static const double height = 440;
@@ -361,6 +372,10 @@ class NcAvatarStage extends StatefulWidget {
   final double? fill;
   final List<NcAvatarAction> actions;
   final VoidCallback? onShare;
+
+  /// Shown on the right beside the legs, where the figure is narrow (Home:
+  /// the "water added / meal saved / sleep saved" badge, owner 2026-11-24).
+  final Widget? sideBadge;
 
   /// Width / height of the figure art (assets/avatars, OQ-56).
   static double aspect(String? sex) =>
@@ -374,6 +389,14 @@ class _NcAvatarStageState extends State<NcAvatarStage> {
   /// How far the card may reach over the figure's background margin.
   static const double _cardOverlap = 24;
   static const double _cardMinWidth = 132;
+
+  /// The side badge starts this far down the stage (thigh level, below the
+  /// hands) and may reach this far into the figure box (the legs leave the
+  /// outer part of it empty).
+  static const double _badgeTop = 0.56;
+  static const double _badgeInset = 0.22;
+  static const double _badgeMinWidth = 88;
+  static const double _badgeMaxWidth = 140;
 
   @override
   Widget build(BuildContext context) {
@@ -452,6 +475,7 @@ class _NcAvatarStageState extends State<NcAvatarStage> {
                             look: widget.look,
                             height: height,
                             fill: widget.fill,
+                            scaleWithScreen: false,
                           ),
                         ),
                         Positioned(
@@ -470,6 +494,15 @@ class _NcAvatarStageState extends State<NcAvatarStage> {
                 top: NcSpace.cardGap,
                 child: Column(children: buttons),
               ),
+              if (widget.sideBadge case final badge?)
+                Positioned(
+                  right: 0,
+                  top: height * _badgeTop,
+                  width:
+                      (width - (free + shift + figureWidth * (1 - _badgeInset)))
+                          .clamp(_badgeMinWidth, _badgeMaxWidth),
+                  child: badge,
+                ),
             ],
           );
         },

@@ -18,6 +18,7 @@ import 'package:naraacare/shared/widgets/nc_chip.dart';
 import 'package:naraacare/shared/widgets/nc_star_badge.dart';
 import 'package:naraacare/shared/widgets/nc_text_field.dart';
 import 'package:naraacare/shared/widgets/nc_toast.dart';
+import 'package:naraacare/shared/widgets/nc_update_badge.dart';
 import 'package:naraacare/shared/widgets/nc_wheel_picker.dart';
 import 'package:uuid/uuid.dart';
 
@@ -137,10 +138,14 @@ class _AddIntakeState extends ConsumerState<_AddIntake> {
       if (!result.queued) ref.invalidate(hydrationStatusProvider);
       ref.invalidate(todaysIntakesProvider);
       Navigator.of(context).pop();
-      showNcToast(
-        context,
-        result.queued ? l10n.savedOffline : l10n.intakeAdded,
-      );
+      // Shown beside the avatar on Home, not as a toast over the button.
+      ref
+          .read(avatarUpdatesProvider.notifier)
+          .post(
+            UpdateTracker.water,
+            result.queued ? l10n.badgeSaved : l10n.intakeAdded,
+            offline: result.queued,
+          );
     } on ApiError catch (e) {
       if (!mounted) return;
       if (e.code == 'UPGRADE_REQUIRED') {

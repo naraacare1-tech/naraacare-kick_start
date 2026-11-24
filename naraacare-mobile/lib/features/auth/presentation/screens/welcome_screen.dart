@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:naraacare/core/l10n/generated/app_localizations.dart';
 import 'package:naraacare/core/routing/routes.dart';
 import 'package:naraacare/core/theme/app_theme.dart';
+import 'package:naraacare/core/theme/responsive.dart';
 import 'package:naraacare/core/theme/tokens.dart';
 import 'package:naraacare/features/auth/presentation/widgets/auth_scaffold.dart';
 import 'package:naraacare/shared/widgets/nc_button.dart';
@@ -32,7 +33,7 @@ class WelcomeScreen extends StatelessWidget {
                     const SizedBox(height: NcSpace.sectionGap),
                     Image.asset(
                       'assets/brand/logo.png',
-                      height: 64,
+                      height: context.scaled(64),
                       excludeFromSemantics: true,
                     ),
                     const Spacer(),

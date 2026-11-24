@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:naraacare/core/l10n/generated/app_localizations.dart';
 import 'package:naraacare/core/security/screen_guard.dart';
 import 'package:naraacare/core/theme/app_theme.dart';
+import 'package:naraacare/core/theme/responsive.dart';
 import 'package:naraacare/core/theme/tokens.dart';
 
 /// Layout shared by the auth screens (Figma Login Process): logo on top,
@@ -43,7 +44,7 @@ class AuthScaffold extends StatelessWidget {
               Center(
                 child: Image.asset(
                   'assets/brand/logo.png',
-                  height: NcSize.buttonHeight,
+                  height: context.scaled(NcSize.buttonHeight),
                   excludeFromSemantics: true,
                 ),
               ),

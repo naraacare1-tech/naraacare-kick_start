@@ -3116,6 +3116,18 @@ abstract class AppLocalizations {
   /// **'Sleep saved'**
   String get sleepSaved;
 
+  /// No description provided for @badgeSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved'**
+  String get badgeSaved;
+
+  /// No description provided for @badgeSyncsLater.
+  ///
+  /// In en, this message translates to:
+  /// **'Syncs when online'**
+  String get badgeSyncsLater;
+
   /// No description provided for @sleepWakeAfterStart.
   ///
   /// In en, this message translates to:

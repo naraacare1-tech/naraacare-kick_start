@@ -25,6 +25,7 @@ import 'package:naraacare/shared/widgets/nc_avatar_menu.dart';
 import 'package:naraacare/shared/widgets/nc_bottom_sheet.dart';
 import 'package:naraacare/shared/widgets/nc_star_badge.dart';
 import 'package:naraacare/shared/widgets/nc_toast.dart';
+import 'package:naraacare/shared/widgets/nc_update_badge.dart';
 import 'package:naraacare/shared/widgets/nc_wheel_picker.dart';
 
 /// "7 h 30 m".
@@ -68,6 +69,7 @@ class SleepAvatarCard extends ConsumerWidget {
             look: AvatarLook.neutral,
             fill: data == null ? 0 : (data.scorePct / 100).clamp(0, 1),
             onShare: () => showAvatarShareSheet(context, AvatarType.sleep),
+            sideBadge: const NcUpdateBadge(tracker: UpdateTracker.sleep),
             actions: [
               NcAvatarAction(
                 icon: Icons.more_vert,
@@ -362,7 +364,19 @@ class _UpdateSleepScreenState extends ConsumerState<UpdateSleepScreen> {
       }
       if (!mounted) return;
       ref.invalidate(sleepSummaryProvider);
-      showNcToast(context, queued ? l10n.savedOffline : l10n.sleepSaved);
+      if (e == null) {
+        // A new entry returns to Home: shown beside the avatar there.
+        ref
+            .read(avatarUpdatesProvider.notifier)
+            .post(
+              UpdateTracker.sleep,
+              queued ? l10n.badgeSaved : l10n.sleepSaved,
+              offline: queued,
+            );
+      } else {
+        // An edit returns to Today's Sleep, which covers the avatar.
+        showNcToast(context, queued ? l10n.savedOffline : l10n.sleepSaved);
+      }
       context.pop();
     } on ApiError catch (err) {
       if (!mounted) return;

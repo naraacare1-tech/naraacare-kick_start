@@ -8,7 +8,6 @@ import 'package:naraacare/core/errors/api_error.dart';
 import 'package:naraacare/core/l10n/generated/app_localizations.dart';
 import 'package:naraacare/core/routing/routes.dart';
 import 'package:naraacare/core/theme/app_theme.dart';
-import 'package:naraacare/core/theme/tokens.dart';
 import 'package:naraacare/features/auth/presentation/auth_errors.dart';
 import 'package:naraacare/features/care_circle/data/circle_data.dart'
     show AvatarType;
@@ -21,6 +20,7 @@ import 'package:naraacare/shared/widgets/nc_avatar_card.dart';
 import 'package:naraacare/shared/widgets/nc_avatar_figure.dart';
 import 'package:naraacare/shared/widgets/nc_avatar_menu.dart';
 import 'package:naraacare/shared/widgets/nc_toast.dart';
+import 'package:naraacare/shared/widgets/nc_update_badge.dart';
 
 /// "2.1 L" with one decimal (doc 06 section 3: litres shown with 1 decimal).
 String litres(int ml) => (ml / 1000).toStringAsFixed(1);
@@ -88,12 +88,15 @@ class _HydrationAvatarCardState extends ConsumerState<HydrationAvatarCard> {
       if (!mounted) return;
       if (!result.queued) ref.invalidate(hydrationStatusProvider);
       ref.invalidate(todaysIntakesProvider);
-      showNcToast(
-        context,
-        up
-            ? l10n.swipeAdded(catalogue.quickAddMl)
-            : l10n.swipeRemoved(catalogue.quickAddMl),
-      );
+      ref
+          .read(avatarUpdatesProvider.notifier)
+          .post(
+            UpdateTracker.water,
+            up
+                ? l10n.swipeAdded(catalogue.quickAddMl)
+                : l10n.swipeRemoved(catalogue.quickAddMl),
+            offline: result.queued,
+          );
     } on ApiError catch (e) {
       if (!mounted) return;
       showNcToast(
@@ -112,7 +115,6 @@ class _HydrationAvatarCardState extends ConsumerState<HydrationAvatarCard> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     final nc = context.nc;
-    final text = Theme.of(context).textTheme;
     final status = ref.watch(shownHydrationProvider);
     final sex = ref.watch(meProvider).value?.profile.biologicalSex;
     final data = status.value;
@@ -143,6 +145,12 @@ class _HydrationAvatarCardState extends ConsumerState<HydrationAvatarCard> {
               fill: data == null ? 0 : goalFill(data),
               onShare: () =>
                   showAvatarShareSheet(context, AvatarType.hydration),
+              sideBadge: NcUpdateBadge(
+                tracker: UpdateTracker.water,
+                caution: (data?.overhydrationCaution ?? false)
+                    ? l10n.overhydrationCaution
+                    : null,
+              ),
               actions: [
                 NcAvatarAction(
                   icon: Icons.more_vert,
@@ -182,38 +190,10 @@ class _HydrationAvatarCardState extends ConsumerState<HydrationAvatarCard> {
             ),
           ),
         ),
-        if (data != null) ...[
-          if (data.state == HydrationState.dayEndingSoon)
-            _Note(text: l10n.dayEndingSoon, color: nc.primary),
-          if (data.overhydrationCaution)
-            _Note(text: l10n.overhydrationCaution, color: nc.error),
-          if (data.temperatureStale)
-            _Note(text: l10n.temperatureNotUpdated, color: nc.textSecondary),
-          Padding(
-            padding: const EdgeInsets.only(top: NcSpace.xs),
-            child: Text(
-              l10n.leftToDrink(litres(data.leftToDrinkMl)),
-              style: text.bodySmall?.copyWith(color: nc.textSecondary),
-            ),
-          ),
-        ],
+        // No text under the avatar (owner 2026-11-24): "left to drink" is in
+        // the details sheet (tap the avatar); the over-hydration safety note
+        // stays visible as the side badge.
       ],
     );
   }
-}
-
-class _Note extends StatelessWidget {
-  const new({required this.text, required this.color});
-
-  final String text;
-  final Color color;
-
-  @override
-  Widget build(BuildContext context) => Padding(
-    padding: const EdgeInsets.only(top: NcSpace.xs),
-    child: Text(
-      text,
-      style: Theme.of(context).textTheme.bodySmall?.copyWith(color: color),
-    ),
-  );
 }
