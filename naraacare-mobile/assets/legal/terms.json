@@ -1,0 +1,2384 @@
+{
+ "title": "NaraaCare Terms and Conditions",
+ "blocks": [
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "Important: NaraaCare is a health-tracking app, not a medical app. Please check with your doctor ",
+     "b": true
+    },
+    {
+     "t": "before changing your diet, fluid intake, sleep or exercise, and for any health concern. NaraaCare does not diagnose or treat any condition, and Rin is a wellness assistant, not a health advisor.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "Effective date: 1 December 2026",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "heading",
+   "text": "1. About these Terms"
+  },
+  {
+   "type": "summary",
+   "spans": [
+    {
+     "t": "In short: these Terms are a contract between you and us. By creating an account or using NaraaCare, you agree to them. Please read them, along with our Privacy Policy.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "1.1 These Terms and Conditions (\"",
+     "b": false
+    },
+    {
+     "t": "Terms",
+     "b": true
+    },
+    {
+     "t": "\") govern your use of the NaraaCare mobile application, the website naraacare.com and related services (together, the \"",
+     "b": false
+    },
+    {
+     "t": "Service",
+     "b": true
+    },
+    {
+     "t": "\"). The Service is provided by NaraaCare, a business founded and operated by Sahil Pardake, which is in the process of being incorporated, with its address at Pardake Residence, Jawar Colony, near Tiwari Layout, Pulgaon, Maharashtra 442302, India (\"",
+     "b": false
+    },
+    {
+     "t": "NaraaCare",
+     "b": true
+    },
+    {
+     "t": "\", \"",
+     "b": false
+    },
+    {
+     "t": "we",
+     "b": true
+    },
+    {
+     "t": "\", \"",
+     "b": false
+    },
+    {
+     "t": "us",
+     "b": true
+    },
+    {
+     "t": "\" or \"",
+     "b": false
+    },
+    {
+     "t": "our",
+     "b": true
+    },
+    {
+     "t": "\"). When NaraaCare is incorporated, the company will take over the Service and these Terms; we will tell you when this happens, and your rights under these Terms will not be reduced. \"",
+     "b": false
+    },
+    {
+     "t": "You",
+     "b": true
+    },
+    {
+     "t": "\" means the person using the Service.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "1.2 These Terms are an electronic record under the Information Technology Act, 2000 and the rules made under it. They do not need a physical or digital signature. You accept them by ticking the box at sign-up, or by using the Service.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "1.3 These Terms include, by reference, our Privacy Policy, our Community Guidelines (set out in Section 9) and any feature-specific terms we show you in the app (for example, offer terms). If a feature-specific term conflicts with these Terms, the feature-specific term applies to that feature.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "1.4 If you do not agree with these Terms, please do not use the Service.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "heading",
+   "text": "2. Eligibility and your account"
+  },
+  {
+   "type": "summary",
+   "spans": [
+    {
+     "t": "In short: NaraaCare is for adults aged 18 and above. One account per person. Keep your login safe and your details accurate.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "2.1 ",
+     "b": false
+    },
+    {
+     "t": "Age. ",
+     "b": true
+    },
+    {
+     "t": "You must be at least 18 years old and competent to contract under the Indian Contract Act, 1872. The Service is not designed for, and we do not knowingly collect data from, anyone under 18. If we learn that a user is under 18, we will close the account and delete its data.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "2.2 ",
+     "b": false
+    },
+    {
+     "t": "Sign-up. ",
+     "b": true
+    },
+    {
+     "t": "You can create an account with your email address and a password (verified by a one-time code sent to your email), or with Google or Apple sign-in. You agree to give accurate and complete information, including during onboarding, and to keep it updated in Profile → Settings. Your goals and estimates are calculated from this information, so inaccurate details give inaccurate results.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "2.3 ",
+     "b": false
+    },
+    {
+     "t": "One person, one account. ",
+     "b": true
+    },
+    {
+     "t": "Accounts are personal. Do not share your account, sell it, transfer it, or create an account for someone else.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "2.4 ",
+     "b": false
+    },
+    {
+     "t": "Security. ",
+     "b": true
+    },
+    {
+     "t": "You are responsible for keeping your password, email account and device secure, and for activity on your account. You may turn on the optional fingerprint or face lock on your device. Tell us immediately at support@naraacare.com if you suspect unauthorised access.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "2.5 ",
+     "b": false
+    },
+    {
+     "t": "Username. ",
+     "b": true
+    },
+    {
+     "t": "A unique username is required to use Care Circles and connections. It must not impersonate anyone, mislead, or break the rules in Section 9. You can change it once every 3 months. We may ask you to change a username that breaks these Terms.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "2.6 ",
+     "b": false
+    },
+    {
+     "t": "Fingerprint and face lock. ",
+     "b": true
+    },
+    {
+     "t": "If you turn on the optional app lock, your fingerprint or face is checked by your phone's own security system. We never receive or store your biometric data.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "heading",
+   "text": "3. NaraaCare is a health-tracking app, not a medical app"
+  },
+  {
+   "type": "summary",
+   "spans": [
+    {
+     "t": "In short: NaraaCare is a health-tracking app that helps you track water, food and sleep. It is not a medical app and does not diagnose or treat any condition. For any health decision, please check with your doctor.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "3.1 NaraaCare is a health-tracking app (general wellness software). It helps healthy adults keep track of everyday habits: hydration, nutrition and sleep. It shows these as avatars, goals, streaks and reports, and lets you share progress with people you choose.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "3.2 NaraaCare is ",
+     "b": false
+    },
+    {
+     "t": "not",
+     "b": true
+    },
+    {
+     "t": ":",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "bullet",
+   "spans": [
+    {
+     "t": "a medical device, or software intended to diagnose, treat, cure, monitor or prevent any disease or condition;",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "bullet",
+   "spans": [
+    {
+     "t": "a substitute for advice from a doctor, dietitian or other qualified professional;",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "bullet",
+   "spans": [
+    {
+     "t": "a telemedicine or emergency service. We do not connect you to doctors.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "3.3 Goals, targets, scores and estimates in the app (for example, daily water need, calorie and nutrient targets, sleep score and avatar levels) are ",
+     "b": false
+    },
+    {
+     "t": "estimates for healthy adults",
+     "b": true
+    },
+    {
+     "t": ". They come from published formulas and our own product choices, and they depend on the information you enter. They can be wrong for you.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "heading",
+   "text": "4. Your health and safety"
+  },
+  {
+   "type": "summary",
+   "spans": [
+    {
+     "t": "In short: listen to your body and your doctor first. If something feels wrong, stop and get medical help. In an emergency, call 112.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "4.1 ",
+     "b": false
+    },
+    {
+     "t": "Please check with your doctor first ",
+     "b": true
+    },
+    {
+     "t": "before changing how much you eat, drink, sleep or exercise, especially if you are pregnant or breastfeeding, have a kidney, heart, liver or metabolic condition, have or have had an eating disorder, take medicines that affect fluids or appetite, or are recovering from illness or surgery. The app's estimates are not designed for these situations. If you tell us during onboarding that you have a medical condition, we will remind you to check with your doctor; we do not change your goals or Rin's replies based on any condition.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "4.2 ",
+     "b": false
+    },
+    {
+     "t": "Use your own judgement. ",
+     "b": true
+    },
+    {
+     "t": "Do not ignore professional advice, or delay seeking it, because of anything in the app. Stop any activity, and seek help, if you feel unwell, dizzy, faint, short of breath or in pain.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "4.3 ",
+     "b": false
+    },
+    {
+     "t": "Safety limits are built in, but they are not a guarantee. ",
+     "b": true
+    },
+    {
+     "t": "For example, we keep daily calorie targets above a minimum floor, keep daily water targets between set lower and upper limits, and restrict weight-loss goals for users in a lower BMI range. These limits are general safeguards, not personal medical limits. Drinking far more water than your body needs can be harmful; follow the app's warnings and your doctor's advice.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "4.4 ",
+     "b": false
+    },
+    {
+     "t": "Food and drink data are approximate. ",
+     "b": true
+    },
+    {
+     "t": "Nutrition values, portion sizes (such as a katori or a piece), barcode results and AI estimates for custom drinks may differ from what you actually consume. Check labels where you can, especially if you have an allergy or a dietary restriction. Do not rely on the app to identify allergens.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "4.5 ",
+     "b": false
+    },
+    {
+     "t": "Emergencies. ",
+     "b": true
+    },
+    {
+     "t": "NaraaCare cannot respond to emergencies. If you or someone else is in danger, call ",
+     "b": false
+    },
+    {
+     "t": "112 ",
+     "b": true
+    },
+    {
+     "t": "(national emergency number) or ",
+     "b": false
+    },
+    {
+     "t": "108 ",
+     "b": true
+    },
+    {
+     "t": "(ambulance), or go to the nearest hospital.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "4.6 ",
+     "b": false
+    },
+    {
+     "t": "Eating concerns. ",
+     "b": true
+    },
+    {
+     "t": "NaraaCare is not designed to support very low food intake or rapid weight loss. If you are worried about your eating, your weight or your relationship with food, please talk to a doctor. You can also call Tele-MANAS, the Government of India's free mental health helpline, on ",
+     "b": false
+    },
+    {
+     "t": "14416",
+     "b": true
+    },
+    {
+     "t": ".",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "4.7 ",
+     "b": false
+    },
+    {
+     "t": "Reminders. ",
+     "b": true
+    },
+    {
+     "t": "Hydration, nutrition and sleep reminders depend on your phone's settings and may not always arrive on time. Do not rely on NaraaCare to remind you to take medicines or for any medical task.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "heading",
+   "text": "5. Rin, your wellness assistant (STAR only)"
+  },
+  {
+   "type": "summary",
+   "spans": [
+    {
+     "t": "In short: Rin is an AI wellness assistant, not a health advisor. It uses only the data you log in your avatars. It can be helpful, but it can also be wrong, and it is not a doctor. For health decisions, please check with your doctor. You control whether Rin can use your data.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "5.1 ",
+     "b": false
+    },
+    {
+     "t": "What Rin does. ",
+     "b": true
+    },
+    {
+     "t": "Rin is an AI wellness assistant available on the STAR plan. It is not a doctor, dietitian or health advisor. Rin uses only the data you log in your Hydration, Nutrition and Sleep avatars to answer general questions about hydration, food, nutrition and sleep; estimate the water content of custom drinks; help you log meals and drinks by chat; and create insights for STAR reports. Rin's replies are generated automatically by artificial intelligence. No human reviews them before you see them.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "5.2 ",
+     "b": false
+    },
+    {
+     "t": "Rin can make mistakes. ",
+     "b": true
+    },
+    {
+     "t": "AI output can be inaccurate, incomplete or out of date, and may sound more certain than it is. Rin does not diagnose, prescribe or give medical advice; for any health question, please check with your doctor. Always check meal and drink entries that Rin suggests before you add them to your avatar. Do not use Rin for symptoms, medicines or emergencies; see Section 4.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "5.3 ",
+     "b": false
+    },
+    {
+     "t": "Consent and your data. ",
+     "b": true
+    },
+    {
+     "t": "Rin works only after you give separate consent for AI processing. Rin uses only your avatar data: the drinks, meals, sleep and workouts you log, the goals and progress shown in your avatars, and the messages you send Rin. Rin does not use your name, email address, phone number, your onboarding details (including any medical condition), or any data that other Care Circle members have shared with you. We send the avatar data needed for each reply to our AI provider. Our current provider processes this data outside India, and has told us that data sent through its business API is not used to train its models. You can withdraw AI consent at any time in Settings; Rin will then stop working for you and stop using your data. Our Privacy Policy has the details.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "5.4 ",
+     "b": false
+    },
+    {
+     "t": "Usage allowance. ",
+     "b": true
+    },
+    {
+     "t": "Each STAR account has a monthly Rin usage allowance, shown in the app as a percentage bar. When it runs out, Rin pauses until the allowance resets, as shown in the app. We may change the allowance with notice. If our AI provider is unavailable, a simpler built-in version of Rin may answer instead, using only your own logged data.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "5.5 ",
+     "b": false
+    },
+    {
+     "t": "Your responsibilities. ",
+     "b": true
+    },
+    {
+     "t": "Do not use Rin to create content that is unlawful, harmful, misleading or that impersonates a real person, or to try to make it break its safety rules. Unlawful use of AI-generated content can lead to civil and criminal liability under Indian law, removal of the content, and suspension or termination of your account (see Sections 9 and 13). If you share Rin's output outside the app, make clear that it was generated by AI.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "5.6 ",
+     "b": false
+    },
+    {
+     "t": "Conversations. ",
+     "b": true
+    },
+    {
+     "t": "Your Rin conversations are stored with your account so you can search them and so Rin can respond with context. You can delete them at any time, and Rin will then no longer use them. They are also deleted with your account.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "heading",
+   "text": "6. Plans, subscriptions and payments"
+  },
+  {
+   "type": "summary",
+   "spans": [
+    {
+     "t": "In short: Standard is free. STAR is a paid subscription bought through Google Play or the App Store. It renews automatically until you cancel, and you can cancel any time in your store account.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "6.1 ",
+     "b": false
+    },
+    {
+     "t": "Plans. ",
+     "b": true
+    },
+    {
+     "t": "NaraaCare offers two plans. Features may change as described in Section 16.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "",
+     "Standard",
+     "STAR"
+    ],
+    [
+     "Price",
+     "Free",
+     "₹199 per month, or ₹1,899 per year"
+    ],
+    [
+     "Hydration",
+     "Water and basic drinks",
+     "Adds custom drinks estimated by AI"
+    ],
+    [
+     "Nutrition",
+     "Text search, 6 nutrients, up to 4 meal logs a day",
+     "Adds voice and barcode logging, 17 nutrients, up to 8 meal logs a day"
+    ],
+    [
+     "Sleep avatar",
+     "Not included",
+     "Included"
+    ],
+    [
+     "Rin AI",
+     "Not included",
+     "Included, with a usage allowance"
+    ],
+    [
+     "Reports",
+     "Monthly, hydration and nutrition",
+     "Custom date range, adds sleep and AI insights"
+    ]
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "6.2 ",
+     "b": false
+    },
+    {
+     "t": "Price and taxes. ",
+     "b": true
+    },
+    {
+     "t": "The price you pay is the one shown on the Google Play or App Store checkout screen when you buy, including applicable taxes such as GST. If we change the price of STAR, the new price applies only from your next renewal after we, or the store, give you notice. You can cancel before then.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "6.3 ",
+     "b": false
+    },
+    {
+     "t": "Buying through the app stores. ",
+     "b": true
+    },
+    {
+     "t": "STAR is sold only as an in-app purchase through Google Play Billing (Android) or Apple In-App Purchase (iOS). The store processes your payment, so we never see or store your card, UPI or bank details. Your purchase is also subject to the store's own terms.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "6.4 ",
+     "b": false
+    },
+    {
+     "t": "Automatic renewal. ",
+     "b": true
+    },
+    {
+     "t": "Your STAR subscription renews automatically at the end of each monthly or yearly period, and the store charges your chosen payment method, unless you cancel before the renewal date. The renewal date is shown in Settings → My Subscriptions and in your store account.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "6.5 ",
+     "b": false
+    },
+    {
+     "t": "How to cancel. ",
+     "b": true
+    },
+    {
+     "t": "You can cancel any time in a few taps:",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "bullet",
+   "spans": [
+    {
+     "t": "Android: ",
+     "b": true
+    },
+    {
+     "t": "Google Play app → Profile → Payments & subscriptions → Subscriptions → NaraaCare → Cancel.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "bullet",
+   "spans": [
+    {
+     "t": "iPhone: ",
+     "b": true
+    },
+    {
+     "t": "Settings → your name → Subscriptions → NaraaCare → Cancel Subscription.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "We link to these screens from Settings → My Subscriptions. Deleting the app, or your NaraaCare account, does not cancel the store subscription on its own.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "6.6 ",
+     "b": false
+    },
+    {
+     "t": "After you cancel. ",
+     "b": true
+    },
+    {
+     "t": "You keep STAR until the end of the period you have paid for. Your account then moves to Standard. Data you created on STAR (such as sleep history and AI report insights) stays in your account and appears in reports for the period when you were on STAR. You get full access back if you subscribe again. If you shared your Sleep avatar in a Care Circle, other members will no longer see it.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "6.7 ",
+     "b": false
+    },
+    {
+     "t": "Refunds. ",
+     "b": true
+    },
+    {
+     "t": "Because the app stores take the payment, refund requests are handled by Google Play or Apple under their refund policies. If you are unable to get help from the store, contact us at support@naraacare.com and we will help where we can. Nothing in these Terms limits any refund right you have under the Consumer Protection Act, 2019.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "6.8 ",
+     "b": false
+    },
+    {
+     "t": "Invoices. ",
+     "b": true
+    },
+    {
+     "t": "The app store issues receipts for your purchases. You can see your plan history in Settings → My Subscriptions.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "6.9 ",
+     "b": false
+    },
+    {
+     "t": "Free trials and offers. ",
+     "b": true
+    },
+    {
+     "t": "If we offer a free trial, introductory price or promotion, we will show its terms clearly before you sign up, including when paid billing starts and how to cancel before then. Promo codes cannot be exchanged for cash, cannot be combined unless we say so, and may expire or be withdrawn if misused.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "6.10 ",
+     "b": false
+    },
+    {
+     "t": "Failed payments. ",
+     "b": true
+    },
+    {
+     "t": "If the app store cannot collect a renewal payment, it may retry for a short period. If payment still fails, your account moves to Standard until payment succeeds.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "6.11 ",
+     "b": false
+    },
+    {
+     "t": "Pricing errors. ",
+     "b": true
+    },
+    {
+     "t": "If a price is shown wrongly because of an obvious error, we may correct it. If you have already been charged the wrong price, we will tell you and help you get a refund of any overcharge through the app store, or offer you the option to cancel.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "heading",
+   "text": "7. Care Circles and connections"
+  },
+  {
+   "type": "summary",
+   "spans": [
+    {
+     "t": "In short: you decide what you share and with whom. What you share in a circle is visible to its members. Be kind, and respect other people's privacy.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "7.1 ",
+     "b": false
+    },
+    {
+     "t": "What you share. ",
+     "b": true
+    },
+    {
+     "t": "When you create or join a Care Circle, you choose which avatars (Hydration, Nutrition and, on STAR, Sleep) to share. Members of that circle can see your username, profile avatar, the avatars you shared (a shared Sleep avatar is visible only to members on STAR) and updates to them, and the messages you post. You can change what you share, or leave a circle, at any time. Once you stop sharing, members no longer see that avatar, but they may already have seen earlier updates.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "7.2 ",
+     "b": false
+    },
+    {
+     "t": "Circles. ",
+     "b": true
+    },
+    {
+     "t": "A circle can have up to 50 members, and you can join as many circles as you like. The person who creates a circle is its admin and can invite, manage and remove members, and change the circle's name and wallpaper. Invite links let people outside NaraaCare join after signing up; share them only with people you trust.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "7.3 ",
+     "b": false
+    },
+    {
+     "t": "Connections. ",
+     "b": true
+    },
+    {
+     "t": "You can find people by username, send and accept connection requests, and block anyone. Blocked users cannot contact you or add you to circles.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "7.4 ",
+     "b": false
+    },
+    {
+     "t": "Other people's information. ",
+     "b": true
+    },
+    {
+     "t": "Only share information about yourself. Do not post, screenshot or forward another member's health information outside the circle without their permission.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "7.5 ",
+     "b": false
+    },
+    {
+     "t": "Our role. ",
+     "b": true
+    },
+    {
+     "t": "Messages and updates in circles are posted by users, not by us. We act as an intermediary under the Information Technology Act, 2000 for this content. We do not pre-screen it, but we act on complaints and on what we become aware of, as described in Sections 9 and 18. You can report a message or a user from inside the app or by writing to our Grievance Officer.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "heading",
+   "text": "8. Your content"
+  },
+  {
+   "type": "summary",
+   "spans": [
+    {
+     "t": "In short: your data and posts belong to you. You give us permission to use them only to run NaraaCare for you. We do not sell your health data.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "8.1 ",
+     "b": false
+    },
+    {
+     "t": "You own your content. ",
+     "b": true
+    },
+    {
+     "t": "\"Your content\" means the information you enter or post: profile and onboarding details, food, water, sleep and workout logs, messages, Rin conversations and feedback.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "8.2 ",
+     "b": false
+    },
+    {
+     "t": "Permission you give us. ",
+     "b": true
+    },
+    {
+     "t": "You give us a non-exclusive, royalty-free, worldwide permission to host, store, copy, process, display and transmit your content, only as needed to provide, secure and improve the Service and as described in our Privacy Policy. This includes showing your shared content to the circle members you choose. This permission ends when your content is deleted, except for copies we must keep by law (see Section 13.4).",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "8.3 ",
+     "b": false
+    },
+    {
+     "t": "No sale of health data. ",
+     "b": true
+    },
+    {
+     "t": "We do not sell your personal data or health data, and we do not use it for third-party advertising. We may use aggregated, de-identified statistics that cannot reasonably identify you to understand and improve the Service.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "8.4 ",
+     "b": false
+    },
+    {
+     "t": "Feedback. ",
+     "b": true
+    },
+    {
+     "t": "If you send us ideas or suggestions, we may use them without any obligation to you.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "8.5 ",
+     "b": false
+    },
+    {
+     "t": "Intellectual property complaints. ",
+     "b": true
+    },
+    {
+     "t": "If you believe content on NaraaCare infringes your copyright or trademark, write to our Grievance Officer (Section 18). Include your contact details, a description of the work, where the content appears in the app, and a statement that you own the rights or are authorised to act for the owner. We will act on valid complaints as required by the Copyright Act, 1957 and the Information Technology Act, 2000.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "heading",
+   "text": "9. Acceptable use and Community Guidelines"
+  },
+  {
+   "type": "summary",
+   "spans": [
+    {
+     "t": "In short: use NaraaCare lawfully and kindly. Don't post harmful content, don't harass anyone, and don't try to break or misuse the app.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "9.1 ",
+     "b": false
+    },
+    {
+     "t": "Content you must not post or share. ",
+     "b": true
+    },
+    {
+     "t": "As required by the Information Technology (Intermediary Guidelines and Digital Media Ethics Code) Rules, 2021, you must not host, display, upload, publish, transmit, store or share any information that:",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "item",
+   "spans": [
+    {
+     "t": "1. belongs to another person and you have no right to share;",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "item",
+   "spans": [
+    {
+     "t": "2. is obscene, pornographic or paedophilic, invades another person's privacy (including bodily privacy), insults or harasses on the basis of gender, is racially or ethnically objectionable, relates to or encourages money laundering or gambling, or promotes enmity between groups on grounds of religion or caste with intent to incite violence;",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "item",
+   "spans": [
+    {
+     "t": "3. is harmful to children;",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "item",
+   "spans": [
+    {
+     "t": "4. infringes any patent, trademark, copyright or other proprietary right;",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "item",
+   "spans": [
+    {
+     "t": "5. deceives or misleads about where a message came from, or knowingly and intentionally communicates misinformation or information that is patently false and untrue or misleading;",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "item",
+   "spans": [
+    {
+     "t": "6. impersonates another person;",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "item",
+   "spans": [
+    {
+     "t": "7. threatens the unity, integrity, defence, security or sovereignty of India, friendly relations with foreign States, or public order, incites any cognisable offence, prevents the investigation of any offence, or insults another nation;",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "item",
+   "spans": [
+    {
+     "t": "8. contains software viruses or any other code designed to interrupt, destroy or limit the functioning of any computer resource;",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "item",
+   "spans": [
+    {
+     "t": "9. violates any law in force in India.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "9.2 ",
+     "b": false
+    },
+    {
+     "t": "Health-specific rules. ",
+     "b": true
+    },
+    {
+     "t": "On NaraaCare you also must not:",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "bullet",
+   "spans": [
+    {
+     "t": "promote or encourage eating disorders, extreme dieting, self-harm or suicide;",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "bullet",
+   "spans": [
+    {
+     "t": "offer medical diagnosis, prescriptions or unproven \"cures\", or sell or promote medicines, supplements or other products;",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "bullet",
+   "spans": [
+    {
+     "t": "shame, bully or harass anyone about their body, weight, food or health;",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "bullet",
+   "spans": [
+    {
+     "t": "post another person's health information without their permission.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "9.3 ",
+     "b": false
+    },
+    {
+     "t": "Misuse of the Service. ",
+     "b": true
+    },
+    {
+     "t": "You must not: copy, scrape or harvest data from the Service; reverse engineer, decompile or tamper with the app, except where the law allows it; bypass security, rate limits, usage allowances or plan restrictions; use bots or automated access; interfere with our servers; create accounts by automated means or under false identities; or use the Service to send spam.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "9.4 ",
+     "b": false
+    },
+    {
+     "t": "What happens if you break these rules. ",
+     "b": true
+    },
+    {
+     "t": "We may, depending on how serious the breach is: remove or disable access to the content; warn you; suspend your access to some or all features; or terminate your account. Where we are required by law, we will preserve evidence and report offences (for example, under the Bharatiya Nagarik Suraksha Sanhita, 2023 or the Protection of Children from Sexual Offences Act, 2012) to the appropriate authorities. Where the law requires, we may also share information about the account responsible with the authorities, or with a person who has complained about unlawful content concerning them. Posting unlawful content may also make you liable to penalties or punishment under the Information Technology Act, 2000, the Bharatiya Nyaya Sanhita, 2023 or other laws.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "9.5 ",
+     "b": false
+    },
+    {
+     "t": "Reminder. ",
+     "b": true
+    },
+    {
+     "t": "As required by law, we will remind you of these rules, our Privacy Policy and these Terms at least once every three months, in the app or by email.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "heading",
+   "text": "10. Privacy and your data"
+  },
+  {
+   "type": "summary",
+   "spans": [
+    {
+     "t": "In short: our Privacy Policy explains exactly what we collect and why. You can download your data, correct it, withdraw consent or delete your account at any time.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "10.1 ",
+     "b": false
+    },
+    {
+     "t": "Privacy Policy. ",
+     "b": true
+    },
+    {
+     "t": "How we collect, use, store and share personal data is set out in our Privacy Policy at naraacare.com/privacy, which forms part of these Terms. We process personal data in line with the Digital Personal Data Protection Act, 2023 and the rules made under it, and the Information Technology Act, 2000.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "10.2 ",
+     "b": false
+    },
+    {
+     "t": "Consent. ",
+     "b": true
+    },
+    {
+     "t": "We ask for your consent before processing your health data, and separately before using it for Rin AI. We ask for permission before using your device's camera (barcode scanning), microphone (voice logging) or notifications. You can withdraw any consent in Settings or your device settings; features that depend on it will then stop working.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "10.3 ",
+     "b": false
+    },
+    {
+     "t": "Your rights. ",
+     "b": true
+    },
+    {
+     "t": "Subject to law, you can ask to access a summary of your personal data, correct or update it, erase it, nominate someone to exercise your rights if you die or become incapacitated, and raise a grievance. You can download a copy of your data from Settings at any time.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "10.4 ",
+     "b": false
+    },
+    {
+     "t": "Where your data is stored. ",
+     "b": true
+    },
+    {
+     "t": "Your account data is stored on servers in India. Some processing happens outside India, for example the data our AI provider processes to answer you in Rin (Section 5.3) and sign-in with Google or Apple. We transfer data outside India only as the law permits.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "10.5 ",
+     "b": false
+    },
+    {
+     "t": "Security. ",
+     "b": true
+    },
+    {
+     "t": "We use reasonable security safeguards, including encrypted connections, hashed passwords and access controls. No online service is completely secure, so we cannot guarantee absolute security. If a personal data breach affects you, we will tell you and the authorities as the law requires.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "10.6 ",
+     "b": false
+    },
+    {
+     "t": "Messages from us. ",
+     "b": true
+    },
+    {
+     "t": "We send service messages that are needed to run your account, such as sign-in codes, security alerts, subscription notices and changes to these Terms; these cannot be turned off while you have an account. Reminders, goal updates and Care Circle notifications can be turned off in Settings → Notifications & Reminders. We will send product news or offers only if you agree, and you can opt out at any time.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "heading",
+   "text": "11. Our intellectual property and your licence to use the app"
+  },
+  {
+   "type": "summary",
+   "spans": [
+    {
+     "t": "In short: the NaraaCare app, brand and content are ours. We give you a personal licence to use the app; please don't copy or resell it.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "11.1 ",
+     "b": false
+    },
+    {
+     "t": "Ownership. ",
+     "b": true
+    },
+    {
+     "t": "The Service, including the app, software, design, avatars, characters, the Rin name, our food and drink database, our calculation methods, text, graphics and the NaraaCare name and logo, is owned by or licensed to us and protected by Indian and international intellectual property laws. These Terms do not transfer any of these rights to you.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "11.2 ",
+     "b": false
+    },
+    {
+     "t": "Your licence. ",
+     "b": true
+    },
+    {
+     "t": "Subject to these Terms, we give you a limited, personal, non-exclusive, non-transferable, revocable licence to download and use the app on devices you own or control, for your own non-commercial use.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "11.3 ",
+     "b": false
+    },
+    {
+     "t": "Open-source software. ",
+     "b": true
+    },
+    {
+     "t": "Parts of the app use open-source software under their own licences, listed in Settings → Licenses. Those licences apply to those parts.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "11.4 ",
+     "b": false
+    },
+    {
+     "t": "Devices and updates. ",
+     "b": true
+    },
+    {
+     "t": "NaraaCare needs a compatible device (currently Android 7.0 or later, or iOS 15.0 or later) and an internet connection to sync. Your mobile operator's data charges apply. We may release updates, and some updates may be required to keep using the app.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "11.5 ",
+     "b": false
+    },
+    {
+     "t": "Data saved on your phone. ",
+     "b": true
+    },
+    {
+     "t": "NaraaCare saves your logs on your phone first and syncs them to our servers when you are online. Logs that have not synced yet may be lost if your phone is lost, reset or the app is removed.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "11.6 ",
+     "b": false
+    },
+    {
+     "t": "Protected screens and modified devices. ",
+     "b": true
+    },
+    {
+     "t": "To protect health data, the app may block screenshots or screen recording on some screens, and may limit features or refuse to run on rooted or jailbroken devices.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "heading",
+   "text": "12. Third-party services and app stores"
+  },
+  {
+   "type": "summary",
+   "spans": [
+    {
+     "t": "In short: some parts of NaraaCare rely on other companies, such as Google, Apple and our AI provider. Their own terms also apply to you.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "12.1 ",
+     "b": false
+    },
+    {
+     "t": "Third-party services. ",
+     "b": true
+    },
+    {
+     "t": "The Service uses third-party services, including Google and Apple sign-in, Google Play and App Store billing, our AI provider and email providers. Your use of them is also subject to their terms and privacy policies. We are not responsible for services we do not control, but we choose providers carefully and require them to protect your data. Links to other websites in the app are provided for convenience; we do not control or endorse those websites.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "12.2 ",
+     "b": false
+    },
+    {
+     "t": "Apple App Store. ",
+     "b": true
+    },
+    {
+     "t": "If you downloaded the app from the Apple App Store:",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "item",
+   "spans": [
+    {
+     "t": "1. these Terms are between you and us only, not with Apple Inc. (\"",
+     "b": false
+    },
+    {
+     "t": "Apple",
+     "b": true
+    },
+    {
+     "t": "\"), and we, not Apple, are solely responsible for the app and its content;",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "item",
+   "spans": [
+    {
+     "t": "2. your licence is limited to using the app on Apple-branded products you own or control, as allowed by the Usage Rules in Apple's Media Services Terms and Conditions;",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "item",
+   "spans": [
+    {
+     "t": "3. Apple has no obligation to provide any maintenance or support for the app;",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "item",
+   "spans": [
+    {
+     "t": "4. if the app fails to conform to any applicable warranty, you may notify Apple, and Apple will refund the purchase price (if any) for the app; to the extent the law allows, Apple has no other warranty obligation for the app;",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "item",
+   "spans": [
+    {
+     "t": "5. we, not Apple, are responsible for addressing any claims by you or any third party relating to the app, including product liability claims, claims that the app fails to meet legal or regulatory requirements, and claims under consumer protection, privacy or similar laws;",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "item",
+   "spans": [
+    {
+     "t": "6. if a third party claims that the app or your use of it infringes their intellectual property rights, we, not Apple, are responsible for the investigation, defence, settlement and discharge of that claim;",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "item",
+   "spans": [
+    {
+     "t": "7. you confirm that you are not located in a country subject to a U.S. Government embargo or designated as a \"terrorist supporting\" country, and that you are not on any U.S. Government list of prohibited or restricted parties;",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "item",
+   "spans": [
+    {
+     "t": "8. Apple and its subsidiaries are third-party beneficiaries of these Terms, and once you accept them, Apple may enforce them against you.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "12.3 ",
+     "b": false
+    },
+    {
+     "t": "Google Play. ",
+     "b": true
+    },
+    {
+     "t": "If you downloaded the app from Google Play, Google's terms of service also apply to your download and purchases. Google is not responsible for the app or these Terms.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "heading",
+   "text": "13. Suspension, termination and account deletion"
+  },
+  {
+   "type": "summary",
+   "spans": [
+    {
+     "t": "In short: you can delete your account at any time and have 30 days to change your mind. We may suspend or close accounts that break these Terms, and we will usually tell you why.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "13.1 ",
+     "b": false
+    },
+    {
+     "t": "Deleting your account. ",
+     "b": true
+    },
+    {
+     "t": "You can delete your account in Settings → Account → Delete Account. Your account is first deactivated for a 30-day grace period. If you sign in during that period, you can restore it. After 30 days, your account and personal data are permanently deleted, except as set out in Section 13.4. Copies in our backups are overwritten within a further 14 days. Remember to cancel any store subscription separately (Section 6.5).",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "13.2 ",
+     "b": false
+    },
+    {
+     "t": "Suspension or termination by us. ",
+     "b": true
+    },
+    {
+     "t": "We may suspend or terminate your access, in whole or in part, if: you break these Terms or the law; you misuse the Service or put other users at risk; we are required to by law or by an order of a court or authority; or we stop offering the Service. Where the law and the circumstances allow, we will tell you the reason and give you a chance to respond. If you think we got it wrong, contact our Grievance Officer (Section 18).",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "13.3 ",
+     "b": false
+    },
+    {
+     "t": "Inactive accounts. ",
+     "b": true
+    },
+    {
+     "t": "We may close accounts that have been inactive for 24 months, after giving you at least 30 days' notice by email.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "13.4 ",
+     "b": false
+    },
+    {
+     "t": "What we may keep. ",
+     "b": true
+    },
+    {
+     "t": "After deletion, we may keep limited records only as long as the law requires or allows, for example transaction records, security and audit logs, and information needed to resolve disputes, prevent fraud or comply with legal orders.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "13.5 ",
+     "b": false
+    },
+    {
+     "t": "If we close the Service. ",
+     "b": true
+    },
+    {
+     "t": "If we stop offering the Service, we will give you at least 30 days' notice where we reasonably can, with a way to download your data. If you have paid for STAR time that you can no longer use, we will help you request a refund of the unused portion through Google Play or the App Store.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "13.6 ",
+     "b": false
+    },
+    {
+     "t": "What continues after termination. ",
+     "b": true
+    },
+    {
+     "t": "Sections 3, 4, 8.4, 11, 14, 15, 17 and 19, and any other terms that by their nature should continue, survive the end of these Terms.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "heading",
+   "text": "14. Disclaimers and limits on our liability"
+  },
+  {
+   "type": "summary",
+   "spans": [
+    {
+     "t": "In short: we work hard to keep NaraaCare accurate and available, but we can't promise it will be perfect. If something goes wrong, our liability is limited, except where the law says it can't be.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "14.1 ",
+     "b": false
+    },
+    {
+     "t": "The Service is provided \"as is\" and \"as available\". ",
+     "b": true
+    },
+    {
+     "t": "To the extent the law allows, we do not promise that the Service will be uninterrupted, error-free or always available, or that its estimates, nutrition data, AI output or results will be accurate, complete or suitable for your particular needs. We do not promise any health, weight or fitness outcome.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "14.2 ",
+     "b": false
+    },
+    {
+     "t": "Things we are not responsible for. ",
+     "b": true
+    },
+    {
+     "t": "To the extent the law allows, we are not liable for:",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "bullet",
+   "spans": [
+    {
+     "t": "decisions you make, or actions you take, based on the app's estimates, Rin's replies or other content, instead of professional advice;",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "bullet",
+   "spans": [
+    {
+     "t": "content posted by other users, or how other users use what you share with them;",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "bullet",
+   "spans": [
+    {
+     "t": "indirect, incidental, special or consequential loss, or loss of profits, revenue, data or goodwill;",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "bullet",
+   "spans": [
+    {
+     "t": "loss caused by events beyond our reasonable control (Section 19.4), or by your failure to keep your account and device secure.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "14.3 ",
+     "b": false
+    },
+    {
+     "t": "Maximum liability. ",
+     "b": true
+    },
+    {
+     "t": "To the extent the law allows, our total liability to you for all claims relating to the Service is limited to the greater of (a) the amount you paid for STAR in the 12 months before the event giving rise to the claim, and (b) ₹1,000.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "14.4 ",
+     "b": false
+    },
+    {
+     "t": "What we do not limit. ",
+     "b": true
+    },
+    {
+     "t": "Nothing in these Terms excludes or limits our liability for fraud, for death or personal injury caused by our negligence, for gross negligence or wilful misconduct, or for any liability that cannot be excluded or limited under applicable law, including your rights as a consumer under the Consumer Protection Act, 2019.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "heading",
+   "text": "15. Indemnity"
+  },
+  {
+   "type": "summary",
+   "spans": [
+    {
+     "t": "In short: if someone makes a claim against us because you broke these Terms or the law, you are responsible for it.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "15.1 You agree to compensate us, and our founder, employees and service providers, for reasonable losses, costs and expenses (including reasonable legal fees) arising from a third-party claim caused by: your breach of these Terms; your content; or your violation of any law or of anyone else's rights. This does not apply to the extent the loss was caused by our own breach or negligence.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "heading",
+   "text": "16. Changes to the Service and to these Terms"
+  },
+  {
+   "type": "summary",
+   "spans": [
+    {
+     "t": "In short: NaraaCare will grow and change. We'll tell you in advance about important changes to these Terms.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "16.1 ",
+     "b": false
+    },
+    {
+     "t": "Changes to the Service. ",
+     "b": true
+    },
+    {
+     "t": "We may add, change or remove features, limits or plans from time to time. If a change materially reduces the paid features of STAR during a period you have already paid for, we will tell you in advance, and you may cancel and request a refund of the unused portion through the app store you paid with.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "16.2 ",
+     "b": false
+    },
+    {
+     "t": "Changes to these Terms. ",
+     "b": true
+    },
+    {
+     "t": "We may update these Terms to reflect changes in the law, our Service or our business. For material changes, we will notify you in the app or by email at least 15 days before they take effect. Changes required by law, or that address new features or security risks, may take effect sooner. The \"Effective date\" at the top shows the current version.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "16.3 ",
+     "b": false
+    },
+    {
+     "t": "Your choice. ",
+     "b": true
+    },
+    {
+     "t": "If you continue to use the Service after changes take effect, you accept the updated Terms. If you do not agree, stop using the Service, cancel your subscription and delete your account.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "heading",
+   "text": "17. Governing law and disputes"
+  },
+  {
+   "type": "summary",
+   "spans": [
+    {
+     "t": "In short: Indian law applies. If you have a problem, talk to us first. If we can't fix it, an independent arbitrator decides. You can always go to a consumer commission.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "17.1 ",
+     "b": false
+    },
+    {
+     "t": "Governing law. ",
+     "b": true
+    },
+    {
+     "t": "These Terms are governed by the laws of India.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "17.2 ",
+     "b": false
+    },
+    {
+     "t": "Talk to us first. ",
+     "b": true
+    },
+    {
+     "t": "If you have a dispute with us, please first contact our Grievance Officer (Section 18). We will try in good faith to resolve it within 30 days of receiving your complaint, or sooner where Section 18.3 sets a shorter time.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "17.3 ",
+     "b": false
+    },
+    {
+     "t": "Arbitration. ",
+     "b": true
+    },
+    {
+     "t": "If the dispute is not resolved within that time, either party may refer it to arbitration under the Arbitration and Conciliation Act, 1996. The arbitration will be conducted by a sole arbitrator appointed by mutual agreement of the parties. The seat and venue of arbitration will be Wardha, Maharashtra, India, and the language will be English. Hearings may be held online where both parties agree. The award will be final and binding on both parties.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "17.4 ",
+     "b": false
+    },
+    {
+     "t": "Courts. ",
+     "b": true
+    },
+    {
+     "t": "Subject to Section 17.3, the courts at Wardha, Maharashtra, India have exclusive jurisdiction over matters arising from these Terms, including applications in support of arbitration.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "17.5 ",
+     "b": false
+    },
+    {
+     "t": "Your consumer rights are not affected. ",
+     "b": true
+    },
+    {
+     "t": "Nothing in this Section stops you from filing a complaint before a Consumer Disputes Redressal Commission under the Consumer Protection Act, 2019, using the National Consumer Helpline (1915), or approaching any authority that the law allows you to approach.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "heading",
+   "text": "18. Grievance Officer and contact"
+  },
+  {
+   "type": "summary",
+   "spans": [
+    {
+     "t": "In short: if you have a complaint about content, your data, billing or anything else, write to our Grievance Officer. We acknowledge every complaint within 24 hours.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "18.1 In accordance with the Information Technology Act, 2000 and its rules, the Consumer Protection (E-Commerce) Rules, 2020 and the Digital Personal Data Protection Act, 2023, our Grievance Officer is:",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "Name",
+     "Sahil Pardake"
+    ],
+    [
+     "Designation",
+     "Grievance Officer"
+    ],
+    [
+     "Email",
+     "support@naraacare.com"
+    ],
+    [
+     "Phone",
+     "+91 9209903425"
+    ],
+    [
+     "Address",
+     "NaraaCare (yet to be incorporated), Pardake Residence, Jawar Colony, near Tiwari Layout, Pulgaon, Maharashtra 442302"
+    ],
+    [
+     "Hours",
+     "Email any time. Phone: Monday to Saturday, 10:00 to 18:00 IST"
+    ]
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "18.2 ",
+     "b": false
+    },
+    {
+     "t": "How to complain. ",
+     "b": true
+    },
+    {
+     "t": "Email the Grievance Officer, or use Help & Support → Report a problem in the app. Please include your registered email, a description of the issue and, for content, a screenshot or link and the circle or username concerned.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "18.3 ",
+     "b": false
+    },
+    {
+     "t": "Timelines.",
+     "b": true
+    }
+   ]
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "Type of complaint",
+     "We acknowledge within",
+     "We resolve within"
+    ],
+    [
+     "Content in the Service that breaks Section 9, or other complaints under the IT Rules",
+     "24 hours",
+     "7 days"
+    ],
+    [
+     "Urgent request to remove content under the IT Rules",
+     "24 hours",
+     "36 hours"
+    ],
+    [
+     "Content showing a person's private area, nudity or a sexual act, or an impersonation in such material",
+     "24 hours",
+     "Within the time required by law"
+    ],
+    [
+     "Consumer complaints (billing, subscriptions, service quality)",
+     "24 hours",
+     "1 month"
+    ],
+    [
+     "Personal data and privacy complaints",
+     "24 hours",
+     "30 days"
+    ]
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "18.4 ",
+     "b": false
+    },
+    {
+     "t": "Appeals. ",
+     "b": true
+    },
+    {
+     "t": "If you are not satisfied with our Grievance Officer's decision on content under the IT Rules, you may appeal to the Grievance Appellate Committee set up by the Government of India, through gac.gov.in, within 30 days. For privacy complaints, once you have used our grievance process, you may approach the Data Protection Board of India.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "18.5 ",
+     "b": false
+    },
+    {
+     "t": "General support. ",
+     "b": true
+    },
+    {
+     "t": "For questions that are not complaints, write to support@naraacare.com.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "heading",
+   "text": "19. General"
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "19.1 ",
+     "b": false
+    },
+    {
+     "t": "Entire agreement. ",
+     "b": true
+    },
+    {
+     "t": "These Terms, together with the Privacy Policy and any feature-specific terms, are the whole agreement between you and us about the Service.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "19.2 ",
+     "b": false
+    },
+    {
+     "t": "Severability. ",
+     "b": true
+    },
+    {
+     "t": "If any part of these Terms is found invalid or unenforceable, the rest stays in force, and the invalid part is applied to the greatest extent the law allows.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "19.3 ",
+     "b": false
+    },
+    {
+     "t": "No waiver. ",
+     "b": true
+    },
+    {
+     "t": "If we do not enforce a right immediately, we have not given it up.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "19.4 ",
+     "b": false
+    },
+    {
+     "t": "Events beyond our control. ",
+     "b": true
+    },
+    {
+     "t": "We are not responsible for delays or failures caused by events beyond our reasonable control, such as natural disasters, epidemics, war, government action, power or internet failures, or failures of third-party services.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "19.5 ",
+     "b": false
+    },
+    {
+     "t": "Transfer. ",
+     "b": true
+    },
+    {
+     "t": "You may not transfer your rights under these Terms. We may transfer ours, for example in a merger, acquisition or sale of assets, as long as your rights under these Terms are not reduced. We will tell you if this happens.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "19.6 ",
+     "b": false
+    },
+    {
+     "t": "Notices. ",
+     "b": true
+    },
+    {
+     "t": "We may send notices to the email address on your account or through the app. You can send notices to us at the Grievance Officer's address in Section 18.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "19.7 ",
+     "b": false
+    },
+    {
+     "t": "Language. ",
+     "b": true
+    },
+    {
+     "t": "These Terms are written in English. If we provide a translation in another language, the English version applies if there is a conflict. You can ask us for these Terms in any language listed in the Eighth Schedule to the Constitution of India.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "19.8 ",
+     "b": false
+    },
+    {
+     "t": "Relationship. ",
+     "b": true
+    },
+    {
+     "t": "These Terms do not create any partnership, joint venture, employment or agency relationship between you and us.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "19.9 ",
+     "b": false
+    },
+    {
+     "t": "Headings. ",
+     "b": true
+    },
+    {
+     "t": "Section headings and the \"In short\" summaries help you read these Terms. If a summary and a numbered clause differ, the numbered clause applies.",
+     "b": false
+    }
+   ]
+  }
+ ]
+}

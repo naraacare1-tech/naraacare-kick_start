@@ -7,8 +7,12 @@ precision internally; values are rounded only in the returned representation (OQ
   tank drains at the awake rate of the temperature in force (piecewise: a temperature change applies
   from that moment, hours already passed keep the old rate); after bedtime it drains at the sleep
   rate. Entries logged before wake time count at wake time.
-* Fills: drinks add their effective mL (snapshot factor), each meal with a food credit adds
-  ``0.20 x daily need / 3``; the balance never exceeds the extra-water allowance (+300 mL).
+* Fills: drinks add their effective mL (snapshot factor). Food water follows the calories logged
+  (owner 2026-11-24, 2026-11 MVP doc hydration step 6): ``0.20 x daily need x min(1, kcal logged /
+  base target kcal)``, added at each meal as the increase over the meals before it, so snacks can
+  never push food water past 20 % of the need. The balance never exceeds the extra-water allowance
+  (+300 mL). Without ``meals`` / ``base_target_kcal`` (an older database) the old rule applies:
+  ``0.20 x daily need / 3`` for each of the first three meals.
 * STAR (``advanced``) only: temperatures (default 25 C otherwise) and workouts (sweat is drained at
   once and added to the daily need). STANDARD rows kept from a STAR period are ignored.
 * Headline (OQ-17): effective drink intake today vs the daily goal; the avatar fill is the tank
@@ -52,6 +56,8 @@ class DayInputs:
     drinks: Sequence[Fill] = ()
     workouts: Sequence[tuple[datetime, float]] = ()  # (performed_at, sweat_ml)
     meal_credits: Sequence[datetime] = ()
+    meals: Sequence[tuple[datetime, float]] = ()  # (logged_at, kcal) of every meal of the day
+    base_target_kcal: float | None = None
     goal_completed_at: datetime | None = None
     temperature_unit: str = "c"
 
@@ -82,7 +88,11 @@ class DayInputs:
             temperatures=tuple((ts(t["from"]), float(t["c"])) for t in raw["temperatures"]),
             drinks=tuple(Fill(ts(i["at"]), float(i["effective_ml"])) for i in raw["intakes"]),
             workouts=tuple((ts(w["at"]), float(w["sweat_ml"])) for w in raw["workouts"]),
-            meal_credits=tuple(ts(m) for m in raw["meal_credits"]),
+            meal_credits=tuple(ts(m) for m in raw.get("meal_credits") or ()),
+            meals=tuple((ts(m["at"]), float(m["kcal"] or 0)) for m in raw.get("meals") or ()),
+            base_target_kcal=float(raw["base_target_kcal"])
+            if raw.get("base_target_kcal")
+            else None,
             goal_completed_at=ts(raw["goal_completed_at"])
             if raw.get("goal_completed_at")
             else None,
@@ -212,6 +222,36 @@ def _breakdown(ctx: CalcContext, model: _Model, temp_c: float, sweat: float) -> 
     }
 
 
+def _events(day: DayInputs, window: _Day, now: datetime) -> list[tuple[datetime, int, float]]:
+    """(time, kind, value) up to ``now``, in time order; kind 0 drink (effective mL), 1 meal
+    (kcal, or 0 under the old three-meal rule), 2 workout (sweat mL, STAR only)."""
+    events = [(max(d.at, window.wake), 0, d.effective_ml) for d in day.drinks if d.at <= now]
+    if _kcal_rule(day):
+        events += [(max(m, window.wake), 1, kcal) for m, kcal in day.meals if m <= now]
+    else:
+        events += [(max(m, window.wake), 1, 0.0) for m in day.meal_credits if m <= now]
+    if day.advanced:
+        events += [(max(w, window.wake), 2, s) for w, s in day.workouts if w <= now]
+    events.sort(key=lambda e: (e[0], e[1]))
+    return events
+
+
+def _kcal_rule(day: DayInputs) -> bool:
+    return day.base_target_kcal is not None and day.base_target_kcal > 0
+
+
+def _food_credit(
+    ctx: CalcContext, day: DayInputs, need: float, kcal_logged: float, food_so_far: float
+) -> float:
+    """Food water added by one meal: the increase of 0.20 x need x min(1, kcal / target) over what
+    the earlier meals gave, or 0.20 x need / 3 under the old rule."""
+    share = ctx.f("hyd.food.share_of_need")
+    if _kcal_rule(day):
+        target = day.base_target_kcal or 1.0
+        return max(0.0, share * need * min(1.0, kcal_logged / target) - food_so_far)
+    return share * need / ctx.f("hyd.food.meals_per_day")
+
+
 def compute(ctx: CalcContext, day: DayInputs, at: datetime) -> HydrationStatus:
     """Status of ``day`` at ``at`` (clamped to the day's wake time; past days end at bedtime)."""
     window = _day_window(day)
@@ -220,32 +260,19 @@ def compute(ctx: CalcContext, day: DayInputs, at: datetime) -> HydrationStatus:
         at = max(at, window.bed)
     now = max(at, window.wake)
 
-    events: list[
-        tuple[datetime, int, float]
-    ] = []  # (time, kind, value); kind 0 drink, 1 meal, 2 workout
-    events += [(max(d.at, window.wake), 0, d.effective_ml) for d in day.drinks if d.at <= now]
-    events += [(max(m, window.wake), 1, 0.0) for m in day.meal_credits if m <= now]
-    if day.advanced:
-        events += [(max(w, window.wake), 2, s) for w, s in day.workouts if w <= now]
-    events.sort(key=lambda e: (e[0], e[1]))
-
-    share = ctx.f("hyd.food.share_of_need")
-    meals_per_day = ctx.f("hyd.food.meals_per_day")
     balance = -model.overnight
     cursor = window.wake
-    sweat = food = intake = 0.0
-    for when, kind, value in events:
+    sweat = food = intake = kcal_logged = 0.0
+    for when, kind, value in _events(day, window, now):
         balance -= model.drain(cursor, when)
         cursor = when
         if kind == 0:
             intake += value
             balance = min(balance + value, model.cap)
         elif kind == 1:
-            credit = (
-                share
-                * clamp_need(ctx, model.need_before(model.temperature_at(when)) + sweat)
-                / meals_per_day
-            )
+            kcal_logged += value
+            need = clamp_need(ctx, model.need_before(model.temperature_at(when)) + sweat)
+            credit = _food_credit(ctx, day, need, kcal_logged, food)
             food += credit
             balance = min(balance + credit, model.cap)
         else:

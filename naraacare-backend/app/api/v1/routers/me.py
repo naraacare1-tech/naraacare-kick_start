@@ -38,6 +38,8 @@ WRITES = [Depends(user_limit("writes"))]
 @router.get("/me")
 async def get_me(principal: CurrentUser, profiles: ProfileServiceDep) -> MeResponse:
     decrypted, entitlement = await profiles.load(principal)
+    # Moves an existing user onto the current formulas once (calc_version change, 2026-11-24).
+    await profiles.refresh_outdated_targets(principal, decrypted)
     return MeResponse.model_validate(profiles.me(decrypted, entitlement))
 
 

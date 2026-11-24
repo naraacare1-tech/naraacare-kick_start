@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:naraacare/core/config/providers.dart';
 import 'package:naraacare/core/l10n/generated/app_localizations.dart';
 import 'package:naraacare/core/theme/app_theme.dart';
 import 'package:naraacare/core/theme/tokens.dart';
 import 'package:naraacare/features/auth/data/auth_api.dart';
-import 'package:naraacare/shared/widgets/legal_links.dart';
+import 'package:naraacare/features/legal/legal_document_screen.dart';
 import 'package:naraacare/shared/widgets/nc_bottom_sheet.dart';
 import 'package:naraacare/shared/widgets/nc_button.dart';
 
@@ -58,7 +57,6 @@ class _ConsentSheetState extends ConsumerState<_ConsentSheet> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     final nc = context.nc;
-    final config = ref.watch(appConfigProvider);
     Widget row(
       String label,
       ValueChanged<bool> onChanged, {
@@ -90,13 +88,13 @@ class _ConsentSheetState extends ConsumerState<_ConsentSheet> {
           l10n.consentTerms,
           (v) => _terms = v,
           value: _terms,
-          onOpen: () => openLegalLink(context, config.termsUrl),
+          onOpen: () => showLegalDocument(context, LegalDocument.terms),
         ),
         row(
           l10n.consentPrivacy,
           (v) => _privacy = v,
           value: _privacy,
-          onOpen: () => openLegalLink(context, config.privacyUrl),
+          onOpen: () => showLegalDocument(context, LegalDocument.privacy),
         ),
         row(l10n.consentHealth, (v) => _health = v, value: _health),
         row(l10n.consentAi, (v) => _ai = v, value: _ai, required: false),

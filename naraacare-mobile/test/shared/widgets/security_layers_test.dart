@@ -1,6 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+
 import 'package:naraacare/core/security/biometric_gate.dart';
+import 'package:naraacare/core/security/system_prompt.dart';
 import 'package:naraacare/core/utils/clock.dart';
 import 'package:naraacare/shared/widgets/app_switcher_privacy.dart';
 import 'package:naraacare/shared/widgets/biometric_lock.dart';
@@ -117,5 +121,24 @@ void main() {
     tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.resumed);
     await tester.pump();
     expect(find.byKey(const Key('app-switcher-cover')), findsNothing);
+  });
+
+  testWidgets('no cover while an app-opened system prompt is showing', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      themed(const AppSwitcherPrivacy(child: Text('health data'))),
+    );
+    final prompt = Completer<void>();
+    final done = SystemPrompt.guard(() => prompt.future);
+    tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.inactive);
+    await tester.pump();
+    expect(find.byKey(const Key('app-switcher-cover')), findsNothing);
+    expect(find.text('health data'), findsOneWidget);
+    prompt.complete();
+    await done;
+    tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.resumed);
+    await tester.pump();
+    expect(SystemPrompt.active, isFalse);
   });
 }

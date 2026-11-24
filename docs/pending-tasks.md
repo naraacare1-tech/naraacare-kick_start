@@ -282,3 +282,33 @@ Tests to write:
 - Over-hydration caution shows as the red side badge when no update is showing.
 - Home shows no text between the avatar and the button.
 - Visual check of the badge position on a 360 dp and a 412 dp phone.
+
+## Splash, Rin suggestion, field labels, profile-target refresh, in-app legal (2026-11-24)
+
+Done: splash waits for the first frame and holds the last frame 1.5 s (one controller, no timers);
+Rin shows only "How am I doing today?"; text-field labels sit inside the box (NcFilledInputBorder);
+Edit Profile reloads nutrition and water; app.pr_update_profile refreshes today's nutrition summary
+when targets change (checked live in a rolled-back transaction: 2,245 -> 2,345 kcal); Terms and
+Privacy open in-app from assets/legal/*.json (tools/legal_to_json.py, from the owner's PDFs).
+
+Tests to write:
+- pgTAP: after `app.pr_update_profile` with a snapshot, today's `nutrition.daily_summary.base_target_kcal`
+  equals the new snapshot's; days before today are unchanged.
+- Edit Profile save invalidates `dailySummaryProvider` and `hydrationStatusProvider`.
+- `LegalDoc.fromJson` parses every block type; both assets load; no block is empty.
+- Legal screen renders headings, summaries, bullets and tables; opens from Settings and Sign Up (signed out).
+- Splash: the last frame shows with "remove animations"; `onFinished` fires after settle + animation + hold.
+- Text field: the floating label is inside the filled box (golden or position test).
+
+Decided 2026-11-24 (owner): use the 2026-11 MVP document. Done: TDEE 1.2 / 1.375 / 1.55 / 1.725;
+water activity 1.55 / 1.70 / 1.85 / 2.00 + 699.7 mL (V030 adds 'light'); net workout kcal (MET - 1);
+food water = 0.20 x need x min(1, kcal logged / base target); calc_version 2026.2; GET /me recomputes
+today's targets once for users whose latest snapshot is an older version. Unit tests updated
+(523 pass); integration expectations updated (they need the test database to run).
+
+Tests to write:
+- `ProfileService.refresh_outdated_targets`: recomputes once when the snapshot version is older,
+  does nothing when current or onboarding is incomplete, never raises; GET /me still answers.
+- pgTAP: `hydration.fn_day_inputs` returns `meals` (time, kcal of non-deleted items) and
+  `base_target_kcal`; `activity.pr_log_workout` stores (MET - 1) x kg x h.
+- Nutritionist sign-off on the new values (OQ-12) before launch.

@@ -27,7 +27,7 @@ class User:
         self.flow = flow
         self.email, pair = flow.new_user()
         self.headers = bearer(pair)
-        onboard(flow, self.headers)  # DOC example 1: target 2214 kcal
+        onboard(flow, self.headers)  # DOC example 1: target 3104 kcal
         done = flow.client.post(
             "/api/v1/me/onboarding/complete",
             headers=self.headers,

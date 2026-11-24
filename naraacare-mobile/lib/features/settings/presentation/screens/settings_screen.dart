@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:naraacare/core/config/providers.dart';
 import 'package:naraacare/core/l10n/generated/app_localizations.dart';
 import 'package:naraacare/core/providers.dart';
 import 'package:naraacare/core/routing/routes.dart';
 import 'package:naraacare/core/theme/app_theme.dart';
 import 'package:naraacare/core/theme/tokens.dart';
+import 'package:naraacare/features/legal/legal_document_screen.dart';
 import 'package:naraacare/features/profile/profile_providers.dart';
-import 'package:naraacare/shared/widgets/legal_links.dart';
 
 /// ST1 Settings (Figma Profile/Settings). Legal documents open in the
 /// external browser (never a WebView); Licenses lists the packages and the
@@ -44,7 +43,6 @@ class SettingsScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
     final nc = context.nc;
-    final config = ref.watch(appConfigProvider);
     final me = ref.watch(meProvider).value;
     Widget section(String title) => Padding(
       padding: const EdgeInsets.only(
@@ -124,12 +122,12 @@ class SettingsScreen extends ConsumerWidget {
           item(
             l10n.termsTitle,
             Icons.description_outlined,
-            () => openLegalLink(context, config.termsUrl),
+            () => showLegalDocument(context, LegalDocument.terms),
           ),
           item(
             l10n.privacyTitle,
             Icons.privacy_tip_outlined,
-            () => openLegalLink(context, config.privacyUrl),
+            () => showLegalDocument(context, LegalDocument.privacy),
           ),
           item(
             l10n.licensesTitle,

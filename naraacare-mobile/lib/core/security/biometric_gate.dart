@@ -1,5 +1,6 @@
 import 'package:flutter/services.dart';
 import 'package:local_auth/local_auth.dart';
+import 'package:naraacare/core/security/system_prompt.dart';
 
 /// Biometric / device-passcode check (doc 07 SEC-5.6). The app locks itself
 /// when it returns from more than [BiometricPolicy.lockAfter] in the
@@ -17,7 +18,9 @@ class PlatformAuthenticator implements Authenticator {
   Future<bool> authenticate(String reason) async {
     try {
       // Biometrics with the device passcode as the fallback.
-      return await _auth.authenticate(localizedReason: reason);
+      return await SystemPrompt.guard(
+        () => _auth.authenticate(localizedReason: reason),
+      );
     } on PlatformException {
       return false;
     } on MissingPluginException {

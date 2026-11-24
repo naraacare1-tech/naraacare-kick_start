@@ -9,6 +9,7 @@ import 'package:naraacare/core/errors/api_error.dart';
 import 'package:naraacare/core/l10n/generated/app_localizations.dart';
 import 'package:naraacare/core/routing/routes.dart';
 import 'package:naraacare/core/security/input_validators.dart';
+import 'package:naraacare/core/security/system_prompt.dart';
 import 'package:naraacare/core/theme/app_theme.dart';
 import 'package:naraacare/core/theme/tokens.dart';
 import 'package:naraacare/features/auth/presentation/auth_errors.dart';
@@ -51,7 +52,10 @@ class PlatformVoiceRecognizer implements VoiceRecognizer {
       // initialize() asks for the microphone permission the first time; the
       // error listener can only be set once, so it forwards to _onError.
       _ready =
-          _ready || await _speech.initialize(onError: (_) => _onError?.call());
+          _ready ||
+          await SystemPrompt.guard(
+            () => _speech.initialize(onError: (_) => _onError?.call()),
+          );
       if (!_ready) return false;
       final locales = await _speech.locales();
       final indian = locales.any((l) => l.localeId == 'en_IN');

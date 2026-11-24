@@ -1,0 +1,1272 @@
+{
+ "title": "NaraaCare Privacy Policy",
+ "blocks": [
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "Important: NaraaCare is a health-tracking app, not a medical app. Please check with your doctor ",
+     "b": true
+    },
+    {
+     "t": "before changing your diet, fluid intake, sleep or exercise, and for any health concern. Rin is a wellness assistant, not a health advisor.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "Effective date: 1 December 2026",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "heading",
+   "text": "1. Who we are and what this policy covers"
+  },
+  {
+   "type": "summary",
+   "spans": [
+    {
+     "t": "In short: this policy explains what personal data NaraaCare collects, why, who sees it, and the choices you have. It applies to the NaraaCare app and naraacare.com.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "1.1 NaraaCare (\"",
+     "b": false
+    },
+    {
+     "t": "NaraaCare",
+     "b": true
+    },
+    {
+     "t": "\", \"",
+     "b": false
+    },
+    {
+     "t": "we",
+     "b": true
+    },
+    {
+     "t": "\", \"",
+     "b": false
+    },
+    {
+     "t": "us",
+     "b": true
+    },
+    {
+     "t": "\") is a business founded and operated by Sahil Pardake, which is in the process of being incorporated, with its address at Pardake Residence, Jawar Colony, near Tiwari Layout, Pulgaon, Maharashtra 442302, India. Under the Digital Personal Data Protection Act, 2023 (\"",
+     "b": false
+    },
+    {
+     "t": "DPDP Act",
+     "b": true
+    },
+    {
+     "t": "\"), we are the ",
+     "b": false
+    },
+    {
+     "t": "Data Fiduciary ",
+     "b": true
+    },
+    {
+     "t": "for your personal data: we decide why and how it is processed. You are the ",
+     "b": false
+    },
+    {
+     "t": "Data Principal",
+     "b": true
+    },
+    {
+     "t": ". When NaraaCare is incorporated, the company will become the Data Fiduciary, and we will tell you when this happens.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "1.2 This policy applies to the NaraaCare mobile app, the website naraacare.com and related services (the \"",
+     "b": false
+    },
+    {
+     "t": "Service",
+     "b": true
+    },
+    {
+     "t": "\"). It forms part of our Terms and Conditions. Words defined in the Terms have the same meaning here.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "1.3 NaraaCare is for adults aged 18 and above. It is a health-tracking app, not a medical app. Please check with your doctor before making any health decision.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "heading",
+   "text": "2. Privacy at a glance"
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "What we collect",
+     "Your account details, body details from onboarding, the hydration, food, sleep and workout data you log, your Care Circle activity, Rin AI chats, and basic device and security data"
+    ],
+    [
+     "Why",
+     "To calculate your goals, run your avatars, reports, Care Circles and Rin, keep your account secure, and meet our legal duties"
+    ],
+    [
+     "Consent",
+     "We ask for your consent for health data, and separately for Rin AI. You can withdraw either at any time"
+    ],
+    [
+     "What we never do",
+     "Sell your personal data, use it for third-party advertising, or put tracking or advertising SDKs in the app"
+    ],
+    [
+     "Where it is stored",
+     "On servers in India. Rin's AI provider processes data outside India"
+    ],
+    [
+     "Who sees it",
+     "You; the Care Circle members you choose to share with; and service providers who help us run NaraaCare, under contract"
+    ],
+    [
+     "Your control",
+     "Download your data, correct it, withdraw consent, or delete your account at any time from Settings"
+    ],
+    [
+     "Questions",
+     "Our Grievance Officer at support@naraacare.com"
+    ]
+   ]
+  },
+  {
+   "type": "heading",
+   "text": "3. What personal data we collect"
+  },
+  {
+   "type": "summary",
+   "spans": [
+    {
+     "t": "In short: we collect what you give us, a small amount of device and security data, and nothing from advertisers or data brokers.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "3.1 ",
+     "b": false
+    },
+    {
+     "t": "Data you give us",
+     "b": true
+    }
+   ]
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "Category",
+     "What it includes",
+     "Required?",
+     "Why we need it"
+    ],
+    [
+     "Account",
+     "Email address, password (stored only as a secure hash), or your Google or Apple account ID and email if you sign in with them",
+     "Yes",
+     "To create and secure your account"
+    ],
+    [
+     "Profile",
+     "Name, username, chosen avatar, sex/gender",
+     "Yes",
+     "To personalise the app and show you in Care Circles"
+    ],
+    [
+     "Body and lifestyle (onboarding)",
+     "Height, weight, target weight, weight goal, age, activity level, body type, any medical condition you choose to tell us",
+     "Yes, except medical condition",
+     "To calculate your water, calorie, nutrient and sleep goals. Any medical condition is used only to remind you to check with your doctor; it is never used to calculate goals or by Rin"
+    ],
+    [
+     "Hydration logs",
+     "Drinks and amounts, custom drink names, temperature you enter, workouts (type and duration)",
+     "No, but needed for the Hydration avatar",
+     "To run the Hydration avatar and goals"
+    ],
+    [
+     "Nutrition logs",
+     "Foods, quantities and units, meals, saved and recent meals; voice entries converted to text; barcodes you scan",
+     "No, but needed for the Nutrition avatar",
+     "To calculate nutrients and run the Nutrition avatar"
+    ],
+    [
+     "Sleep logs (STAR)",
+     "Bedtime, wake time, night wakings",
+     "No",
+     "To calculate sleep and run the Sleep avatar"
+    ],
+    [
+     "Care Circles and connections",
+     "Circles you create or join, members, invites, the avatars you choose to share, chat messages, @mentions, connection requests, blocks",
+     "No",
+     "To run Care Circles and connections"
+    ],
+    [
+     "Rin AI chats (STAR)",
+     "Your messages to Rin and Rin's replies",
+     "No",
+     "To provide Rin (Section 5)"
+    ],
+    [
+     "Consents and settings",
+     "Your consent choices with date and version, notification and reminder settings, units",
+     "Yes",
+     "To respect your choices and prove consent"
+    ],
+    [
+     "Subscription",
+     "Plan, purchase and renewal status, store transaction ID and receipt data from Google Play or the App Store",
+     "Only for STAR",
+     "To give you STAR access and handle billing issues. We never receive your card, UPI or bank details"
+    ],
+    [
+     "Support",
+     "Messages, screenshots and contact details you send to support or the Grievance Officer",
+     "No",
+     "To help you and resolve complaints"
+    ]
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "3.2 ",
+     "b": false
+    },
+    {
+     "t": "Data collected automatically",
+     "b": true
+    }
+   ]
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "Category",
+     "What it includes",
+     "Why"
+    ],
+    [
+     "Device and app",
+     "Device model, operating system and version, app version, language, time zone, push notification token",
+     "To run the app correctly, send notifications and use your local date for streaks and reports"
+    ],
+    [
+     "Security",
+     "IP address, sign-in attempts, session and token records, rooted or jailbroken device check",
+     "To protect accounts, limit abuse and investigate incidents"
+    ],
+    [
+     "Server logs",
+     "Technical logs of requests and errors, written without your name or health values",
+     "To keep the Service working and secure"
+    ]
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "3.3 ",
+     "b": false
+    },
+    {
+     "t": "What we do not collect. ",
+     "b": true
+    },
+    {
+     "t": "We do not collect your precise location, contacts, photos or files from your device. We do not use advertising IDs, analytics or advertising SDKs, or third-party trackers in the app. We do not buy data about you from other companies. We do not read health data from Google Health Connect or Apple HealthKit today; if we add this, we will ask for your permission first and update this policy.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "3.4 ",
+     "b": false
+    },
+    {
+     "t": "Data about other people. ",
+     "b": true
+    },
+    {
+     "t": "If you invite someone to a Care Circle by link, we process the invite only to let them join. Please share only your own information (see Section 7.4 of the Terms).",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "heading",
+   "text": "4. How we use your data, and on what basis"
+  },
+  {
+   "type": "summary",
+   "spans": [
+    {
+     "t": "In short: we use your data to run NaraaCare for you, with your consent. We use some data without consent only where the law allows, such as to meet a legal duty.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "4.1 ",
+     "b": false
+    },
+    {
+     "t": "With your consent. ",
+     "b": true
+    },
+    {
+     "t": "When you sign up, we ask you to agree to these Terms and this policy and, separately, to the processing of your health data. We use your data for these purposes:",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "item",
+   "spans": [
+    {
+     "t": "1. creating and securing your account, and signing you in;",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "item",
+   "spans": [
+    {
+     "t": "2. calculating your daily water, calorie, nutrient and sleep goals from your onboarding details, and updating them when you edit them;",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "item",
+   "spans": [
+    {
+     "t": "3. running your Hydration, Nutrition and Sleep avatars, streaks, notifications and reminders;",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "item",
+   "spans": [
+    {
+     "t": "4. producing PDF reports and data exports when you ask for them;",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "item",
+   "spans": [
+    {
+     "t": "5. running Care Circles, chat and connections, and showing your shared avatars to the members you choose;",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "item",
+   "spans": [
+    {
+     "t": "6. providing Rin AI if you are on STAR and have given AI consent (Section 5);",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "item",
+   "spans": [
+    {
+     "t": "7. managing your subscription and verifying purchases with Google Play or the App Store;",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "item",
+   "spans": [
+    {
+     "t": "8. answering support requests and complaints;",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "item",
+   "spans": [
+    {
+     "t": "9. improving the Service using aggregated, de-identified statistics that cannot reasonably identify you.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "4.2 ",
+     "b": false
+    },
+    {
+     "t": "Without consent, where the law allows. ",
+     "b": true
+    },
+    {
+     "t": "Under Section 7 of the DPDP Act, we may process personal data without fresh consent to comply with a law, court order or government request; to respond to a medical emergency involving a threat to someone's life or health; and for other legitimate uses the Act permits. This includes keeping security logs and records the law requires (Section 9).",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "4.3 ",
+     "b": false
+    },
+    {
+     "t": "Voice logging. ",
+     "b": true
+    },
+    {
+     "t": "When you log food by voice (STAR), the speech recognition service built into your phone (Google on Android, Apple on iOS) converts your speech to text. Your phone's provider may process the audio under its own privacy policy. NaraaCare receives only the text, not the recording.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "4.4 ",
+     "b": false
+    },
+    {
+     "t": "Barcode scanning. ",
+     "b": true
+    },
+    {
+     "t": "The barcode is read on your phone. We receive only the barcode number, which we use to look up the product's nutrition information.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "4.5 ",
+     "b": false
+    },
+    {
+     "t": "We do not ",
+     "b": true
+    },
+    {
+     "t": "sell your personal data, share it for third-party advertising, use it to decide your eligibility for insurance, credit or employment, or make decisions about you that have legal effects using automated means.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "heading",
+   "text": "5. Rin, your wellness assistant"
+  },
+  {
+   "type": "summary",
+   "spans": [
+    {
+     "t": "In short: Rin is a wellness assistant, not a health advisor. It uses only the data you log in your avatars to give you personal answers, only with your separate consent. Your name, email and phone number are never sent to the AI provider.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "5.1 ",
+     "b": false
+    },
+    {
+     "t": "What Rin uses. ",
+     "b": true
+    },
+    {
+     "t": "If you are on STAR and give AI consent, Rin uses only your avatar data: the drinks, meals, sleep and workouts you log, the goals and progress shown in your Hydration, Nutrition and Sleep avatars, and the messages you send Rin.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "5.2 ",
+     "b": false
+    },
+    {
+     "t": "What Rin does not use. ",
+     "b": true
+    },
+    {
+     "t": "Rin does not use your name, email address or phone number, your onboarding details (including any medical condition), data that other Care Circle members have shared with you, or your Care Circle chats. Rin is not a doctor or health advisor; for any health question, please check with your doctor.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "5.3 ",
+     "b": false
+    },
+    {
+     "t": "How it works. ",
+     "b": true
+    },
+    {
+     "t": "For each message, our servers send the parts of this data that are needed for the reply, along with your message, to our AI provider (currently OpenAI). The provider generates the reply and sends it back. The provider processes this data outside India, and under its business terms does not use it to train its models. It may keep it for a limited period for abuse and safety monitoring, as described in Section 9. Rin's replies are generated automatically and are not reviewed by a person before you see them.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "5.4 ",
+     "b": false
+    },
+    {
+     "t": "Your control. ",
+     "b": true
+    },
+    {
+     "t": "You can withdraw AI consent at any time in Settings. Rin then stops working for you and stops using your data. You can delete individual Rin conversations, and Rin will then no longer use them.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "5.5 ",
+     "b": false
+    },
+    {
+     "t": "Report insights. ",
+     "b": true
+    },
+    {
+     "t": "For STAR reports with AI insights, the same process and safeguards apply to the report period's data.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "heading",
+   "text": "6. Care Circles: what other members see"
+  },
+  {
+   "type": "summary",
+   "spans": [
+    {
+     "t": "In short: you choose what to share and with whom.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "When you join a Care Circle, members can see your username, profile avatar, the avatars you choose to share and their updates, and the messages you post. A shared Sleep avatar is visible only to members on STAR. Members do not see your email, your exact body measurements or your Rin chats. You can change what you share, leave a circle or block someone at any time. Members may already have seen updates you shared before you stopped sharing.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "heading",
+   "text": "7. Who we share your data with"
+  },
+  {
+   "type": "summary",
+   "spans": [
+    {
+     "t": "In short: only with service providers who help us run NaraaCare, under contract, and with authorities when the law requires.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "7.1 ",
+     "b": false
+    },
+    {
+     "t": "Service providers (Data Processors). ",
+     "b": true
+    },
+    {
+     "t": "We use these providers to run the Service. They may process your data only on our instructions and must protect it.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "Provider",
+     "What they do for us",
+     "Data involved",
+     "Where processed"
+    ],
+    [
+     "Hostinger (server hosting)",
+     "Hosts our servers, database and stored files",
+     "All account and app data",
+     "India (Mumbai)"
+    ],
+    [
+     "Cloudflare",
+     "Secure connection, network protection and DNS for our servers",
+     "Data in transit, IP address",
+     "Global network"
+    ],
+    [
+     "OpenAI",
+     "Generates Rin AI replies and report insights (Section 5)",
+     "The Rin data in Section 5.1, without name, email or phone",
+     "Outside India (USA)"
+    ],
+    [
+     "Google",
+     "Google sign-in; Google Play subscriptions; push notifications through Firebase Cloud Messaging; voice-to-text on Android",
+     "Google account ID and email, purchase records, push token, voice input",
+     "Outside and inside India"
+    ],
+    [
+     "Apple",
+     "Sign in with Apple; App Store subscriptions; push notifications; voice-to-text on iPhone",
+     "Apple account ID and email, purchase records, push token, voice input",
+     "Outside and inside India"
+    ],
+    [
+     "Email service provider",
+     "Sends sign-in codes, receipts, alerts and service emails",
+     "Email address, message content",
+     "Inside or outside India, depending on the provider"
+    ],
+    [
+     "Barcode product database",
+     "Looks up nutrition for scanned barcodes",
+     "Barcode number only",
+     "Inside or outside India, depending on the provider"
+    ]
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "Push notifications never include your health values.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "7.2 ",
+     "b": false
+    },
+    {
+     "t": "Other people you choose. ",
+     "b": true
+    },
+    {
+     "t": "Care Circle members see what you choose to share (Section 6).",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "7.3 ",
+     "b": false
+    },
+    {
+     "t": "Legal and safety reasons. ",
+     "b": true
+    },
+    {
+     "t": "We may disclose personal data where required by law, a court order or a lawful request from a government authority; to report offences as the law requires; to protect the rights, safety or property of users, the public or NaraaCare; or in a medical emergency.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "7.4 ",
+     "b": false
+    },
+    {
+     "t": "Business changes. ",
+     "b": true
+    },
+    {
+     "t": "If NaraaCare is involved in a merger, acquisition or sale of assets, your data may move to the new owner, which must keep protecting it under this policy. We will tell you before this happens.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "7.5 ",
+     "b": false
+    },
+    {
+     "t": "De-identified data. ",
+     "b": true
+    },
+    {
+     "t": "We may use aggregated statistics that cannot reasonably identify you (for example, the average number of glasses of water logged per day) to improve the Service. We do not sell or license this data to others.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "heading",
+   "text": "8. Where your data is stored"
+  },
+  {
+   "type": "summary",
+   "spans": [
+    {
+     "t": "In short: in India. A small number of providers process some data outside India.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "8.1 Our servers and database are located in India. Data processed by the providers in Section 7.1 marked as outside India, mainly Rin AI data and sign-in, push and billing data handled by Google and Apple, may be transferred to other countries.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "8.2 We transfer personal data outside India only as the DPDP Act and its rules permit, and not to any country the Government of India has restricted. We require providers to protect it with safeguards at least as strong as this policy.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "heading",
+   "text": "9. How long we keep your data"
+  },
+  {
+   "type": "summary",
+   "spans": [
+    {
+     "t": "In short: for as long as you have an account. When you delete it, your data is erased after a 30-day grace period, apart from limited records the law requires us to keep.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "Data",
+     "How long we keep it"
+    ],
+    [
+     "Account, profile, onboarding details, hydration, nutrition, sleep and workout logs, streaks, Rin chats",
+     "While your account is active. Erased when your account is deleted, after the 30-day grace period"
+    ],
+    [
+     "A Rin conversation you delete",
+     "Removed from your account immediately. Our AI provider may keep its copy for its limited safety-monitoring period"
+    ],
+    [
+     "Care Circle messages and shared updates",
+     "While the circle and your account exist. Erased when you delete your account"
+    ],
+    [
+     "Report PDFs and data exports",
+     "7 days after they are created, so you can download them"
+    ],
+    [
+     "Support requests and complaints",
+     "2 years after the issue is closed"
+    ],
+    [
+     "Subscription and transaction records",
+     "As long as tax and accounting laws require, up to 8 years"
+    ],
+    [
+     "Security logs, sign-in records and records of processing",
+     "At least one year, as required by the DPDP Rules, 2025; audit records of data changes and security events for up to 3 years"
+    ],
+    [
+     "Backups",
+     "Nightly backups are kept for 14 days, then overwritten"
+    ]
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "9.1 ",
+     "b": false
+    },
+    {
+     "t": "Deleting your account. ",
+     "b": true
+    },
+    {
+     "t": "You can delete your account in Settings → Account → Delete Account. Your account is deactivated straight away and permanently erased after 30 days, unless you sign in to restore it. Copies in backups are overwritten within a further 14 days.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "9.2 ",
+     "b": false
+    },
+    {
+     "t": "Inactive accounts. ",
+     "b": true
+    },
+    {
+     "t": "If you do not use NaraaCare for 24 months, we may close your account and erase your data. We will email you at least 30 days before we do.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "9.3 ",
+     "b": false
+    },
+    {
+     "t": "What we may keep after deletion. ",
+     "b": true
+    },
+    {
+     "t": "Only the records in the table above that the law requires, such as transaction records and logs. We keep them securely, use them only for that legal purpose, and erase them at the end of the period.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "heading",
+   "text": "10. How we protect your data"
+  },
+  {
+   "type": "summary",
+   "spans": [
+    {
+     "t": "In short: we use strong safeguards, but no online service is perfectly secure.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "10.1 Our safeguards include:",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "bullet",
+   "spans": [
+    {
+     "t": "encrypted connections (HTTPS/TLS) between the app and our servers, with certificate checks in the app;",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "bullet",
+   "spans": [
+    {
+     "t": "passwords, sign-in codes and session tokens stored only as secure hashes;",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "bullet",
+   "spans": [
+    {
+     "t": "sign-in tokens stored in your phone's secure keystore;",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "bullet",
+   "spans": [
+    {
+     "t": "a database that is not reachable from the public internet, with rules that let each account see only its own data;",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "bullet",
+   "spans": [
+    {
+     "t": "staff access limited to those who need it, and logged;",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "bullet",
+   "spans": [
+    {
+     "t": "limits on sign-in attempts and other abuse protections;",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "bullet",
+   "spans": [
+    {
+     "t": "optional fingerprint or face lock in the app, and screenshot blocking on sensitive screens.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "10.2 You can help by using a strong password you do not use elsewhere, keeping your phone's lock on, and telling us at support@naraacare.com if you think your account has been accessed without your permission.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "heading",
+   "text": "11. If there is a data breach"
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "If a personal data breach affects you, we will tell you without delay: what happened, the likely impact on you, what we are doing about it, what you can do to protect yourself, and who to contact. We will also report the breach to the Data Protection Board of India and send it a detailed report within 72 hours, as the DPDP Rules, 2025 require.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "heading",
+   "text": "12. Your rights and choices"
+  },
+  {
+   "type": "summary",
+   "spans": [
+    {
+     "t": "In short: it's your data. You can see it, fix it, take it with you, stop us using it, or delete it.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "12.1 Under the DPDP Act, you have the right to:",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "Right",
+     "How to use it"
+    ],
+    [
+     "Know what data we hold and how it is used, and who we have shared it with",
+     "Settings → Download my data, or email support@naraacare.com"
+    ],
+    [
+     "Correct, complete or update your data",
+     "Profile → Settings → Edit Profile, or edit your logs (the last 2 entries in each avatar), or email us"
+    ],
+    [
+     "Erase your data",
+     "Settings → Account → Delete Account, or email us"
+    ],
+    [
+     "Withdraw consent",
+     "Settings → Privacy. Withdrawing health-data consent means we cannot run the avatars, so we will help you download your data and close your account. Withdrawing AI consent stops Rin only"
+    ],
+    [
+     "Nominate someone to act for you if you die or cannot act",
+     "Email us with the person's name and contact details"
+    ],
+    [
+     "Raise a grievance",
+     "Our Grievance Officer (Section 18)"
+    ],
+    [
+     "Complain to the Data Protection Board of India",
+     "After using our grievance process, through the Board's website"
+    ]
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "12.2 ",
+     "b": false
+    },
+    {
+     "t": "How we respond. ",
+     "b": true
+    },
+    {
+     "t": "We will verify your identity (usually by asking you to write from your registered email) and respond within 30 days. Withdrawing consent is as easy as giving it, and does not affect processing that took place before you withdrew.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "12.3 ",
+     "b": false
+    },
+    {
+     "t": "Your duties. ",
+     "b": true
+    },
+    {
+     "t": "The DPDP Act also asks you to give accurate information, not impersonate anyone, and not file false or frivolous complaints.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "heading",
+   "text": "13. Permissions on your phone"
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "Permission",
+     "When we ask",
+     "What happens if you say no"
+    ],
+    [
+     "Notifications",
+     "When you turn on reminders",
+     "No reminders or alerts; the app still works"
+    ],
+    [
+     "Microphone and speech recognition",
+     "When you first use voice logging (STAR)",
+     "You can log food by text instead"
+    ],
+    [
+     "Camera",
+     "When you first scan a barcode (STAR)",
+     "You can search for food by text instead"
+    ],
+    [
+     "Fingerprint or face",
+     "When you turn on app lock",
+     "App lock stays off; your biometric data never leaves your phone"
+    ]
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "You can change these at any time in your phone's settings. We never ask for location, contacts or photos.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "heading",
+   "text": "14. Children"
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "NaraaCare is only for people aged 18 and above. We do not knowingly collect data from anyone under 18. If we learn that a user is under 18, we will close the account and erase its data. If you believe a child is using NaraaCare, please tell our Grievance Officer.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "heading",
+   "text": "15. Our website"
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "naraacare.com uses only cookies that are needed for it to work and stay secure, including security cookies set by Cloudflare. We do not use analytics or advertising cookies. If this changes, we will ask for your consent first.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "heading",
+   "text": "16. Messages from us"
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "We send service messages needed to run your account, such as sign-in codes, security alerts, subscription notices and updates to our Terms or this policy; these cannot be turned off while you have an account. Reminders, goal updates and Care Circle notifications can be turned off in Settings → Notifications & Reminders. We send product news or offers only if you agree, and every such email has an unsubscribe link.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "heading",
+   "text": "17. Changes to this policy"
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "We may update this policy when our Service or the law changes. For material changes, we will tell you in the app or by email at least 15 days before they take effect, and ask for fresh consent where the law requires. The effective date at the top shows the current version, and we keep earlier versions on request.",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "heading",
+   "text": "18. Grievance Officer and contact"
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "For any question, request or complaint about your personal data:",
+     "b": false
+    }
+   ]
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "Grievance Officer",
+     "Sahil Pardake"
+    ],
+    [
+     "Email",
+     "support@naraacare.com"
+    ],
+    [
+     "Phone",
+     "+91 9209903425"
+    ],
+    [
+     "Address",
+     "NaraaCare (yet to be incorporated), Pardake Residence, Jawar Colony, near Tiwari Layout, Pulgaon, Maharashtra 442302"
+    ]
+   ]
+  },
+  {
+   "type": "paragraph",
+   "spans": [
+    {
+     "t": "We acknowledge every complaint within 24 hours and aim to resolve privacy complaints within 30 days. If you are not satisfied, you may approach the Data Protection Board of India.",
+     "b": false
+    }
+   ]
+  }
+ ]
+}

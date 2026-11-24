@@ -8,6 +8,7 @@ import 'package:naraacare/core/theme/tokens.dart';
 import 'package:naraacare/features/auth/auth_providers.dart';
 import 'package:naraacare/features/auth/data/social_sign_in.dart';
 import 'package:naraacare/features/auth/presentation/auth_errors.dart';
+import 'package:naraacare/shared/widgets/google_logo.dart';
 import 'package:naraacare/shared/widgets/nc_bottom_sheet.dart';
 import 'package:naraacare/shared/widgets/nc_button.dart';
 import 'package:naraacare/shared/widgets/nc_error_banner.dart';
@@ -109,7 +110,7 @@ class _SocialButtonsState extends ConsumerState<SocialButtons> {
           label: widget.signUp
               ? l10n.continueWithGoogle
               : l10n.signInWithGoogle,
-          icon: Icons.g_mobiledata,
+          leading: const GoogleLogo(),
           variant: NcButtonVariant.secondary,
           loading: _busy == _Provider.google,
           onPressed: _busy == null ? () => _run(_Provider.google) : null,

@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:naraacare/core/l10n/generated/app_localizations.dart';
+import 'package:naraacare/core/security/system_prompt.dart';
 import 'package:naraacare/core/theme/app_theme.dart';
 import 'package:naraacare/core/theme/tokens.dart';
 
 /// Covers every screen with an opaque brand cover while the app is inactive
 /// or in the background, so the app-switcher snapshot shows no health data
 /// (doc 07 SEC-5.5).
+///
+/// Not while a system prompt the app opened itself is showing (Google /
+/// Apple account picker, permission, fingerprint, photo picker; see
+/// [SystemPrompt]): the user is still in the app and keeps seeing the real
+/// page behind it (owner 2026-11-24).
 class AppSwitcherPrivacy extends StatefulWidget {
   const new({required this.child, super.key});
 
@@ -33,7 +39,7 @@ class _AppSwitcherPrivacyState extends State<AppSwitcherPrivacy>
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    final cover = state != AppLifecycleState.resumed;
+    final cover = state != AppLifecycleState.resumed && !SystemPrompt.active;
     if (cover != _covered) setState(() => _covered = cover);
   }
 

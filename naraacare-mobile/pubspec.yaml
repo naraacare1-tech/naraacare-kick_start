@@ -88,6 +88,7 @@ flutter:
     - assets/brand/
     - assets/avatars/
     - assets/illustrations/
+    - assets/legal/
   fonts:
     # Manrope (OQ-57), SIL Open Font License 1.1 (assets/fonts/manrope/OFL.txt). Static weights
     # generated from the Google Fonts variable font with fontTools (see README).

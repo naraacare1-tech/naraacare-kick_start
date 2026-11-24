@@ -38,20 +38,52 @@ class _SplashScreenState extends State<SplashScreen>
     _started = true;
     if (MediaQuery.disableAnimationsOf(context)) {
       _anim.value = 1;
+      _progress = const AlwaysStoppedAnimation(1); // the last frame
       _played.complete();
     }
     unawaited(widget.onStart());
     unawaited(_played.future.then((_) => widget.onFinished()));
   }
 
+  /// On a cold start (first launch above all) the database, secure storage
+  /// and fonts load while the first frames draw, so frames were dropped and
+  /// the animation jumped ahead: the user saw only its end (owner
+  /// 2026-11-24). Start only after the first frame is on screen plus a short
+  /// settle time, so the whole animation plays.
+  static const _settle = Duration(milliseconds: 400);
+
+  /// The final frame (logo and "Naraa Care") stays this long (owner
+  /// 2026-11-24: "increase splash screen time"); about 4.4 s in all.
+  static const _hold = Duration(milliseconds: 1500);
+
+  /// What the Lottie shows: frame 0 during the settle time, the animation,
+  /// then the last frame during the hold. One controller drives all three
+  /// (no timers), so tests and the "remove animations" setting behave.
+  Animation<double> _progress = const AlwaysStoppedAnimation(0);
+
   void _loaded(LottieComposition composition) {
     if (_played.isCompleted) return;
-    _anim.duration = composition.duration;
-    unawaited(
-      _anim.forward().whenComplete(() {
-        if (!_played.isCompleted) _played.complete();
-      }),
+    final total = _settle + composition.duration + _hold;
+    final start = _settle.inMicroseconds / total.inMicroseconds;
+    final end =
+        (_settle + composition.duration).inMicroseconds / total.inMicroseconds;
+    _anim.duration = total;
+    setState(
+      () => _progress = CurvedAnimation(
+        parent: _anim,
+        curve: Interval(start, end),
+      ),
     );
+    // Start once the first frame is on screen, not while the app is still
+    // loading.
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted || _played.isCompleted) return;
+      unawaited(
+        _anim.forward().whenComplete(() {
+          if (!_played.isCompleted) _played.complete();
+        }),
+      );
+    });
   }
 
   @override
@@ -68,7 +100,7 @@ class _SplashScreenState extends State<SplashScreen>
       child: SizedBox.expand(
         child: Lottie.asset(
           'assets/brand/splash.json',
-          controller: _anim,
+          controller: _progress,
           fit: BoxFit.cover,
           onLoaded: _loaded,
           // A broken asset must never block start-up.

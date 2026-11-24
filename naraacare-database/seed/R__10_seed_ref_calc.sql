@@ -1,9 +1,14 @@
--- Calculation constants, version 2026.1 (doc 06). Source of truth for domain calculators.
+-- Calculation constants, versions 2026.1 and 2026.2 (doc 06). Source of truth for domain calculators.
 -- Constants of a released version are IMMUTABLE: this script inserts missing rows and raises if an
 -- existing row differs. To change a value, add a new calc_version with the full constant set.
 
 INSERT INTO ref.calc_version (code, effective_from, description, approved_by) VALUES
-('2026.1', date '2026-10-01', 'Initial constants from NaraaCare MVP document (pending expert review OQ-12)', NULL)
+('2026.1', date '2026-10-01', 'Initial constants from NaraaCare MVP document (pending expert review OQ-12)', NULL),
+-- 2026.2 (owner 2026-11-24): the 2026-11 MVP document. The constants below are unchanged; what changed
+-- is reference data outside this table (TDEE multipliers 1.2-1.725 and four water activity levels in
+-- R__11, net workout kcal (MET - 1) in activity.pr_log_workout, food water tied to logged kcal in the
+-- API). Targets computed from this date carry 2026.2; earlier snapshots keep 2026.1.
+('2026.2', date '2026-11-24', '2026-11 MVP document: standard TDEE multipliers, 4 water activity levels, net workout kcal, kcal-based food water (pending expert review OQ-12)', NULL)
 ON CONFLICT (code) DO NOTHING;
 
 DROP TABLE IF EXISTS pg_temp.seed_calc_constant;
@@ -92,13 +97,14 @@ INSERT INTO seed_calc_constant (key, value, unit, source, is_product_choice) VAL
 
 INSERT INTO ref.calc_constant (calc_version, key, value, unit, source, is_product_choice)
 SELECT
-    '2026.1' AS calc_version,
+    v.code AS calc_version,
     key,
     value,
     unit,
     source,
     is_product_choice
 FROM seed_calc_constant
+CROSS JOIN (VALUES ('2026.1'), ('2026.2')) AS v (code)
 ON CONFLICT (calc_version, key) DO NOTHING;
 
 DO $verify$
@@ -107,10 +113,10 @@ DECLARE
 BEGIN
     SELECT string_agg(s.key, ', ' ORDER BY s.key) INTO drift
     FROM seed_calc_constant AS s
-    JOIN ref.calc_constant AS c ON c.calc_version = '2026.1' AND c.key = s.key
+    JOIN ref.calc_constant AS c ON c.calc_version IN ('2026.1', '2026.2') AND c.key = s.key
     WHERE c.value <> s.value OR c.unit <> s.unit OR c.is_product_choice <> s.is_product_choice;
     IF drift IS NOT NULL THEN
-        RAISE EXCEPTION 'calc_version 2026.1 is immutable; changed constants: %. Add a new calc_version.', drift;
+        RAISE EXCEPTION 'calc_versions 2026.1/2026.2 are immutable; changed constants: %. Add a new calc_version.', drift;
     END IF;
 END
 $verify$;

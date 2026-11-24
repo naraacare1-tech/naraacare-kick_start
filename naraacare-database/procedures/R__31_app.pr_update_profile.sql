@@ -1,6 +1,7 @@
 -- PATCH /me/profile (doc 04 section 2.2). NULL parameters leave the column unchanged. When anything that
 -- feeds the calculations changes, the API recomputes and passes p_snapshot, which replaces TODAY's
 -- snapshot only; past days keep their targets (doc 06 section 1). Without p_snapshot no target changes.
+-- With it, today's nutrition summary (calorie target and allowance) is refreshed in the same transaction.
 -- Errors: P0001 ONBOARDING_INCOMPLETE (use the onboarding steps first); table CHECK/FK errors.
 -- Created as api_definer, which owns every API function (doc 05 section 7); LOCAL = this script only.
 SET LOCAL ROLE api_definer;
@@ -52,6 +53,16 @@ BEGIN
     IF p_snapshot IS NOT NULL THEN
         o_effective_date := common.fn_local_date(v_profile.timezone);
         CALL app.pr_upsert_target_snapshot(p_user_id, o_effective_date, p_snapshot);
+        -- Today's nutrition summary keeps the calorie target it copied at its last refresh (a meal or
+        -- workout write), so without this a profile edit changed nothing on Home until the next meal
+        -- (owner 2026-11-24). Re-read the new target now; days before today are never touched.
+        IF EXISTS (
+            SELECT 1 FROM nutrition.daily_summary AS d
+            WHERE d.user_id = p_user_id AND d.local_date = o_effective_date
+            FOR UPDATE
+        ) THEN
+            CALL nutrition.pr_refresh_daily_summary(p_user_id, o_effective_date);
+        END IF;
     ELSE
         o_effective_date := NULL;
     END IF;

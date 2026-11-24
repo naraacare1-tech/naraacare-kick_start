@@ -2,7 +2,7 @@
 -- STAR only (advanced_hydration, OQ-04). Several workouts a day add up.
 --   * Snapshots at write time (weight from the target snapshot in force that day, rates from
 --     ref.workout_type): sweat_ml = sweat rate x kg x min / 60 (1 decimal),
---     kcal = MET x kg x hours, rounded half-up (OQ-16 proposal).
+--     kcal = (MET - 1) x kg x hours, rounded half-up (net, 2026-11 MVP doc step 7; was OQ-16 gross MET).
 --   * Same transaction: nutrition.daily_summary.exercise_kcal (effective allowance = base target +
 --     exercise, doc 06 section 2.7) and hydration.daily_summary.workout_sweat_ml are rebuilt, under
 --     the two summary row locks (nutrition first, then hydration, in every procedure).
@@ -119,7 +119,9 @@ BEGIN
     VALUES (
         p_workout_id, p_performed_at, p_user_id, o_local_date, p_workout_type, p_duration_min,
         round(v_type.sweat_ml_per_kg_h * v_weight * p_duration_min / 60.0, 1),
-        round(v_type.met * v_weight * p_duration_min / 60.0)::integer,
+        -- Net kcal: (MET - 1) x kg x hours (2026-11 MVP document, nutrition step 7; owner 2026-11-24).
+        -- The resting 1 MET is already in the TDEE, so it is not counted twice.
+        round(greatest(v_type.met - 1, 0) * v_weight * p_duration_min / 60.0)::integer,
         v_calc, p_user_id, p_user_id
     );
 
