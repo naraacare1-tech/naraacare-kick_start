@@ -69,6 +69,7 @@ dependencies:
 dev_dependencies:
   build_runner: 2.16.2
   drift_dev: 2.35.2
+  flutter_launcher_icons: 0.14.4  # app icon generator (dev-only, not shipped); MIT
   flutter_test:
     sdk: flutter
   freezed: 4.0.3

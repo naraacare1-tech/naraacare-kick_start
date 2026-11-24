@@ -161,10 +161,18 @@ class AuthController extends ChangeNotifier {
     await _afterSignOut();
   }
 
+  /// The tokens are already gone at this point, so the user always lands on
+  /// Welcome, even if wiping local data fails (the failure is logged).
+  /// Otherwise the screen stays on Settings while the session is over.
   Future<void> _afterSignOut() async {
-    await wipeLocalData?.call();
-    _set(AuthStatus.signedOut);
-    onSignedOut?.call();
+    try {
+      await wipeLocalData?.call();
+    } on Object catch (e) {
+      log.warning('local_wipe_failed', {'type': e.runtimeType.toString()});
+    } finally {
+      _set(AuthStatus.signedOut);
+      onSignedOut?.call();
+    }
   }
 
   Future<bool> _onboardingComplete() async =>

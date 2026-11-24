@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Release builds shrink unused resources. The reminder icon is only named as a string in Dart
+     (AndroidInitializationSettings('ic_stat_naraacare')), so the shrinker cannot see it is used
+     and removes it; reminders and sign-out then fail with "invalid_icon". Keep it. -->
+<resources xmlns:tools="http://schemas.android.com/tools"
+    tools:keep="@drawable/ic_stat_naraacare" />
