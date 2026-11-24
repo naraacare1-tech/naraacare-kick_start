@@ -250,3 +250,35 @@ Decisions (2026-11-05): write the S16 security suite AND every deferred S09-S15 
 - [ ] Whole session. Carried in: hosting provider choice (OQ-45), Android release signing, OQ-46 (Sentry data residency).
 - [x] Decisions (2026-11-05, owner): finish Session 16 before starting S17; hosting provider chosen later by the owner (OQ-45 stays open); load tests with k6 (AGPL-3.0, internal use only, never modified or shipped); **no crash reporting at launch** (OQ-46): store crash reports (Play Console, App Store Connect) and server logs only, Sentry may be added later.
 - [ ] Tests to write later: k6 scenarios with thresholds as CI pass/fail; plan tests; release config tests; post-deploy smoke tests (synthetic canary); store sandbox purchase on production-signed builds (license testers / TestFlight).
+
+## Mobile fixes: logout, app icon, no DEV ribbon (2026-11-20)
+
+Tests to write:
+- `AuthController.signOut`: when `wipeLocalData` throws, status still becomes `signedOut` and `onSignedOut` runs.
+- `authControllerProvider` wipe: when reminders `clear()` throws, `wipeLocalUserData` still runs.
+- Release APK check in CI: `aapt2 dump resources` lists `drawable/ic_stat_naraacare` (kept by `res/raw/keep.xml`).
+- Fix existing failures, not caused by this change: all `test/app_smoke_test.dart` tests (`pumpAndSettle` times out) and 7 tests in `test/core/routing/router_test.dart`.
+
+## AI data isolation tests (2026-11-22)
+
+Checked live on the dev database (2026-11-22): acting as user B, every Rin read of user A is refused
+(`fn_rin_context`, `fn_rin_lookup`, `fn_usage_month`, `fn_history`, `fn_conversations`), and
+`fn_history(B, <A's chat>)` returns no rows. Add these to `naraacare-database/tests/700_ai.sql`
+(today only fn_messages / write / delete of another user's chat are tested):
+- `ai.fn_rin_context(A)` and `ai.fn_rin_lookup(A, ...)` as actor B raise 42501.
+- `ai.fn_history(B, <A's conversation>)` returns 0 rows.
+- `ai.fn_pending_action` / `ai.pr_resolve_pending_action` on A's action as B raise 42501.
+- `ai.fn_usage_month(A)` as B raises 42501.
+- Backend: a `get_my_data` tool call can only ever read the token's user (the tool has no user parameter).
+
+## Home avatar UI: screen scaling, side badge, cleaner page (2026-11-24)
+
+Tests to write:
+- `screenScaleFor`: 390 dp = 1.0; 320 dp clamps to 0.85; 800 dp clamps to 1.3; text part caps at 1.15.
+- App text scale = user text size (max 130 %) x screen scale (`app.dart`).
+- `NcAvatarFigure` with a fixed `height` scales with the screen; inside `NcAvatarStage` it does not.
+- `AvatarUpdates.post` shows the badge on the matching tracker only and clears it after 4 s.
+- Water swipe, add drink, new meal and new sleep show the side badge, not a toast; editing sleep keeps the toast.
+- Over-hydration caution shows as the red side badge when no update is showing.
+- Home shows no text between the avatar and the button.
+- Visual check of the badge position on a 360 dp and a 412 dp phone.
